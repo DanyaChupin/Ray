@@ -5,12 +5,12 @@ export const fonts = localFonts({
 	variable: '--font-arial',
 	src: [
 		{
-			path: './static-fonts/ArialBold.ttf',
+			path: './ArialBold.ttf',
 			weight: '700',
 			style: 'normal',
 		},
 		{
-			path: './static-fonts/ArialRegular.ttf',
+			path: './ArialRegular.ttf',
 			weight: '400',
 			style: 'normal',
 		},

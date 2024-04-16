@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { fonts } from './fonts'
+import { fonts } from '../assets/static-fonts/fonts'
 import './globals.css'
 
 export const metadata: Metadata = {

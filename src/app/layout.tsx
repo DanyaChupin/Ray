@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { fonts } from '../assets/static-fonts/fonts'
-import './globals.css'
+import '../assets/styles/globals.scss'
 
 export const metadata: Metadata = {
 	title: 'Луч',
@@ -14,7 +14,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='ru'>
-			<body className={fonts.className}>{children}</body>
+			<body className={fonts.className}>
+				<main>{children}</main>
+			</body>
 		</html>
 	)
 }

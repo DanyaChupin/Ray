@@ -1,0 +1,34 @@
+.slide {
+	white-space: nowrap;
+}
+
+// anim pause on hover
+.slide:hover .slide-wrapper {
+	animation-play-state: paused;
+}
+
+.slide-wrapper {
+	display: inline-block;
+}
+.slide-right {
+	animation: var(--anim-time) slide-right infinite linear;
+}
+.slide-left {
+	animation: var(--anim-time) slide-left infinite linear;
+}
+@keyframes slide-right {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+@keyframes slide-left {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}

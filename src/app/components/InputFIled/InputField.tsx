@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styles from './InputField.module.scss'
-import { InputHTMLAttributes, useState } from 'react'
+import { InputHTMLAttributes } from 'react'
 
 interface IFormInput extends InputHTMLAttributes<HTMLInputElement> {
 	screenSize: boolean

@@ -1,0 +1,28 @@
+@import '../../../assets/mixins/mixin-media.scss';
+
+.inputField__wrapper {
+	width: 308px;
+	height: 37.37px;
+	display: flex;
+	overflow: hidden;
+	padding: 0 13px;
+	gap: 15px;
+	align-items: center;
+	text-align: center;
+	border-radius: var(--border-radius);
+	border: var(--border) solid var(--border-color);
+	@include respond-to(lg) {
+		width: 485px;
+		height: 56px;
+	}
+}
+.inputField__input {
+	color: var(--text-color);
+	background: none;
+	height: 16px;
+	width: 100%;
+	border: none;
+	@include respond-to(lg) {
+		font-size: 20px;
+	}
+}

@@ -19,7 +19,7 @@ interface ResizeHook {
 
 export function useResize(): ResizeHook {
 	const [width, setWidth] = useState<number>(window.innerWidth)
-	console.log(width)
+
 	useEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth) {

@@ -1,0 +1,9 @@
+@import '../../../assets/mixins/mixin-media.scss';
+
+.logo {
+	font-size: var(--fs-30);
+	font-weight: var(--bold);
+	@include respond-to(lg) {
+		font-size: var(--fs-48);
+	}
+}

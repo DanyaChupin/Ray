@@ -1,5 +1,5 @@
+import cn from 'classnames'
 import { SlideItem } from '../slideItem/SlideItem'
-import cn from 'classNames'
 import styles from './Slide.module.scss'
 
 type ISlide = { sideLeft: boolean }

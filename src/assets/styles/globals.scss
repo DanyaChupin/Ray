@@ -4,7 +4,17 @@
 	--max-width: 1440px;
 	--bg-color: #1e1e1e;
 	--text-color: #ffffff;
+	--border-color: #646464;
+	--border: 1px;
+	--border-radius: 30px;
 	--anim-time: 60s;
+	--transition: 0.3s;
+	--bold: 700;
+	--regular: 400;
+	--fs-30: 30px;
+	--fs-48: 48px;
+	--fs-20: 20px;
+	--fs-15: 15px;
 }
 
 * {
@@ -24,16 +34,29 @@ body {
 	color: var(--text-color);
 	position: relative;
 	background: var(--bg-color);
-	font-weight: 400;
-}
-body > main {
+	font-weight: var(--regular);
 	padding: 0px 8px;
 	@include respond-to(lg) {
 		padding: 0px 13px;
 	}
 }
+// body > main {
+// 	padding: 0px 8px;
+// 	@include respond-to(lg) {
+// 		padding: 0px 13px;
+// 	}
+// }
 
 a {
 	color: inherit;
 	text-decoration: none;
+}
+
+textarea:focus,
+input:focus {
+	outline: none;
+}
+
+button {
+	color: inherit;
 }

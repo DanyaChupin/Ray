@@ -1,0 +1,31 @@
+@import '../../../assets/mixins/mixin-media.scss';
+
+.buttonLang {
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	cursor: pointer;
+	position: absolute;
+	bottom: 10px;
+	right: 8px;
+	@include respond-to(lg) {
+		right: 13px;
+		font-size: 24px;
+	}
+}
+
+.button {
+	font-size: 15px;
+	cursor: pointer;
+	border: none;
+	border-radius: none;
+	background: none;
+	transition: font-weight var(--transition) ease;
+	@include respond-to(lg) {
+		font-size: 24px;
+	}
+}
+.bold {
+	font-weight: var(--bold);
+}

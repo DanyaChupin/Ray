@@ -1,6 +1,6 @@
 import styles from './Logo.module.scss'
 
-const LOGOTEXT = 'Луч'
+const LOGOTEXT = 'ЛУЧ'
 export function Logo() {
-	return <h1>{LOGOTEXT}</h1>
+	return <h1 className={styles['logo']}>{LOGOTEXT}</h1>
 }

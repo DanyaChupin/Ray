@@ -1,0 +1,29 @@
+@import '../../../assets/mixins/mixin-media.scss';
+.select-wrapper {
+	position: absolute;
+	display: grid;
+	grid-template-rows: 0fr;
+	top: 50%;
+	width: 100%;
+	transition: grid-template-rows 0.3s ease;
+}
+.select {
+	background-color: var(--select-bg);
+	overflow: hidden;
+	min-height: 0;
+
+	border-radius: 0 0 var(--border-radius) var(--border-radius);
+
+	li:first-child {
+		margin-top: 29px;
+		@include respond-to(lg) {
+			margin-top: 41px;
+		}
+	}
+	li:last-child {
+		height: 40px;
+	}
+}
+.open {
+	grid-template-rows: 1fr;
+}

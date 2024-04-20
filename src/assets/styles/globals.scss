@@ -5,6 +5,8 @@
 	--bg-color: #1e1e1e;
 	--text-color: #ffffff;
 	--border-color: #646464;
+	--select-bg: #141414;
+	--select-hover: #2b2b2b;
 	--border: 1px;
 	--border-radius: 30px;
 	--anim-time: 60s;
@@ -40,12 +42,6 @@ body {
 		padding: 0px 13px;
 	}
 }
-// body > main {
-// 	padding: 0px 8px;
-// 	@include respond-to(lg) {
-// 		padding: 0px 13px;
-// 	}
-// }
 
 a {
 	color: inherit;

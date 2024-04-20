@@ -3,12 +3,12 @@ import { useResize } from '@/app/hooks/useResize'
 import styles from './SlideItem.module.scss'
 
 export function SlideItem() {
-	const { isScreenLg } = useResize()
+	const { isScreenMd } = useResize()
 	return (
 		<Image
 			className={styles['slideItem']}
-			width={isScreenLg ? 160 : 70}
-			height={isScreenLg ? 100 : 54.71}
+			width={isScreenMd ? 160 : 70}
+			height={isScreenMd ? 100 : 54.71}
 			src='/photo.jpeg'
 			alt='photo'
 		/>

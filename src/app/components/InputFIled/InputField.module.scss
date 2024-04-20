@@ -1,8 +1,11 @@
 @import '../../../assets/mixins/mixin-media.scss';
 
 .inputField__wrapper {
-	width: 308px;
-	height: 37.37px;
+	position: relative;
+	background-color: var(--bg-color);
+	// width: 308px;
+	height: 100%;
+	z-index: 2;
 	display: flex;
 	overflow: hidden;
 	padding: 0 13px;
@@ -11,10 +14,6 @@
 	text-align: center;
 	border-radius: var(--border-radius);
 	border: var(--border) solid var(--border-color);
-	@include respond-to(lg) {
-		width: 485px;
-		height: 56px;
-	}
 }
 .inputField__input {
 	color: var(--text-color);

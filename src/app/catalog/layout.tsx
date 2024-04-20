@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react'
 
-export default function GalleryLayout({
+export default function CatalogLayout({
 	children,
 }: PropsWithChildren<unknown>) {
 	return (

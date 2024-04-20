@@ -4,17 +4,17 @@ import { InputHTMLAttributes } from 'react'
 
 interface IFormInput extends InputHTMLAttributes<HTMLInputElement> {
 	screenSize: boolean
-	icon: string
+	pathIcon: string
 }
 
-export function InputField({ screenSize, icon, ...rest }: IFormInput) {
+export function InputField({ screenSize, pathIcon, ...rest }: IFormInput) {
 	return (
 		<div className={styles['inputField__wrapper']}>
-			{icon && (
+			{pathIcon && (
 				<Image
 					width={screenSize ? 24 : 16}
 					height={screenSize ? 24 : 16}
-					src={icon}
+					src={pathIcon}
 					alt='иконка'
 				/>
 			)}

@@ -1,0 +1,10 @@
+@import '../../../assets/mixins/mixin-media.scss';
+.form {
+	position: relative;
+	height: 37.37px;
+	width: 308px;
+	@include respond-to(lg) {
+		width: 485px;
+		height: 56px;
+	}
+}

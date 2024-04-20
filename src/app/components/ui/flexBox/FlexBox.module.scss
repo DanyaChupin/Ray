@@ -1,10 +1,12 @@
 .flex {
 	display: flex;
+	position: relative;
 	gap: 35px;
 	justify-content: center;
 	align-items: center;
+	// min-height: 100px;
 }
 .column {
-	justify-content: center;
+	// justify-content: top;
 	flex-direction: column;
 }

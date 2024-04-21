@@ -19,7 +19,7 @@
 
 .home__description {
 	opacity: 0;
-	animation: descriptionOpacity var(--transition) forwards;
+	animation: opacity var(--transition) forwards;
 	width: 326px;
 	height: 37.7px;
 	text-align: center;
@@ -30,7 +30,7 @@
 		font-size: var(--fs-20);
 	}
 }
-@keyframes descriptionOpacity {
+@keyframes opacity {
 	0% {
 		opacity: 0;
 	}

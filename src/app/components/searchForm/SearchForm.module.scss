@@ -1,10 +1,22 @@
 @import '../../../assets/mixins/mixin-media.scss';
+
 .form {
 	position: relative;
 	height: 37.37px;
 	width: 308px;
+	opacity: 0;
+	animation: opacity var(--transition) forwards;
 	@include respond-to(lg) {
 		width: 485px;
 		height: 56px;
+	}
+}
+
+@keyframes opacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }

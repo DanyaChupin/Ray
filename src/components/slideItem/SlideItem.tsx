@@ -1,11 +1,13 @@
 import Image from 'next/image'
-import { useResize } from '@/app/hooks/useResize'
+import { useResize } from '@/hooks/useResize'
 import styles from './SlideItem.module.scss'
+import { useDrag } from 'react-dnd'
 
 export function SlideItem() {
 	const { isScreenMd } = useResize()
 	return (
 		<Image
+			// ref={dragRef }
 			className={styles['slideItem']}
 			width={isScreenMd ? 160 : 70}
 			height={isScreenMd ? 100 : 54.71}

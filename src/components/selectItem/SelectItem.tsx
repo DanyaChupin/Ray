@@ -1,4 +1,4 @@
-import { IOption } from '@/app/shared/types/options.type'
+import { IOption } from '@/shared/types/options.type'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './SelectItem.module.scss'

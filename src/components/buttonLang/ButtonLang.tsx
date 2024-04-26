@@ -12,7 +12,7 @@ export function ButtonLang() {
 		if (lang === 'RU') {
 			setLang('EN')
 		} else {
-			setLang('RU')
+			setLang(LANG)
 		}
 	}
 	return (

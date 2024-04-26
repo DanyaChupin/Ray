@@ -1,10 +1,14 @@
-import cn from 'classnames'
 import { SlideItem } from '../slideItem/SlideItem'
+import { IVideo } from '@/shared/types/video.type'
+import cn from 'classnames'
 import styles from './Slide.module.scss'
 
-type ISlide = { sideLeft: boolean }
+interface ISlide {
+	sideLeft: boolean
+	videoArray: IVideo[]
+}
 
-export function Slide({ sideLeft }: ISlide) {
+export function Slide({ sideLeft, videoArray }: ISlide) {
 	return (
 		<div className={styles['slide']}>
 			<div
@@ -13,15 +17,9 @@ export function Slide({ sideLeft }: ISlide) {
 					[styles['slide-right']]: !sideLeft,
 				})}
 			>
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
+				{videoArray.map(video => (
+					<SlideItem video={video} key={video.id} />
+				))}
 			</div>
 			<div
 				className={cn(styles['slide-wrapper'], {
@@ -29,15 +27,9 @@ export function Slide({ sideLeft }: ISlide) {
 					[styles['slide-right']]: !sideLeft,
 				})}
 			>
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
-				<SlideItem />
+				{videoArray.map(video => (
+					<SlideItem video={video} key={video.id} />
+				))}
 			</div>
 		</div>
 	)

@@ -1,10 +1,14 @@
+@import '../../assets/mixins/mixin-media.scss';
+
 .slide {
 	white-space: nowrap;
 }
 
 // anim pause on hover
 .slide:hover .slide-wrapper {
-	animation-play-state: paused;
+	@include respond-to(lg) {
+		animation-play-state: paused;
+	}
 }
 
 .slide-wrapper {

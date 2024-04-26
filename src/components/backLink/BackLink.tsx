@@ -4,15 +4,15 @@ import styles from './BackLink.module.scss'
 
 export function BackLink({
 	returnBackUrl,
-	checkDescription,
+	onClick,
 }: {
 	returnBackUrl: string
-	checkDescription?: () => void
+	onClick?: () => void
 }) {
 	return (
 		<Link
 			className={styles['backLink']}
-			onClick={checkDescription && checkDescription}
+			onClick={onClick && onClick}
 			href={returnBackUrl}
 		>
 			<Image src='/images/back.svg' width={30} height={30} alt='Назад' />

@@ -9,7 +9,7 @@ interface IVideoPrevies {
 }
 
 const coordinates = function randomPosition() {
-	const x = Math.floor(Math.random() * 400)
+	const x = Math.floor(Math.random() * -500) + 200
 	const y = Math.floor(Math.random() * 200)
 	return { x, y }
 }
@@ -26,15 +26,22 @@ export function VideoPrevies({ video }: IVideoPrevies) {
 
 	return (
 		<Draggable grid={[1, 1]} defaultPosition={coordinates()}>
-			<Image
-				onClick={() => setZIndex(prev => prev + 1)}
+			{/* <Image
 				src={video.src}
-				style={{ zIndex: zIndex }}
 				width={size.width}
 				height={size.height}
 				alt='video'
 				className={styles['videoPrevies']}
 				draggable={false}
+			/> */}
+			<video
+				src='/video.mp4'
+				onClick={() => setZIndex(prev => prev + 1)}
+				style={{ zIndex: zIndex }}
+				autoPlay
+				width={size.width}
+				height={size.height}
+				className={styles['videoPrevies']}
 			/>
 		</Draggable>
 	)

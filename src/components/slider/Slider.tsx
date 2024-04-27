@@ -1,12 +1,14 @@
 import { IVideo } from '@/shared/types/video.type'
 import { Slide } from '../slide/Slide'
 import styles from './Slider.module.scss'
+import { Dispatch, SetStateAction } from 'react'
 
 interface ISlider {
 	screenSize: boolean
+	setDragVideo: Dispatch<SetStateAction<IVideo>>
 }
 
-export function Slider({ screenSize }: ISlider) {
+export function Slider({ screenSize, setDragVideo }: ISlider) {
 	const mock: IVideo[] = [
 		{
 			id: '1',
@@ -56,8 +58,10 @@ export function Slider({ screenSize }: ISlider) {
 	]
 	return (
 		<div className={styles['slider']}>
-			<Slide sideLeft={true} videoArray={mock} />
-			{screenSize && <Slide sideLeft={false} videoArray={mock} />}
+			<Slide sideLeft={true} setDragVideo={setDragVideo} videoArray={mock} />
+			{screenSize && (
+				<Slide sideLeft={false} setDragVideo={setDragVideo} videoArray={mock} />
+			)}
 		</div>
 	)
 }

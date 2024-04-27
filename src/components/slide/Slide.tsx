@@ -2,13 +2,17 @@ import { SlideItem } from '../slideItem/SlideItem'
 import { IVideo } from '@/shared/types/video.type'
 import cn from 'classnames'
 import styles from './Slide.module.scss'
+import { Dispatch, SetStateAction } from 'react'
+import { useActiveVideoContext } from '@/context/ActiveVideoContext'
 
 interface ISlide {
 	sideLeft: boolean
 	videoArray: IVideo[]
+	setDragVideo: Dispatch<SetStateAction<IVideo>>
 }
 
-export function Slide({ sideLeft, videoArray }: ISlide) {
+export function Slide({ sideLeft, videoArray, setDragVideo }: ISlide) {
+	const { activeVideo, setActiveVideo } = useActiveVideoContext()
 	return (
 		<div className={styles['slide']}>
 			<div
@@ -18,7 +22,13 @@ export function Slide({ sideLeft, videoArray }: ISlide) {
 				})}
 			>
 				{videoArray.map(video => (
-					<SlideItem video={video} key={video.id} />
+					<SlideItem
+						video={video}
+						setDragVideo={setDragVideo}
+						activeVideo={activeVideo}
+						setActiveVideo={setActiveVideo}
+						key={video.id}
+					/>
 				))}
 			</div>
 			<div
@@ -28,7 +38,13 @@ export function Slide({ sideLeft, videoArray }: ISlide) {
 				})}
 			>
 				{videoArray.map(video => (
-					<SlideItem video={video} key={video.id} />
+					<SlideItem
+						video={video}
+						activeVideo={activeVideo}
+						setActiveVideo={setActiveVideo}
+						setDragVideo={setDragVideo}
+						key={video.id}
+					/>
 				))}
 			</div>
 		</div>

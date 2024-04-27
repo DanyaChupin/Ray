@@ -2,29 +2,46 @@
 import Image from 'next/image'
 import { useResize } from '@/hooks/useResize'
 import { IVideo } from '@/shared/types/video.type'
-import { useEffect, useState } from 'react'
-import { useActiveVideoContext } from '@/context/ActiveVideoContext'
+import {
+	Dispatch,
+	SetStateAction,
+	TouchEvent,
+	memo,
+	useEffect,
+	useState,
+} from 'react'
+import cn from 'classnames'
 import styles from './SlideItem.module.scss'
 
 interface ISlideItem {
 	video: IVideo
+	setDragVideo: Dispatch<SetStateAction<IVideo>>
+	activeVideo: IVideo[]
+	setActiveVideo: Dispatch<SetStateAction<IVideo[]>>
 }
-export function SlideItem({ video }: ISlideItem) {
-	const { activeVideo, setActiveVideo } = useActiveVideoContext()
 
+export function SlideItem({
+	video,
+	setDragVideo,
+	activeVideo,
+	setActiveVideo,
+}: ISlideItem) {
 	const { isScreenLg } = useResize()
 	const [isActive, setIsActive] = useState(false)
 
 	const MAXVIDEO = isScreenLg ? 4 : 2
+
 	useEffect(() => {
 		const isActiveVideo = activeVideo.find(aVideo => aVideo.id === video.id)
 		setIsActive(!!isActiveVideo)
 	}, [activeVideo])
 
-	console.log(activeVideo.length)
-	console.log(activeVideo)
+	const openVideoPreviesDrag = () => {
+		if (isActive) return
+		setDragVideo(video)
+	}
 
-	const openVideoPrevie = () => {
+	const openVideoPrevieClick = () => {
 		if (isActive) {
 			const updatedItems = activeVideo.filter(item => item.id !== video.id)
 			setActiveVideo(updatedItems)
@@ -43,7 +60,7 @@ export function SlideItem({ video }: ISlideItem) {
 		<>
 			{isActive ? (
 				<Image
-					onClick={openVideoPrevie}
+					onClick={openVideoPrevieClick}
 					className={styles['slideItem']}
 					width={isScreenMd ? 160 : 70}
 					height={isScreenMd ? 100 : 54.71}
@@ -53,11 +70,14 @@ export function SlideItem({ video }: ISlideItem) {
 				/>
 			) : (
 				<Image
-					onClick={openVideoPrevie}
-					className={styles['slideItem']}
+					onClick={openVideoPrevieClick}
+					onTouchCancel={openVideoPreviesDrag}
+					onDragStart={openVideoPreviesDrag}
+					className={cn(styles['slideItem'], styles['draggable'])}
 					width={isScreenMd ? 160 : 70}
 					height={isScreenMd ? 100 : 54.71}
 					src={video.src}
+					draggable={true}
 					alt='photo'
 				/>
 			)}

@@ -1,5 +1,3 @@
-@import '../../assets/mixins/mixin-media.scss';
-
 .home {
 	height: 100vh;
 	width: 100%;
@@ -7,34 +5,4 @@
 	align-items: center;
 	flex-direction: column;
 	justify-content: space-between;
-}
-.home__section {
-	height: 100vh;
-	display: flex;
-	margin-top: 30px;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.home__description {
-	opacity: 0;
-	animation: opacity var(--transition) forwards;
-	width: 326px;
-	height: 37.7px;
-	text-align: center;
-	font-size: 13px;
-	@include respond-to(lg) {
-		height: 56px;
-		width: 500px;
-		font-size: var(--fs-20);
-	}
-}
-@keyframes opacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
 }

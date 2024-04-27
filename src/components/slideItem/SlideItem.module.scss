@@ -1,5 +1,8 @@
 .slideItem {
-	cursor: grab;
+	// cursor: grab;
 	margin: 0 10px 0 0;
 	object-fit: cover;
+}
+.draggable {
+	cursor: grab;
 }

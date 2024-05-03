@@ -82,7 +82,7 @@ export function DragDropSearch({
 									onChange={changeInput}
 									onFocus={() => setSelectVisible(true)}
 									onBlur={() => setSelectVisible(false)}
-									pathIcon='/images/search.svg'
+									pathIcon='./images/search.svg'
 								/>
 								<Select isOpen={isSelectVisible}>
 									{defaultSelect.map(option => (
@@ -94,7 +94,7 @@ export function DragDropSearch({
 														}
 													: () => {}
 											}
-											pathIcon='/images/search.svg'
+											pathIcon='./images/search.svg'
 											option={option}
 											key={option.text}
 										/>

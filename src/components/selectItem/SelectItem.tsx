@@ -9,7 +9,6 @@ interface ISelectItem {
 	onClick?: () => void
 }
 
-/* change color svg */
 export function SelectItem({ onClick, pathIcon, option }: ISelectItem) {
 	return (
 		<li className={styles['select-item']}>
@@ -24,6 +23,7 @@ export function SelectItem({ onClick, pathIcon, option }: ISelectItem) {
 					height={16}
 					src={pathIcon}
 					alt='поиск'
+					priority
 				/>
 				<p className={styles['select-item__text']}>{option.text}</p>
 			</Link>

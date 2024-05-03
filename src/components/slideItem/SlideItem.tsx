@@ -59,6 +59,7 @@ export function SlideItem({
 					src='/images/net.png'
 					alt='photo'
 					draggable={false}
+					priority
 				/>
 			) : (
 				<Image

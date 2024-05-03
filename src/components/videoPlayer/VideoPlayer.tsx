@@ -32,7 +32,7 @@ export function VideoPlayer({ isPrevies, removeVideo }: IVideoPlayer) {
 	return (
 		<div className={styles['videoPlayer']}>
 			<video
-				src='/yoto.mp4'
+				src="/yoto.mp4"
 				autoPlay={isPrevies}
 				ref={videoRef}
 				className={styles['video']}
@@ -47,6 +47,7 @@ export function VideoPlayer({ isPrevies, removeVideo }: IVideoPlayer) {
 					src={isPlaying ? '/images/play.svg' : '/images/pause.svg'}
 					width={30}
 					height={37}
+					loading="eager"
 					alt={isPlaying ? 'воспроизвести' : 'пауза'}
 					draggable={false}
 				/>
@@ -56,34 +57,37 @@ export function VideoPlayer({ isPrevies, removeVideo }: IVideoPlayer) {
 					<>
 						<div className={styles['controls__time']}>00.00</div>
 						<div className={styles['controls__progress']}>
-							<input type='range' className={styles['progress']} />
+							<input type="range" className={styles['progress']} />
 						</div>
 						<div className={styles['controls__videoLength']}>10.29</div>
 						<div className={styles['controls__quality']}>HD</div>
 						<button className={styles['controls__volume']}>
 							<Image
-								src='/images/volume.svg'
+								src="/images/volume.svg"
 								width={22}
 								height={22}
-								alt='громкость'
+								loading="eager"
+								alt="громкость"
 							/>
 						</button>
 						<button className={styles['controls__fullScreen']}>
 							<Image
-								src='/images/fullscreen.svg'
+								src="/images/fullscreen.svg"
 								width={34 - 40}
 								height={20}
-								alt='полный экран'
+								loading="eager"
+								alt="полный экран"
 							/>
 						</button>
 					</>
 				)}
 				<button className={styles['controls__volume']} onClick={toggleVolume}>
 					<Image
-						src='/images/volume.svg'
+						src="/images/volume.svg"
 						width={20}
 						height={20}
-						alt='громкость'
+						loading="eager"
+						alt="громкость"
 					/>
 				</button>
 				<button
@@ -92,10 +96,11 @@ export function VideoPlayer({ isPrevies, removeVideo }: IVideoPlayer) {
 					draggable={false}
 				>
 					<Image
-						src='/images/close.svg'
+						src="/images/close.svg"
 						width={20}
 						height={20}
-						alt='закрыть'
+						loading="eager"
+						alt="закрыть"
 						draggable={false}
 					/>
 				</button>

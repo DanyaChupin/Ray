@@ -12,12 +12,12 @@ import { SearchForm } from '../searchForm/SearchForm'
 import { InputField } from '../InputFIled/InputField'
 import { Select } from '../select/Select'
 import { SelectItem } from '../selectItem/SelectItem'
-import { IVideo } from '@/shared/types/video.type'
-import { defaultSelect } from '@/utils/default-select'
+import { IVideo } from '../../shared/types/video.type'
+import { defaultSelect } from '../../utils/default-select'
 import { Footer } from '../footer/Footer'
 import { BackLink } from '../backLink/BackLink'
 import { ButtonLang } from '../buttonLang/ButtonLang'
-import { DESCRIPTION } from '@/utils/description'
+import { DESCRIPTION } from '../../utils/description'
 import cn from 'classnames'
 import styles from './DragDropSearch.module.scss'
 
@@ -52,7 +52,7 @@ export function DragDropSearch({
 
 	const handleDrop = (e: DragEvent<HTMLDivElement>) => {
 		e.preventDefault()
-		if (dragVideo.id) setActiveVideo(prev => [...prev, dragVideo])
+		if (dragVideo.id) setActiveVideo((prev) => [...prev, dragVideo])
 		setDragActive(false)
 	}
 	return (
@@ -67,7 +67,7 @@ export function DragDropSearch({
 				})}
 			>
 				{activeVideo.length ? (
-					activeVideo.map(video => (
+					activeVideo.map((video) => (
 						<VideoPrevies video={video} key={video.id} />
 					))
 				) : (
@@ -82,10 +82,10 @@ export function DragDropSearch({
 									onChange={changeInput}
 									onFocus={() => setSelectVisible(true)}
 									onBlur={() => setSelectVisible(false)}
-									pathIcon='./images/search.svg'
+									pathIcon="./images/search.svg"
 								/>
 								<Select isOpen={isSelectVisible}>
-									{defaultSelect.map(option => (
+									{defaultSelect.map((option) => (
 										<SelectItem
 											onClick={
 												option.text === 'Что такое ЛУЧ?'
@@ -94,7 +94,7 @@ export function DragDropSearch({
 														}
 													: () => {}
 											}
-											pathIcon='./images/search.svg'
+											pathIcon="./images/search.svg"
 											option={option}
 											key={option.text}
 										/>
@@ -107,12 +107,12 @@ export function DragDropSearch({
 			</main>
 			<Footer>
 				{activeVideo.length ? (
-					<BackLink returnBackUrl='' onClick={() => setActiveVideo([])} />
+					<BackLink returnBackUrl="" onClick={() => setActiveVideo([])} />
 				) : (
 					<>
 						{checkDescription && (
 							<BackLink
-								returnBackUrl=''
+								returnBackUrl=""
 								onClick={() => setCheckDescription(!checkDescription)}
 							/>
 						)}

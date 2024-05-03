@@ -1,10 +1,4 @@
-import {
-	Dispatch,
-	SetStateAction,
-	createContext,
-	useContext,
-	useState,
-} from 'react'
+import { Dispatch, SetStateAction, createContext, useContext } from 'react'
 import { IVideo } from '@/shared/types/video.type'
 
 export type IActiveVideo = {

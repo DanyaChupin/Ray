@@ -19,7 +19,6 @@ interface ResizeHook {
 
 export function useResize(): ResizeHook {
 	const [screenSize, setScreenSize] = useState({ width: 0, height: 0 })
-	// console.log(screenSize)
 	useLayoutEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth) {

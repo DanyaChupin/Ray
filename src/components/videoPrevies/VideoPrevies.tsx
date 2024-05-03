@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { IVideo } from '@/shared/types/video.type'
+import { IVideo } from '../../shared/types/video.type'
 import { VideoPlayer } from '../videoPlayer/VideoPlayer'
-import { useActiveVideoContext } from '@/context/ActiveVideoContext'
+import { useActiveVideoContext } from '../../context/ActiveVideoContext'
 import { usePosition } from './usePosition'
 import styles from './VideoPrevies.module.scss'
 
@@ -20,13 +20,11 @@ export function VideoPrevies({ video }: IVideoPrevies) {
 
 	const { activeVideo, setActiveVideo } = useActiveVideoContext()
 
-	const [size, setSize] = useState<{ width: number; height: number }>(
+	const [size] = useState<{ width: number; height: number }>(
 		generateRandomSize()
 	)
-	console.log(position)
-	console.log(generateRandomSize())
 	const removeVideo = () => {
-		setActiveVideo(activeVideo.filter(aVideo => aVideo.id !== video.id))
+		setActiveVideo(activeVideo.filter((aVideo) => aVideo.id !== video.id))
 	}
 
 	return (

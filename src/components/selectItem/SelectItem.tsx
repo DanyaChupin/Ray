@@ -1,4 +1,4 @@
-import { IOption } from '@/shared/types/options.type'
+import { IOption } from '../../shared/types/options.type'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './SelectItem.module.scss'
@@ -22,7 +22,8 @@ export function SelectItem({ onClick, pathIcon, option }: ISelectItem) {
 					width={16}
 					height={16}
 					src={pathIcon}
-					alt='поиск'
+					loading="eager"
+					alt="поиск"
 					priority
 				/>
 				<p className={styles['select-item__text']}>{option.text}</p>

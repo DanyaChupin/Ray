@@ -6,9 +6,6 @@ export function usePosition() {
 	const halfScreenWidth = screenSize.width / 2
 	const halfScreenHeight = screenSize.height / 2
 
-	const [position, setPosition] = useState(generateCoordinates())
-	const [isDragging, setIsDragging] = useState(false)
-
 	//Случайный размер видео превью
 	function generateRandomSize() {
 		let height = Math.floor(Math.random() * (screenSize.height - 308 + 1) + 208)
@@ -28,6 +25,8 @@ export function usePosition() {
 		const y = Math.floor(Math.random() * 100 + halfScreenHeight) - 200
 		return { x, y }
 	}
+	const [position, setPosition] = useState(generateCoordinates())
+	const [isDragging, setIsDragging] = useState(false)
 
 	const handleMouseDown = (e: MouseEvent) => {
 		setIsDragging(true)

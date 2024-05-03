@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { fonts } from '../assets/static-fonts/fonts'
 import '../assets/styles/globals.scss'
+import Head from 'next/head'
 
 export const metadata: Metadata = {
 	title: 'Луч',
@@ -14,6 +15,12 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='ru'>
+			<Head>
+				<meta
+					name='viewport'
+					content='width=device-width, initial-scale=1, viewport-fit=cover'
+				/>
+			</Head>
 			<body className={fonts.className}>{children}</body>
 		</html>
 	)

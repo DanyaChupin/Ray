@@ -15,6 +15,7 @@ export function InputField({ pathIcon, ...rest }: IFormInput) {
 					width={16}
 					height={16}
 					src={pathIcon}
+					priority
 					alt='иконка'
 					draggable={false}
 				/>

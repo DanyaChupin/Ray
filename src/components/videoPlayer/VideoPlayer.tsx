@@ -36,6 +36,7 @@ export function VideoPlayer({ isPrevies, removeVideo }: IVideoPlayer) {
 				autoPlay={isPrevies}
 				ref={videoRef}
 				className={styles['video']}
+				playsInline
 			/>
 			<button
 				onClick={toggleVideo}

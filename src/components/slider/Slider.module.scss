@@ -7,7 +7,20 @@
 	left: 0;
 	flex-direction: column;
 	gap: 15px;
+	transition: top var(--transition) ease;
+	.first {
+		display: none;
+	}
 	@include respond-to(xl) {
 		top: 20px;
 	}
+	@include respond-to(xl) {
+		.first {
+			display: inline-block;
+		}
+	}
+}
+
+.hidden {
+	top: -223px;
 }

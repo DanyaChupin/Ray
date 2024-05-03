@@ -5,18 +5,12 @@ import styles from './SelectItem.module.scss'
 
 interface ISelectItem {
 	option: IOption
-	screenSize: boolean
 	pathIcon: string
 	onClick?: () => void
 }
 
 /* change color svg */
-export function SelectItem({
-	onClick,
-	screenSize,
-	pathIcon,
-	option,
-}: ISelectItem) {
+export function SelectItem({ onClick, pathIcon, option }: ISelectItem) {
 	return (
 		<li className={styles['select-item']}>
 			<Link
@@ -26,11 +20,10 @@ export function SelectItem({
 			>
 				<Image
 					className={styles['select-item__icon']}
-					width={screenSize ? 24 : 16}
-					height={screenSize ? 24 : 16}
-					style={{ color: '#4r321w' }}
+					width={16}
+					height={16}
 					src={pathIcon}
-					alt='иконка'
+					alt='поиск'
 				/>
 				<p className={styles['select-item__text']}>{option.text}</p>
 			</Link>

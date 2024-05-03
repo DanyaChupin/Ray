@@ -34,6 +34,7 @@ body {
 body {
 	margin: 0 auto;
 	max-width: var(--max-width);
+	overflow: hidden;
 	color: var(--text-color);
 	position: relative;
 	background: var(--bg-color);

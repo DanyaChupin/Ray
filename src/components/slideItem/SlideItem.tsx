@@ -1,8 +1,8 @@
 'use client'
-import Image from 'next/image'
-import { useResize } from '@/hooks/useResize'
-import { IVideo } from '@/shared/types/video.type'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import Image from 'next/image'
+import { useResize } from '../../hooks/useResize'
+import { IVideo } from '../../shared/types/video.type'
 import cn from 'classnames'
 import styles from './SlideItem.module.scss'
 
@@ -25,7 +25,7 @@ export function SlideItem({
 	const MAXVIDEO = isScreenLg ? 4 : 2
 
 	useEffect(() => {
-		const isActiveVideo = activeVideo.find(aVideo => aVideo.id === video.id)
+		const isActiveVideo = activeVideo.find((aVideo) => aVideo.id === video.id)
 		setIsActive(!!isActiveVideo)
 	}, [activeVideo, video.id])
 
@@ -36,7 +36,7 @@ export function SlideItem({
 
 	const openVideoPrevieClick = () => {
 		if (isActive) {
-			const updatedItems = activeVideo.filter(item => item.id !== video.id)
+			const updatedItems = activeVideo.filter((item) => item.id !== video.id)
 			setActiveVideo(updatedItems)
 			setIsActive(false)
 			return
@@ -44,7 +44,7 @@ export function SlideItem({
 		if (activeVideo.length === MAXVIDEO) {
 			return
 		}
-		setActiveVideo(prev => [...prev, video])
+		setActiveVideo((prev) => [...prev, video])
 		setIsActive(true)
 	}
 
@@ -56,8 +56,9 @@ export function SlideItem({
 					className={styles['slideItem']}
 					width={70}
 					height={54.71}
-					src='/images/net.png'
-					alt='photo'
+					src="/images/net.png"
+					loading="eager"
+					alt="photo"
 					draggable={false}
 					priority
 				/>
@@ -70,9 +71,10 @@ export function SlideItem({
 					width={70}
 					height={54.71}
 					src={video.src}
+					loading="eager"
 					priority
 					draggable={true}
-					alt='photo'
+					alt="photo"
 				/>
 			)}
 		</>

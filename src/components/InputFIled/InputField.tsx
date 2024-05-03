@@ -14,9 +14,10 @@ export function InputField({ pathIcon, ...rest }: IFormInput) {
 					className={styles['inputField__icon']}
 					width={16}
 					height={16}
+					loading="eager"
 					src={pathIcon}
 					priority
-					alt='иконка'
+					alt="иконка"
 					draggable={false}
 				/>
 			)}

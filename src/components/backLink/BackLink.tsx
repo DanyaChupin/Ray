@@ -15,7 +15,13 @@ export function BackLink({
 			onClick={onClick && onClick}
 			href={returnBackUrl}
 		>
-			<Image src='/images/back.svg' width={30} height={30} alt='Назад' />
+			<Image
+				src="/images/back.svg"
+				loading="eager"
+				width={30}
+				height={30}
+				alt="Назад"
+			/>
 		</Link>
 	)
 }

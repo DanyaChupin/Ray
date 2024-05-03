@@ -83,6 +83,8 @@ export function DragDropSearch({
 									onFocus={() => setSelectVisible(true)}
 									onBlur={() => setSelectVisible(false)}
 									pathIcon="./images/search.svg"
+									type="text"
+									aria-label="поиск"
 								/>
 								<Select isOpen={isSelectVisible}>
 									{defaultSelect.map((option) => (

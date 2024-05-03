@@ -6,7 +6,7 @@
 
 // anim pause on hover
 .slide:hover .slide-wrapper {
-	@include respond-to(lg) {
+	@include respond-to(xl) {
 		animation-play-state: paused;
 	}
 }

@@ -14,14 +14,14 @@
 .activeDrag {
 	background-color: var(--bg-drag-color);
 }
-.home__description {
+.description {
 	opacity: 0;
 	animation: opacity var(--transition) forwards;
 	width: 326px;
 	height: 37.7px;
 	text-align: center;
 	font-size: 13px;
-	@include respond-to(lg) {
+	@include respond-to(xl) {
 		height: 56px;
 		width: 500px;
 		font-size: var(--fs-20);

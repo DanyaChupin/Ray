@@ -17,7 +17,7 @@
 
 	li:first-child {
 		margin-top: 29px;
-		@include respond-to(lg) {
+		@include respond-to(xl) {
 			margin-top: 41px;
 		}
 	}

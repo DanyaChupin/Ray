@@ -6,7 +6,7 @@
 	width: 308px;
 	opacity: 0;
 	animation: opacity var(--transition) forwards;
-	@include respond-to(lg) {
+	@include respond-to(xl) {
 		width: 485px;
 		height: 56px;
 	}

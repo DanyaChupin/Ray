@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 import {
 	SCREEN_LG,
 	SCREEN_MD,
@@ -9,7 +9,7 @@ import {
 } from '../utils/const-breakpoints'
 
 interface ResizeHook {
-	width: number
+	screenSize: { width: number; height: number }
 	isScreenSm: boolean
 	isScreenMd: boolean
 	isScreenLg: boolean
@@ -18,12 +18,13 @@ interface ResizeHook {
 }
 
 export function useResize(): ResizeHook {
-	const [width, setWidth] = useState<number>(window.innerWidth)
-
-	useEffect(() => {
+	const [screenSize, setScreenSize] = useState({ width: 0, height: 0 })
+	// console.log(screenSize)
+	useLayoutEffect(() => {
 		const handleResize = () => {
 			if (window.innerWidth) {
-				setWidth(window.innerWidth)
+				setScreenSize({ width: window.innerWidth, height: window.innerHeight })
+				return
 			}
 		}
 
@@ -37,11 +38,11 @@ export function useResize(): ResizeHook {
 	}, [])
 
 	return {
-		width,
-		isScreenSm: width >= SCREEN_SM,
-		isScreenMd: width >= SCREEN_MD,
-		isScreenLg: width >= SCREEN_LG,
-		isScreenXl: width >= SCREEN_XL,
-		isScreenXxl: width >= SCREEN_XXL,
+		screenSize,
+		isScreenSm: screenSize.width >= SCREEN_SM,
+		isScreenMd: screenSize.width >= SCREEN_MD,
+		isScreenLg: screenSize.width >= SCREEN_LG,
+		isScreenXl: screenSize.width >= SCREEN_XL,
+		isScreenXxl: screenSize.width >= SCREEN_XXL,
 	}
 }

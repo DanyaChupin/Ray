@@ -3,7 +3,6 @@
 .inputField__wrapper {
 	position: relative;
 	background-color: var(--bg-color);
-	// width: 308px;
 	height: 100%;
 	z-index: 2;
 	display: flex;
@@ -15,13 +14,20 @@
 	border-radius: var(--border-radius);
 	border: var(--border) solid var(--border-color);
 }
+.inputField__icon {
+	width: 16px;
+	height: auto;
+	@include respond-to(xl) {
+		width: 30px;
+	}
+}
 .inputField__input {
 	color: var(--text-color);
 	background: none;
 	height: 16px;
 	width: 100%;
 	border: none;
-	@include respond-to(lg) {
+	@include respond-to(xl) {
 		font-size: 20px;
 	}
 }

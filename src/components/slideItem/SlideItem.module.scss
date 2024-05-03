@@ -1,7 +1,12 @@
+@import '../../assets/mixins/mixin-media.scss';
+
 .slideItem {
-	// cursor: grab;
 	margin: 0 10px 0 0;
-	object-fit: cover;
+	width: 70;
+	height: auto;
+	@include respond-to(md) {
+		width: 160px;
+	}
 }
 .draggable {
 	cursor: grab;

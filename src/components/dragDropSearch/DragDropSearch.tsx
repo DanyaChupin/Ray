@@ -3,7 +3,6 @@ import {
 	Dispatch,
 	DragEvent,
 	SetStateAction,
-	useRef,
 	useState,
 } from 'react'
 import { Logo } from '../Logo/Logo'
@@ -23,13 +22,11 @@ import cn from 'classnames'
 import styles from './DragDropSearch.module.scss'
 
 interface IDragDropSearch {
-	screenSize: boolean
 	dragVideo: IVideo
 	activeVideo: IVideo[]
 	setActiveVideo: Dispatch<SetStateAction<IVideo[]>>
 }
 export function DragDropSearch({
-	screenSize,
 	dragVideo,
 	activeVideo,
 	setActiveVideo,
@@ -38,11 +35,11 @@ export function DragDropSearch({
 	const [isSelectVisible, setSelectVisible] = useState(false)
 	const [checkDescription, setCheckDescription] = useState(false)
 	const [dragActive, setDragActive] = useState(false)
+
 	const changeInput = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value)
 	}
 
-	// const dragContainerRef = useRef<HTMLDivElement>(null)
 	const handleDrag = (e: DragEvent<HTMLDivElement>) => {
 		e.preventDefault()
 		setDragActive(true)
@@ -61,7 +58,6 @@ export function DragDropSearch({
 	return (
 		<>
 			<main
-				// ref={dragContainerRef}
 				onDragEnter={handleDrag}
 				onDragOver={handleDrag}
 				onDrop={handleDrop}
@@ -86,7 +82,6 @@ export function DragDropSearch({
 									onChange={changeInput}
 									onFocus={() => setSelectVisible(true)}
 									onBlur={() => setSelectVisible(false)}
-									screenSize={screenSize}
 									pathIcon='/images/search.svg'
 								/>
 								<Select isOpen={isSelectVisible}>
@@ -101,7 +96,6 @@ export function DragDropSearch({
 											}
 											pathIcon='/images/search.svg'
 											option={option}
-											screenSize={screenSize}
 											key={option.text}
 										/>
 									))}

@@ -1,4 +1,5 @@
 'use client'
+import { Viewport } from 'next'
 import { useState } from 'react'
 import { DragDropSearch } from '../components/dragDropSearch/DragDropSearch'
 import { Slider } from '../components/slider/Slider'
@@ -6,8 +7,12 @@ import { useResize } from '../hooks/useResize'
 import { IVideo } from '../shared/types/video.type'
 import { ActiveVideoContext } from '../context/ActiveVideoContext'
 import styles from './Home.module.scss'
-import Head from 'next/head'
-
+export const viewport: Viewport = {
+	// width: 500,
+	maximumScale: 0,
+	userScalable: false,
+	viewportFit: 'cover',
+}
 export default function HomePage() {
 	const [dragVideo, setDragVideo] = useState<IVideo>({
 		id: '',
@@ -22,12 +27,6 @@ export default function HomePage() {
 
 	return (
 		<>
-			<Head>
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1, viewport-fit=cover"
-				/>
-			</Head>
 			<ActiveVideoContext.Provider value={{ activeVideo, setActiveVideo }}>
 				<Slider
 					setDragVideo={setDragVideo}

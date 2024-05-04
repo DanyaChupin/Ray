@@ -2,9 +2,11 @@
 
 .slider {
 	display: flex;
-	position: absolute;
+	position: fixed;
+	max-width: var(--max-width);
+	overflow: hidden;
 	top: 15px;
-	left: 0;
+	transform: translateY(-50%, -50%);
 	flex-direction: column;
 	gap: 15px;
 	transition: top var(--transition) ease;

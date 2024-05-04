@@ -10,7 +10,7 @@ export function VideoPlayer({ isPrevies, removeVideo }: IVideoPlayer) {
 	const videoRef = useRef<HTMLVideoElement>(null)
 
 	const [isPlaying, setIsPlaying] = useState(false)
-
+	const [isVolume, setIsVolume] = useState(true)
 	const toggleVideo = () => {
 		if (videoRef.current) {
 			if (videoRef.current.paused) {
@@ -26,6 +26,7 @@ export function VideoPlayer({ isPrevies, removeVideo }: IVideoPlayer) {
 	const toggleVolume = () => {
 		if (videoRef.current) {
 			videoRef.current.muted = !videoRef.current.muted
+			setIsVolume(!videoRef.current.muted)
 		}
 	}
 
@@ -43,14 +44,25 @@ export function VideoPlayer({ isPrevies, removeVideo }: IVideoPlayer) {
 				className={styles['controls__togglePlay']}
 				draggable={false}
 			>
-				<Image
-					src={isPlaying ? '/images/play.svg' : '/images/pause.svg'}
-					width={30}
-					height={37}
-					loading="eager"
-					alt={isPlaying ? 'воспроизвести' : 'пауза'}
-					draggable={false}
-				/>
+				{isPlaying ? (
+					<Image
+						src={'/images/play.svg'}
+						width={30}
+						height={37}
+						loading="eager"
+						alt={'воспроизвести'}
+						draggable={false}
+					/>
+				) : (
+					<Image
+						src={'/images/pause.svg'}
+						width={30}
+						height={37}
+						loading="eager"
+						alt={'пауза'}
+						draggable={false}
+					/>
+				)}
 			</button>
 			<div className={styles['controls']}>
 				{!isPrevies && (
@@ -82,13 +94,23 @@ export function VideoPlayer({ isPrevies, removeVideo }: IVideoPlayer) {
 					</>
 				)}
 				<button className={styles['controls__volume']} onClick={toggleVolume}>
-					<Image
-						src="/images/volume.svg"
-						width={20}
-						height={20}
-						loading="eager"
-						alt="громкость"
-					/>
+					{isVolume ? (
+						<Image
+							src="/images/volume.svg"
+							width={20}
+							height={20}
+							loading="eager"
+							alt="громкость"
+						/>
+					) : (
+						<Image
+							src="/images/zeroVolume.svg"
+							width={20}
+							height={20}
+							loading="eager"
+							alt="громкость"
+						/>
+					)}
 				</button>
 				<button
 					className={styles['controls__close']}

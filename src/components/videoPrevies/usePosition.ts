@@ -2,7 +2,8 @@
 import { MouseEvent, TouchEvent, useState } from 'react'
 
 export function usePosition() {
-	const screenSize = window.screen
+	const [screenSize] = useState(window.screen)
+
 	const halfScreenWidth = screenSize.width / 2
 	const halfScreenHeight = screenSize.height / 2
 
@@ -22,7 +23,8 @@ export function usePosition() {
 	// Случайная позиция видео превью
 	function generateCoordinates() {
 		const x = Math.floor(Math.random() * halfScreenWidth)
-		const y = Math.floor(Math.random() * 100 + halfScreenHeight) - 200
+		const y =
+			Math.floor(Math.random() * 100 + halfScreenHeight) - halfScreenHeight / 2
 		return { x, y }
 	}
 	const [position, setPosition] = useState(generateCoordinates())

@@ -1,13 +1,12 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { fonts } from '../assets/static-fonts/fonts'
 import '../assets/styles/globals.scss'
-import type { Viewport } from 'next'
 
 export const viewport: Viewport = {
 	themeColor: 'black',
 	viewportFit: 'cover',
 	userScalable: false,
-	initialScale: 0,
+	initialScale: 1,
 }
 
 export const metadata: Metadata = {

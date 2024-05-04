@@ -4,7 +4,7 @@
 	margin: 0 10px 0 0;
 	width: 70;
 	height: auto;
-	@include respond-to(md) {
+	@include respond-to(sm) {
 		width: 160px;
 	}
 }

@@ -26,7 +26,7 @@ export default function HomePage() {
 	const [activeVideo, setActiveVideo] = useState<IVideo[]>([])
 
 	return (
-		<>
+		<div className={styles['wrapper']}>
 			<ActiveVideoContext.Provider value={{ activeVideo, setActiveVideo }}>
 				<Slider
 					setDragVideo={setDragVideo}
@@ -40,6 +40,6 @@ export default function HomePage() {
 					/>
 				</div>
 			</ActiveVideoContext.Provider>
-		</>
+		</div>
 	)
 }

@@ -33,7 +33,11 @@
 		border: none;
 	}
 }
-
+.controls__volume {
+	display: flex;
+	max-width: 13px;
+	justify-content: left;
+}
 .controls__togglePlay {
 	opacity: 0;
 	cursor: pointer;

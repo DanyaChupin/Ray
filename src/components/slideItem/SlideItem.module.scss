@@ -4,7 +4,10 @@
 	margin: 0 10px 0 0;
 	width: 70;
 	height: auto;
-	@include respond-to(sm) {
+	@include respond-to(xl) {
+		width: 160px;
+	}
+	@media screen and (min-height: 992px) {
 		width: 160px;
 	}
 }

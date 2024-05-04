@@ -19,6 +19,11 @@
 			display: inline-block;
 		}
 	}
+	@media screen and (min-height: 992px) {
+		.first {
+			display: inline-block;
+		}
+	}
 }
 
 .hidden {

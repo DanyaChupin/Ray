@@ -12,7 +12,7 @@
 			@content;
 		}
 	} @else if ($media == xl) {
-		@media only screen and (min-width: 1024px) {
+		@media only screen and (min-width: 1024px) and (min-height: 660px) {
 			@content;
 		}
 	} @else if ($media == xxl) {

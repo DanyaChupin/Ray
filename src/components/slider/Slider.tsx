@@ -15,46 +15,55 @@ export function Slider({ setDragVideo, hidden }: ISlider) {
 			id: '1',
 			title: 'Video',
 			src: '/photo.png',
+			zIndex: 1,
 		},
 		{
 			id: '2',
 			title: 'Video',
 			src: '/photo.png',
+			zIndex: 1,
 		},
 		{
 			id: '3',
 			title: 'Video',
 			src: '/photo.png',
+			zIndex: 1,
 		},
 		{
 			id: '4',
 			title: 'Video',
 			src: '/photo.png',
+			zIndex: 1,
 		},
 		{
 			id: '5',
 			title: 'Video',
 			src: '/photo.png',
+			zIndex: 1,
 		},
 		{
 			id: '6',
 			title: 'Video',
 			src: '/photo.png',
+			zIndex: 1,
 		},
 		{
 			id: '7',
 			title: 'Video',
 			src: '/photo.png',
+			zIndex: 1,
 		},
 		{
 			id: '8',
 			title: 'Video',
 			src: '/photo.png',
+			zIndex: 1,
 		},
 		{
 			id: '9',
 			title: 'Video',
 			src: '/photo.png',
+			zIndex: 1,
 		},
 	]
 	return (

@@ -3,6 +3,7 @@
 .select-item {
 	width: 100%;
 	height: 34px;
+	display: flex;
 	transition: background-color var(--transition) ease;
 	&:hover {
 		background-color: var(--select-hover);
@@ -14,6 +15,7 @@
 	cursor: pointer;
 	display: flex;
 	align-items: center;
+	text-align: center;
 	gap: 18px;
 	text-align: center;
 }

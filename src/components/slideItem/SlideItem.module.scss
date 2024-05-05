@@ -2,7 +2,7 @@
 
 .slideItem {
 	margin: 0 10px 0 0;
-	width: 70;
+	width: 70px;
 	height: auto;
 	@include respond-to(md) {
 		width: 120px;

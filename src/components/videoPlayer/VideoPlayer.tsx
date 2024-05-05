@@ -5,18 +5,16 @@ import styles from './VideoPlayer.module.scss'
 interface IVideoPlayer {
 	isPrevies: boolean
 }
+
 export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 	const videoRef = useRef<HTMLVideoElement>(null)
 
-	// const [isVolume, setIsVolume] = useState(true)
 	const toggleVideo = () => {
 		if (videoRef.current) {
 			if (videoRef.current.paused) {
 				videoRef.current.play()
-				// setIsPlaying(!isPlaying)
 			} else {
 				videoRef.current.pause()
-				// setIsPlaying(!isPlaying)
 			}
 		}
 	}
@@ -24,7 +22,6 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 	const toggleVolume = () => {
 		if (videoRef.current) {
 			videoRef.current.muted = !videoRef.current.muted
-			// setIsVolume(!videoRef.current.muted)
 		}
 	}
 

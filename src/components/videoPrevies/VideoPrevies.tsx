@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react'
+import { MouseEvent, TouchEvent, useState } from 'react'
 import Image from 'next/image'
 import { IVideo } from '../../shared/types/video.type'
 import { VideoPlayer } from '../videoPlayer/VideoPlayer'
@@ -9,19 +9,24 @@ import styles from './VideoPrevies.module.scss'
 
 interface IVideoPrevies {
 	video: IVideo
-	onClick: () => void
+	changeZIndex: () => void
 }
 
-export function VideoPrevies({ video, onClick }: IVideoPrevies) {
+export function VideoPrevies({ video, changeZIndex }: IVideoPrevies) {
 	const [isDragging, setIsDragging] = useState(false)
 	const { position, generateRandomSize, handleMouseDown, handleTouchStart } =
 		usePosition(setIsDragging)
 
 	const { activeVideo, setActiveVideo } = useActiveVideoContext()
 	const [size, setSize] = useState(generateRandomSize())
-	const setDrag = (e: MouseEvent) => {
-		onClick()
+
+	const setDragPC = (e: MouseEvent) => {
+		changeZIndex()
 		handleMouseDown(e)
+	}
+	const setDragMobile = (e: TouchEvent) => {
+		changeZIndex()
+		handleTouchStart(e)
 	}
 	const changeSize = (newWidth: number, newHeight: number) => {
 		setSize({ initWidth: newWidth, initHeight: newHeight })
@@ -34,7 +39,7 @@ export function VideoPrevies({ video, onClick }: IVideoPrevies) {
 	return (
 		<div
 			className={styles['videoPrevies']}
-			onClick={onClick}
+			onClick={changeZIndex}
 			style={{
 				left: position.x,
 				top: position.y,
@@ -43,8 +48,8 @@ export function VideoPrevies({ video, onClick }: IVideoPrevies) {
 				height: size.initHeight,
 				zIndex: video.zIndex,
 			}}
-			onMouseDown={setDrag}
-			onTouchStart={handleTouchStart}
+			onMouseDown={setDragPC}
+			onTouchStart={setDragMobile}
 		>
 			<button
 				className={styles['videoPrevies__close']}
@@ -63,6 +68,7 @@ export function VideoPrevies({ video, onClick }: IVideoPrevies) {
 			<ResizeBox
 				width={size.initWidth}
 				height={size.initHeight}
+				changeZIndex={changeZIndex}
 				changeSize={changeSize}
 			/>
 			<VideoPlayer isPrevies={true} />

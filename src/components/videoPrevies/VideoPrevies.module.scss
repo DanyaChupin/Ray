@@ -1,5 +1,22 @@
 .videoPrevies {
+	z-index: 1;
 	position: absolute;
 	cursor: grab;
-	transition: transform 0.01s ease;
+	&:hover {
+		.videoPrevies__close {
+			opacity: 1;
+		}
+	}
+}
+
+.videoPrevies__close {
+	transition: opacity var(--transition) ease;
+	opacity: 0;
+	z-index: 1;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	background: none;
+	border: none;
+	cursor: pointer;
 }

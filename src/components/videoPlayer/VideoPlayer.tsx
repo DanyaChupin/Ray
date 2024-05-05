@@ -4,9 +4,8 @@ import styles from './VideoPlayer.module.scss'
 
 interface IVideoPlayer {
 	isPrevies: boolean
-	removeVideo?: () => void
 }
-export function VideoPlayer({ isPrevies, removeVideo }: IVideoPlayer) {
+export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 	const videoRef = useRef<HTMLVideoElement>(null)
 
 	const [isPlaying, setIsPlaying] = useState(false)
@@ -111,20 +110,6 @@ export function VideoPlayer({ isPrevies, removeVideo }: IVideoPlayer) {
 							alt="громкость"
 						/>
 					)}
-				</button>
-				<button
-					className={styles['controls__close']}
-					onClick={removeVideo}
-					draggable={false}
-				>
-					<Image
-						src="/images/close.svg"
-						width={20}
-						height={20}
-						loading="eager"
-						alt="закрыть"
-						draggable={false}
-					/>
 				</button>
 			</div>
 		</div>

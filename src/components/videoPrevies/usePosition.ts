@@ -1,23 +1,34 @@
 'useClient'
-import { MouseEvent, TouchEvent, useState } from 'react'
+import {
+	Dispatch,
+	MouseEvent,
+	SetStateAction,
+	TouchEvent,
+	useState,
+} from 'react'
 
-export function usePosition() {
-	const [screenSize] = useState(window.screen)
+
+export function usePosition(setIsDRagging: Dispatch<SetStateAction<boolean>>) {
+	const screenSize = window.screen
 
 	const halfScreenWidth = screenSize.width / 2
 	const halfScreenHeight = screenSize.height / 2
 
 	//Случайный размер видео превью
 	function generateRandomSize() {
-		let height = Math.floor(Math.random() * (screenSize.height - 308 + 1) + 208)
-		let width = Math.floor(Math.random() * (halfScreenWidth - 266 + 1) + 266)
-		if (width > screenSize.width) {
-			width = width / 2
+		let initHeight = Math.floor(
+			Math.random() * (screenSize.height - 308 + 1) + 208
+		)
+		let initWidth = Math.floor(
+			Math.random() * (halfScreenWidth - 266 + 1) + 266
+		)
+		if (initWidth > screenSize.width) {
+			initWidth = initWidth / 2
 		}
-		if (height > width) {
-			height = width
+		if (initHeight > initWidth) {
+			initHeight = initWidth
 		}
-		return { width, height }
+		return { initWidth, initHeight }
 	}
 
 	// Случайная позиция видео превью
@@ -27,11 +38,13 @@ export function usePosition() {
 			Math.floor(Math.random() * 100 + halfScreenHeight) - halfScreenHeight / 2
 		return { x, y }
 	}
+
+	//////////////////////////
+
 	const [position, setPosition] = useState(generateCoordinates())
-	const [isDragging, setIsDragging] = useState(false)
 
 	const handleMouseDown = (e: MouseEvent) => {
-		setIsDragging(true)
+		setIsDRagging(true)
 		const offsetX = e.clientX - position.x
 		const offsetY = e.clientY - position.y
 
@@ -43,7 +56,7 @@ export function usePosition() {
 		}
 
 		const handleMouseUp = () => {
-			setIsDragging(false)
+			setIsDRagging(false)
 			document.removeEventListener('mousemove', handleMouseMove as any)
 			document.removeEventListener('mouseup', handleMouseUp)
 		}
@@ -73,8 +86,8 @@ export function usePosition() {
 
 	return {
 		generateRandomSize,
+		generateCoordinates,
 		position,
-		isDragging,
 		handleMouseDown,
 		handleTouchStart,
 	}

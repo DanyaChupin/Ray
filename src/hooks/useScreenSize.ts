@@ -17,7 +17,7 @@ interface ResizeHook {
 	isScreenXxl: boolean
 }
 
-export function useResize(): ResizeHook {
+export function useScreenSize(): ResizeHook {
 	const [screenSize, setScreenSize] = useState({ width: 0, height: 0 })
 	useLayoutEffect(() => {
 		const handleResize = () => {

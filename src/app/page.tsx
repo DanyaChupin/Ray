@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { DragDropSearch } from '../components/dragDropSearch/DragDropSearch'
 import { Slider } from '../components/slider/Slider'
-import { useResize } from '../hooks/useResize'
+import { useScreenSize } from '../hooks/useScreenSize'
 import { IVideo } from '../shared/types/video.type'
 import { ActiveVideoContext } from '../context/ActiveVideoContext'
 import styles from './Home.module.scss'
@@ -14,7 +14,7 @@ export default function HomePage() {
 		title: '',
 	})
 
-	const { isScreenXl } = useResize()
+	const { isScreenXl } = useScreenSize()
 	const maxActiveVideo = isScreenXl ? 4 : 2
 
 	const [activeVideo, setActiveVideo] = useState<IVideo[]>([])

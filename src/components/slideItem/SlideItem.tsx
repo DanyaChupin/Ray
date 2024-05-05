@@ -1,7 +1,7 @@
 'use client'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { useResize } from '../../hooks/useResize'
+import { useScreenSize } from '../../hooks/useScreenSize'
 import { IVideo } from '../../shared/types/video.type'
 import cn from 'classnames'
 import styles from './SlideItem.module.scss'
@@ -21,7 +21,7 @@ export function SlideItem({
 }: ISlideItem) {
 	const [isActive, setIsActive] = useState(false)
 
-	const { isScreenLg } = useResize()
+	const { isScreenLg } = useScreenSize()
 	const MAXVIDEO = isScreenLg ? 4 : 2
 
 	useEffect(() => {

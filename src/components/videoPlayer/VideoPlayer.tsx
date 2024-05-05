@@ -8,16 +8,15 @@ interface IVideoPlayer {
 export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 	const videoRef = useRef<HTMLVideoElement>(null)
 
-	const [isPlaying, setIsPlaying] = useState(false)
-	const [isVolume, setIsVolume] = useState(true)
+	// const [isVolume, setIsVolume] = useState(true)
 	const toggleVideo = () => {
 		if (videoRef.current) {
 			if (videoRef.current.paused) {
 				videoRef.current.play()
-				setIsPlaying(!isPlaying)
+				// setIsPlaying(!isPlaying)
 			} else {
 				videoRef.current.pause()
-				setIsPlaying(!isPlaying)
+				// setIsPlaying(!isPlaying)
 			}
 		}
 	}
@@ -25,7 +24,7 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 	const toggleVolume = () => {
 		if (videoRef.current) {
 			videoRef.current.muted = !videoRef.current.muted
-			setIsVolume(!videoRef.current.muted)
+			// setIsVolume(!videoRef.current.muted)
 		}
 	}
 
@@ -43,12 +42,12 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 				className={styles['controls__togglePlay']}
 				draggable={false}
 			>
-				{isPlaying ? (
+				{videoRef.current?.paused ? (
 					<Image
 						src={'/images/play.svg'}
 						width={30}
 						height={37}
-						loading="eager"
+						loading="lazy"
 						alt={'воспроизвести'}
 						draggable={false}
 					/>
@@ -57,7 +56,7 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 						src={'/images/pause.svg'}
 						width={30}
 						height={37}
-						loading="eager"
+						loading="lazy"
 						alt={'пауза'}
 						draggable={false}
 					/>
@@ -93,9 +92,9 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 					</>
 				)}
 				<button className={styles['controls__volume']} onClick={toggleVolume}>
-					{isVolume ? (
+					{videoRef.current?.muted ? (
 						<Image
-							src="/images/volume.svg"
+							src="/images/zeroVolume.svg"
 							width={20}
 							height={20}
 							loading="eager"
@@ -103,7 +102,7 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 						/>
 					) : (
 						<Image
-							src="/images/zeroVolume.svg"
+							src="/images/volume.svg"
 							width={20}
 							height={20}
 							loading="eager"

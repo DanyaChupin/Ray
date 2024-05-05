@@ -31,7 +31,7 @@ export function SlideItem({
 
 	const openVideoPreviesDrag = () => {
 		if (isActive) return
-		setDragVideo(video)
+		setDragVideo({ ...video, zIndex: 1 })
 	}
 
 	const openVideoPrevieClick = () => {
@@ -44,7 +44,7 @@ export function SlideItem({
 		if (activeVideo.length === MAXVIDEO) {
 			return
 		}
-		setActiveVideo((prev) => [...prev, video])
+		setActiveVideo((prev) => [...prev, { ...video, zIndex: 1 }])
 		setIsActive(true)
 	}
 

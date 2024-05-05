@@ -35,7 +35,6 @@ export function DragDropSearch({
 	const [isSelectVisible, setSelectVisible] = useState(false)
 	const [checkDescription, setCheckDescription] = useState(false)
 	const [dragActive, setDragActive] = useState(false)
-
 	const changeInput = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value)
 	}
@@ -55,6 +54,21 @@ export function DragDropSearch({
 		if (dragVideo.id) setActiveVideo((prev) => [...prev, dragVideo])
 		setDragActive(false)
 	}
+	const updateZIndex = (video: IVideo) => {
+		setActiveVideo((prev) => {
+			const updateZIndexVideo = prev.map((aVideo) => {
+				if (aVideo.id === video.id) {
+					aVideo.zIndex = prev.length // Перемещаем кликнутый элемент наверх
+				} else if (video.zIndex <= aVideo.zIndex) {
+					if (aVideo.zIndex !== 1) {
+						aVideo.zIndex-- // Уменьшаем zIndex для остальных элементов
+					}
+				}
+				return aVideo
+			})
+			return updateZIndexVideo
+		})
+	}
 	return (
 		<>
 			<main
@@ -68,7 +82,11 @@ export function DragDropSearch({
 			>
 				{activeVideo.length ? (
 					activeVideo.map((video) => (
-						<VideoPrevies video={video} key={video.id} />
+						<VideoPrevies
+							video={video}
+							key={video.id}
+							onClick={() => updateZIndex(video)}
+						/>
 					))
 				) : (
 					<FlexBox column={true}>

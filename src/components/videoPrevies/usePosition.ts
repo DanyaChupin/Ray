@@ -7,7 +7,6 @@ import {
 	useState,
 } from 'react'
 
-
 export function usePosition(setIsDRagging: Dispatch<SetStateAction<boolean>>) {
 	const screenSize = window.screen
 

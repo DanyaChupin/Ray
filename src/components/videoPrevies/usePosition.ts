@@ -7,8 +7,10 @@ import {
 	useState,
 } from 'react'
 
+
 export function usePosition(setIsDRagging: Dispatch<SetStateAction<boolean>>) {
 	const screenSize = window.screen
+
 	const halfScreenWidth = screenSize.width / 2
 	const halfScreenHeight = screenSize.height / 2
 
@@ -32,7 +34,8 @@ export function usePosition(setIsDRagging: Dispatch<SetStateAction<boolean>>) {
 	// Случайная позиция видео превью
 	function generateCoordinates() {
 		const x = Math.floor(Math.random() * halfScreenWidth)
-		const y = Math.floor(Math.random() * 100 + halfScreenHeight) - 200
+		const y =
+			Math.floor(Math.random() * 100 + halfScreenHeight) - halfScreenHeight / 2
 		return { x, y }
 	}
 

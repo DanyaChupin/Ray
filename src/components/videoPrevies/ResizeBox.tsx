@@ -5,16 +5,25 @@ interface IResizeElem {
 	width: number
 	height: number
 	changeSize: (width: number, height: number) => void
+	changeZIndex: () => void
 }
+
 const minWidth = 200
 const minHeight = 200
-export function ResizeBox({ width, height, changeSize }: IResizeElem) {
+
+export function ResizeBox({
+	width,
+	height,
+	changeSize,
+	changeZIndex,
+}: IResizeElem) {
 	const maxHeight = window.screen.height / 1.1
 	const maxWidth = window.screen.width / 1.1
 
 	// Изменение размера videoPrevies на телефоне
 	const onTouchStart = (e: TouchEvent) => {
 		e.stopPropagation()
+		changeZIndex()
 		const initialX = e.touches[0].clientX
 		const initialY = e.touches[0].clientY
 
@@ -24,9 +33,6 @@ export function ResizeBox({ width, height, changeSize }: IResizeElem) {
 
 			let newWidth = Math.floor(width + deltaX)
 			let newHeight = Math.floor(height + deltaY)
-
-			console.log('nWidth', newWidth)
-			console.log('nHeight', newHeight)
 
 			if (newWidth <= minWidth) {
 				newWidth = minWidth
@@ -53,7 +59,7 @@ export function ResizeBox({ width, height, changeSize }: IResizeElem) {
 	// Изменение размера videoPrevies на дестоп
 	const onMouseDown = (e: MouseEvent) => {
 		e.stopPropagation()
-
+		changeZIndex()
 		// Начать изменение размера при нажатии на треугольник
 		const initialX = e.clientX
 		const initialY = e.clientY

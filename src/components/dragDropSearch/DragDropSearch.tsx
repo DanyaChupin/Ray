@@ -35,6 +35,7 @@ export function DragDropSearch({
 	const [isSelectVisible, setSelectVisible] = useState(false)
 	const [checkDescription, setCheckDescription] = useState(false)
 	const [dragActive, setDragActive] = useState(false)
+
 	const changeInput = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value)
 	}
@@ -85,7 +86,7 @@ export function DragDropSearch({
 						<VideoPrevies
 							video={video}
 							key={video.id}
-							onClick={() => updateZIndex(video)}
+							changeZIndex={() => updateZIndex(video)}
 						/>
 					))
 				) : (

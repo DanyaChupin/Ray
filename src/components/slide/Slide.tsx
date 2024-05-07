@@ -1,9 +1,9 @@
 import { SlideItem } from '../slideItem/SlideItem'
 import { IVideo } from '@/shared/types/video.type'
 import cn from 'classnames'
-import styles from './Slide.module.scss'
 import { Dispatch, SetStateAction } from 'react'
 import { useActiveVideoContext } from '@/context/ActiveVideoContext'
+import styles from './Slide.module.scss'
 
 interface ISlide {
 	sideLeft: boolean
@@ -21,7 +21,7 @@ export function Slide({ sideLeft, videoArray, setDragVideo }: ISlide) {
 					[styles['slide-right']]: !sideLeft,
 				})}
 			>
-				{videoArray.map(video => (
+				{videoArray.map((video) => (
 					<SlideItem
 						video={video}
 						setDragVideo={setDragVideo}
@@ -37,7 +37,7 @@ export function Slide({ sideLeft, videoArray, setDragVideo }: ISlide) {
 					[styles['slide-right']]: !sideLeft,
 				})}
 			>
-				{videoArray.map(video => (
+				{videoArray.map((video) => (
 					<SlideItem
 						video={video}
 						activeVideo={activeVideo}

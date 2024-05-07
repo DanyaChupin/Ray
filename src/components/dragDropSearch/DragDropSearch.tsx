@@ -9,11 +9,7 @@ import { Logo } from '../Logo/Logo'
 import { FlexBox } from '../ui/flexBox/FlexBox'
 import { VideoPrevies } from '../videoPrevies/VideoPrevies'
 import { SearchForm } from '../searchForm/SearchForm'
-import { InputField } from '../InputFIled/InputField'
-import { Select } from '../select/Select'
-import { SelectItem } from '../selectItem/SelectItem'
 import { IVideo } from '../../shared/types/video.type'
-import { defaultSelect } from '../../utils/default-select'
 import { Footer } from '../footer/Footer'
 import { BackLink } from '../backLink/BackLink'
 import { ButtonLang } from '../buttonLang/ButtonLang'
@@ -32,7 +28,6 @@ export function DragDropSearch({
 	setActiveVideo,
 }: IDragDropSearch) {
 	const [inputValue, setInputValue] = useState('')
-	const [isSelectVisible, setSelectVisible] = useState(false)
 	const [checkDescription, setCheckDescription] = useState(false)
 	const [dragActive, setDragActive] = useState(false)
 
@@ -55,6 +50,7 @@ export function DragDropSearch({
 		if (dragVideo.id) setActiveVideo((prev) => [...prev, dragVideo])
 		setDragActive(false)
 	}
+
 	const updateZIndex = (video: IVideo) => {
 		setActiveVideo((prev) => {
 			const updateZIndexVideo = prev.map((aVideo) => {
@@ -95,33 +91,11 @@ export function DragDropSearch({
 						{checkDescription ? (
 							<p className={styles['description']}>{DESCRIPTION}</p>
 						) : (
-							<SearchForm>
-								<InputField
-									value={inputValue}
-									onChange={changeInput}
-									onFocus={() => setSelectVisible(true)}
-									onBlur={() => setSelectVisible(false)}
-									pathIcon="./images/search.svg"
-									type="text"
-									aria-label="поиск"
-								/>
-								<Select isOpen={isSelectVisible}>
-									{defaultSelect.map((option) => (
-										<SelectItem
-											onClick={
-												option.text === 'Что такое ЛУЧ?'
-													? () => {
-															setCheckDescription(!checkDescription)
-														}
-													: () => {}
-											}
-											pathIcon="./images/search.svg"
-											option={option}
-											key={option.text}
-										/>
-									))}
-								</Select>
-							</SearchForm>
+							<SearchForm
+								inputValue={inputValue}
+								changeInput={changeInput}
+								setCheckDescription={setCheckDescription}
+							/>
 						)}
 					</FlexBox>
 				)}

@@ -42,9 +42,7 @@ body {
 	position: relative;
 	background: var(--bg-color);
 	font-weight: var(--regular);
-	// padding: 0px 8px;
 	@include respond-to(lg) {
-		// padding: 0px 13px;
 	}
 }
 

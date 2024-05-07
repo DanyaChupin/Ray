@@ -20,7 +20,7 @@ export function SlideItem({
 	setActiveVideo,
 }: ISlideItem) {
 	const [isActive, setIsActive] = useState(false)
-
+	const [isDragging, setIsDragging] = useState(false)
 	const { isScreenLg } = useScreenSize()
 	const MAXVIDEO = isScreenLg ? 4 : 2
 
@@ -31,10 +31,11 @@ export function SlideItem({
 
 	const openVideoPreviesDrag = () => {
 		if (isActive) return
+		setIsDragging(true)
 		setDragVideo({ ...video, zIndex: 1 })
 	}
 
-	const openVideoPrevieClick = () => {
+	const openVideoPreviesClick = () => {
 		if (isActive) {
 			const updatedItems = activeVideo.filter((item) => item.id !== video.id)
 			setActiveVideo(updatedItems)
@@ -52,29 +53,29 @@ export function SlideItem({
 		<>
 			{isActive ? (
 				<Image
-					onClick={openVideoPrevieClick}
+					onClick={openVideoPreviesClick}
 					className={styles['slideItem']}
 					width={70}
-					height={54.71}
+					height={55}
 					src="/images/net.png"
-					loading="eager"
 					alt="photo"
 					draggable={false}
 					priority
 				/>
 			) : (
 				<Image
-					onClick={openVideoPrevieClick}
-					onTouchCancel={openVideoPreviesDrag}
+					onClick={openVideoPreviesClick}
+					onTouchStart={openVideoPreviesDrag}
 					onDragStart={openVideoPreviesDrag}
-					className={cn(styles['slideItem'], styles['draggable'])}
+					className={cn(styles['slideItem'], {
+						[styles['grabbing']]: isDragging,
+					})}
 					width={70}
-					height={54.71}
+					height={55}
 					src={video.src}
-					loading="eager"
-					priority
 					draggable={true}
 					alt="photo"
+					priority
 				/>
 			)}
 		</>

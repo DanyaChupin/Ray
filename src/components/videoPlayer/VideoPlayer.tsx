@@ -80,7 +80,7 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 						<button className={styles['controls__fullScreen']}>
 							<Image
 								src="/images/fullscreen.svg"
-								width={34 - 40}
+								width={40}
 								height={20}
 								loading="eager"
 								alt="полный экран"

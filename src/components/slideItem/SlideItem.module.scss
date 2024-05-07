@@ -4,6 +4,9 @@
 	margin: 0 10px 0 0;
 	width: 70px;
 	height: auto;
+	object-position: center;
+	object-fit: cover;
+	cursor: grab;
 	@include respond-to(md) {
 		width: 120px;
 	}
@@ -14,6 +17,6 @@
 		width: 160px;
 	}
 }
-.draggable {
-	cursor: grab;
+.dragging {
+	cursor: grabbing;
 }

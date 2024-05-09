@@ -14,9 +14,9 @@ import { Footer } from '../footer/Footer'
 import { BackLink } from '../backLink/BackLink'
 import { ButtonLang } from '../buttonLang/ButtonLang'
 import { DESCRIPTION } from '../../utils/description'
-import cn from 'classNames'
-import styles from './DragDropSearch.module.scss'
 import { defaultSelect } from '@/utils/default-select'
+import cn from 'classnames'
+import styles from './DragDropSearch.module.scss'
 
 interface IDragDropSearch {
 	dragVideo: IVideo

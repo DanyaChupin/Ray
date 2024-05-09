@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useScreenSize } from '../../hooks/useScreenSize'
 import { IVideo } from '../../shared/types/video.type'
-import cn from 'classNames'
+import cn from 'classnames'
 import styles from './SlideItem.module.scss'
 
 interface ISlideItem {

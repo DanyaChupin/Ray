@@ -1,5 +1,6 @@
 import styles from './Logo.module.scss'
-import cn from 'classNames'
+import cn from 'classnames'
+
 const LOGOTEXT = 'ЛУЧ'
 
 export function Logo({ catalogLogo }: { catalogLogo?: boolean }) {

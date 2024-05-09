@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
-import cn from 'classNames'
 import styles from './ButtonLang.module.scss'
+import cn from 'classnames'
 
 const LANG: 'RU' | 'EN' = 'RU'
 

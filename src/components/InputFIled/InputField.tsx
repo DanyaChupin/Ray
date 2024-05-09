@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { InputHTMLAttributes } from 'react'
-import cn from 'classNames'
+import cn from 'classnames'
 import styles from './InputField.module.scss'
 
 interface IFormInput extends InputHTMLAttributes<HTMLInputElement> {

@@ -4,7 +4,7 @@ import { Select } from '../select/Select'
 import { SelectItem } from '../selectItem/SelectItem'
 import { IOption } from '@/shared/types/options.type'
 import useOutsideClick from '@/hooks/useOutsideClick'
-import cn from 'classNames'
+import cn from 'classnames'
 import styles from './SearchForm.module.scss'
 
 interface IForm {

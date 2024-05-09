@@ -1,7 +1,7 @@
 import { IOption } from '../../shared/types/options.type'
 import Image from 'next/image'
 import Link from 'next/link'
-import cn from 'classNames'
+import cn from 'classnames'
 import styles from './SelectItem.module.scss'
 
 interface ISelectItem {

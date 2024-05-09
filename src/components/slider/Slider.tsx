@@ -1,7 +1,7 @@
 import { IVideo } from '@/shared/types/video.type'
 import { Slide } from '../slide/Slide'
 import { Dispatch, SetStateAction } from 'react'
-import cn from 'classNames'
+import cn from 'classnames'
 import styles from './Slider.module.scss'
 
 interface ISlider {

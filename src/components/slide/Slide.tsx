@@ -1,7 +1,7 @@
+import { Dispatch, SetStateAction } from 'react'
 import { SlideItem } from '../slideItem/SlideItem'
 import { IVideo } from '@/shared/types/video.type'
-import cn from 'classNames'
-import { Dispatch, SetStateAction } from 'react'
+import cn from 'classnames'
 import { useActiveVideoContext } from '@/context/ActiveVideoContext'
 import styles from './Slide.module.scss'
 

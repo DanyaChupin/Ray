@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import cn from 'classNames'
+import cn from 'classnames'
 import styles from './Select.module.scss'
 
 interface ISelect {

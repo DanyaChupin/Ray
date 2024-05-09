@@ -2,7 +2,7 @@ import Image from 'next/image'
 import styles from './CatalogItem.module.scss'
 import cn from 'classnames'
 
-export function CatalogItem() {
+export function CatalogItem({ elem }: { elem: number }) {
 	return (
 		<div className={styles['catalogItem']}>
 			<div className={styles['catalogItem__wrapper']}>

@@ -6,7 +6,7 @@ export function Catalog() {
 	return (
 		<div className={styles['catalog']}>
 			{arr.map((elem) => (
-				<CatalogItem />
+				<CatalogItem elem={elem} />
 			))}
 		</div>
 	)

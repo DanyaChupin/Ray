@@ -2,20 +2,25 @@ import { ChangeEvent, Dispatch, SetStateAction } from 'react'
 import { InputField } from '../InputFIled/InputField'
 import { Select } from '../select/Select'
 import { SelectItem } from '../selectItem/SelectItem'
-import styles from './SearchForm.module.scss'
-import { defaultSelect } from '@/utils/default-select'
+import { IOption } from '@/shared/types/options.type'
 import useOutsideClick from '@/hooks/useOutsideClick'
+import cn from 'classNames'
+import styles from './SearchForm.module.scss'
 
 interface IForm {
 	inputValue: string
 	changeInput: (e: ChangeEvent<HTMLInputElement>) => void
-	setCheckDescription: Dispatch<SetStateAction<boolean>>
+	setCheckDescription?: Dispatch<SetStateAction<boolean>>
+	catalogStyle?: boolean
+	selectOptions: IOption[]
 }
 
 export function SearchForm({
 	inputValue,
 	changeInput,
 	setCheckDescription,
+	catalogStyle = false,
+	selectOptions,
 }: IForm) {
 	const { ref, isActive, setIsActive } = useOutsideClick(false)
 
@@ -24,7 +29,12 @@ export function SearchForm({
 		setIsActive(!isActive)
 	}
 	return (
-		<form className={styles['form']} ref={ref}>
+		<form
+			className={cn(styles['form'], {
+				[styles['formHomeSize']]: !catalogStyle,
+			})}
+			ref={ref}
+		>
 			<InputField
 				value={inputValue}
 				onChange={changeInput}
@@ -32,15 +42,17 @@ export function SearchForm({
 				onClick={toggleSelect}
 				pathIcon="./images/search.svg"
 				type="text"
+				catalogStyle={catalogStyle}
 				aria-label="поиск"
 			/>
-			<Select isOpen={isActive}>
-				{defaultSelect.map((option) => (
+			<Select isOpen={isActive} catalogStyle={catalogStyle}>
+				{selectOptions.map((option) => (
 					<SelectItem
+						catalogStyle={catalogStyle}
 						onClick={
 							option.text === 'Что такое ЛУЧ?'
 								? () => {
-										setCheckDescription((prev) => !prev)
+										setCheckDescription && setCheckDescription((prev) => !prev)
 									}
 								: () => {}
 						}

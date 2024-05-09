@@ -1,0 +1,15 @@
+@import '../../assets/mixins/mixin-media.scss';
+
+.layout {
+	width: 100%;
+}
+
+.layout__padding {
+	padding: 0px 14px;
+	@include respond-to(md) {
+		padding: 0px 30px;
+	}
+	@include respond-to(xl) {
+		padding: 0px 20px;
+	}
+}

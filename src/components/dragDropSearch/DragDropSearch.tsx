@@ -14,8 +14,9 @@ import { Footer } from '../footer/Footer'
 import { BackLink } from '../backLink/BackLink'
 import { ButtonLang } from '../buttonLang/ButtonLang'
 import { DESCRIPTION } from '../../utils/description'
-import cn from 'classnames'
+import cn from 'classNames'
 import styles from './DragDropSearch.module.scss'
+import { defaultSelect } from '@/utils/default-select'
 
 interface IDragDropSearch {
 	dragVideo: IVideo
@@ -86,12 +87,13 @@ export function DragDropSearch({
 						/>
 					))
 				) : (
-					<FlexBox column={true}>
+					<FlexBox column center>
 						<Logo />
 						{checkDescription ? (
 							<p className={styles['description']}>{DESCRIPTION}</p>
 						) : (
 							<SearchForm
+								selectOptions={defaultSelect}
 								inputValue={inputValue}
 								changeInput={changeInput}
 								setCheckDescription={setCheckDescription}

@@ -12,7 +12,7 @@ export default function HomePage() {
 		id: '',
 		src: '',
 		title: '',
-		zIndex: 1,
+		zIndex: 10,
 	})
 
 	const { isScreenXl } = useScreenSize()

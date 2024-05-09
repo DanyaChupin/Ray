@@ -9,6 +9,7 @@
 		background-color: var(--select-hover);
 	}
 }
+
 .select-item__link {
 	padding: 0 13px;
 	height: 100%;
@@ -20,7 +21,11 @@
 	gap: 18px;
 	text-align: center;
 }
+
 .select-item__text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	font-size: var(--fs-15);
 	color: var(--text-color);
 	@include respond-to(xl) {
@@ -34,4 +39,10 @@
 	@include respond-to(xl) {
 		width: 24px;
 	}
+}
+.catalogText {
+	font-size: var(--fs-15);
+}
+.catalogIcon {
+	width: 16px;
 }

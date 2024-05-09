@@ -1,3 +1,5 @@
+import styles from './Catalog.module.scss'
+
 export default function CatalogPage() {
-	return <div>Catalog</div>
+	return <div className={styles['catalog']}></div>
 }

@@ -3,6 +3,7 @@ import styles from './CatalogItem.module.scss'
 import cn from 'classnames'
 
 export function CatalogItem({ elem }: { elem: number }) {
+	console.log(elem)
 	return (
 		<div className={styles['catalogItem']}>
 			<div className={styles['catalogItem__wrapper']}>

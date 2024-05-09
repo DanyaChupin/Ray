@@ -1,0 +1,18 @@
+@import '../../assets/mixins/mixin-media.scss';
+
+.catalog {
+	padding: 19px 0;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	justify-content: center;
+	gap: 25px;
+	flex-wrap: wrap;
+
+	@include respond-to(md) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@include respond-to(xl) {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}

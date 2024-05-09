@@ -1,0 +1,35 @@
+@import '../../assets/mixins/mixin-media.scss';
+
+.catalogItem {
+	cursor: pointer;
+	min-width: 150px;
+	height: 100%;
+	display: flex;
+	gap: 5px;
+	flex-direction: column;
+}
+.catalogItem__wrapper {
+	width: 100%;
+}
+.catalogItem__img {
+	border-radius: var(--border-radius-item);
+	box-shadow: var(--shadow-item);
+}
+.catalogItem__info {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+.text {
+	font-size: 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.catalogItem__name {
+	color: var(--text-color);
+}
+
+.catalogItem__link {
+	opacity: 0.5;
+}

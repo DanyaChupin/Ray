@@ -1,3 +1,21 @@
 .catalog {
 	width: 100%;
+	padding-bottom: 40px;
+	gap: 40px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.catalog__fetchButton {
+	background: none;
+	cursor: pointer;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-button);
+	font-size: 10px;
+	font-weight: var(--bold);
+	padding: 4px 8px;
+	background-color: var(--bg-color);
+	box-shadow: var(--shadow-button);
 }

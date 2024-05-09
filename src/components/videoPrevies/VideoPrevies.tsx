@@ -19,7 +19,6 @@ export function VideoPrevies({ video, changeZIndex }: IVideoPrevies) {
 
 	const { activeVideo, setActiveVideo } = useActiveVideoContext()
 	const [size, setSize] = useState(generateRandomSize())
-
 	const setDragPC = (e: MouseEvent) => {
 		changeZIndex()
 		handleMouseDown(e)

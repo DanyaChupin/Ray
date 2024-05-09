@@ -1,12 +1,27 @@
+@import '../../../assets/mixins/mixin-media.scss';
+
 .flex {
 	display: flex;
 	position: relative;
+	width: 100%;
 	gap: 35px;
-	justify-content: center;
 	align-items: center;
-	// min-height: 100px;
+	@include respond-to(md) {
+		justify-content: space-between;
+	}
+	@include respond-to(xl) {
+		justify-content: left;
+	}
 }
+
 .column {
-	// justify-content: top;
 	flex-direction: column;
+}
+
+.center {
+	padding: 0 34px;
+	justify-content: center;
+	@include respond-to(xl) {
+		padding: 0;
+	}
 }

@@ -7,7 +7,7 @@ import {
 	useState,
 } from 'react'
 
-export function usePosition(setIsDRagging: Dispatch<SetStateAction<boolean>>) {
+export function usePosition(setIsDragging: Dispatch<SetStateAction<boolean>>) {
 	const screenSize = window.screen
 
 	const halfScreenWidth = screenSize.width / 2
@@ -43,7 +43,7 @@ export function usePosition(setIsDRagging: Dispatch<SetStateAction<boolean>>) {
 	const [position, setPosition] = useState(generateCoordinates())
 
 	const handleMouseDown = (e: MouseEvent) => {
-		setIsDRagging(true)
+		setIsDragging(true)
 		const offsetX = e.clientX - position.x
 		const offsetY = e.clientY - position.y
 
@@ -55,7 +55,7 @@ export function usePosition(setIsDRagging: Dispatch<SetStateAction<boolean>>) {
 		}
 
 		const handleMouseUp = () => {
-			setIsDRagging(false)
+			setIsDragging(false)
 			document.removeEventListener('mousemove', handleMouseMove as any)
 			document.removeEventListener('mouseup', handleMouseUp)
 		}

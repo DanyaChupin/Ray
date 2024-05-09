@@ -26,3 +26,9 @@
 .open {
 	grid-template-rows: 1fr;
 }
+
+.catalogSelect {
+	li:first-child {
+		margin-top: 29px;
+	}
+}

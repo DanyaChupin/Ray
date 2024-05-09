@@ -14,6 +14,7 @@
 	border-radius: var(--border-radius);
 	border: var(--border) solid var(--border-color);
 }
+
 .inputField__icon {
 	width: 16px;
 	height: auto;
@@ -21,6 +22,7 @@
 		width: 30px;
 	}
 }
+
 .inputField__input {
 	color: var(--text-color);
 	background: none;
@@ -30,4 +32,9 @@
 	@include respond-to(xl) {
 		font-size: 20px;
 	}
+}
+
+//icon size
+.catalogImg {
+	width: 16px;
 }

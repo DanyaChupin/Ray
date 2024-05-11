@@ -18,6 +18,7 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 				ref={videoRef}
 				onClick={actions.toggleVideo}
 				className={styles['video']}
+				playsInline
 			/>
 			<button
 				onClick={actions.toggleVideo}

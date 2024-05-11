@@ -1,122 +1,147 @@
-// // import { IVideoElement } from '@/shared/types/video.types'
-// import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { IVideoElement } from '@/shared/types/video.types'
+import {
+	ChangeEvent,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react'
 
-// export const useVideo = () => {
-// 	const videoRef = useRef<IVideoElement>(null)
+export const useVideo = () => {
+	const videoRef = useRef<IVideoElement>(null)
 
-// 	const [isPlaying, setIsPlaying] = useState(false)
-// 	const [currentTime, setCurrentTime] = useState(0)
-// 	const [videoTime, setVideoTime] = useState(0)
-// 	const [progress, setProgress] = useState(0)
+	const [isPlaying, setIsPlaying] = useState(false)
+	const [currentTime, setCurrentTime] = useState(0)
+	const [videoTime, setVideoTime] = useState(0)
+	const [progress, setProgress] = useState(0)
+	const [volume, setVolume] = useState(0.6)
 
-// 	useEffect(() => {
-// 		if (videoRef.current?.duration) setVideoTime(videoRef.current.duration)
-// 	}, [videoRef.current?.duration])
+	useEffect(() => {
+		if (videoRef.current?.duration) {
+			setVideoTime(videoRef.current.duration)
+		}
+	}, [videoRef.current?.duration])
 
-// 	const toggleVideo = useCallback(() => {
-// 		if (!isPlaying) {
-// 			videoRef.current?.play()
-// 			setIsPlaying(true)
-// 		} else {
-// 			videoRef.current?.pause()
-// 			setIsPlaying(false)
-// 		}
-// 	}, [isPlaying])
+	const toggleVideo = useCallback(() => {
+		if (!isPlaying) {
+			videoRef.current?.play()
+			setIsPlaying(true)
+		} else {
+			videoRef.current?.pause()
+			setIsPlaying(false)
+		}
+	}, [isPlaying])
 
-// 	const fastForward = () => {
-// 		if (videoRef.current) videoRef.current.currentTime += 10
-// 	}
+	const fastForward = () => {
+		if (videoRef.current) videoRef.current.currentTime += 5
+	}
 
-// 	const revert = () => {
-// 		if (videoRef.current) videoRef.current.currentTime -= 10
-// 	}
+	const changeProgress = (e: ChangeEvent<HTMLInputElement>) => {
+		if (!videoRef.current) return
+		videoRef.current.currentTime =
+			(Number(e.target.value) * videoRef.current.duration) / 100
+	}
 
-// 	const fullScreen = () => {
-// 		const video = videoRef.current
+	const changeVolume = (e: ChangeEvent<HTMLInputElement>) => {
+		if (!videoRef.current) return
+		setVolume(Number(e.target.value))
 
-// 		if (!video) return
+		videoRef.current.volume = volume
+	}
 
-// 		if (video.requestFullscreen) {
-// 			video.requestFullscreen()
-// 		} else if (video.msRequestFullscreen) {
-// 			video.msRequestFullscreen()
-// 		} else if (video.mozRequestFullScreen) {
-// 			video.mozRequestFullScreen()
-// 		} else if (video.webkitRequestFullscreen) {
-// 			video.webkitRequestFullscreen()
-// 		}
-// 	}
+	const revert = () => {
+		if (videoRef.current) videoRef.current.currentTime -= 5
+	}
 
-// 	useEffect(() => {
-// 		const video = videoRef.current
+	const fullScreen = () => {
+		const video = videoRef.current
 
-// 		if (!video) return
+		if (!video) return
 
-// 		const updateProgress = () => {
-// 			setCurrentTime(video.currentTime)
-// 			setProgress((video.currentTime / videoTime) * 100)
-// 		}
+		if (video.requestFullscreen) {
+			video.requestFullscreen()
+		} else if (video.msRequestFullscreen) {
+			video.msRequestFullscreen()
+		} else if (video.mozRequestFullScreen) {
+			video.mozRequestFullScreen()
+		} else if (video.webkitRequestFullscreen) {
+			video.webkitRequestFullscreen()
+		}
+	}
 
-// 		video.addEventListener('timeupdate', updateProgress)
+	useEffect(() => {
+		const video = videoRef.current
+		if (!video) return
 
-// 		return () => {
-// 			video.removeEventListener('timeupdate', updateProgress)
-// 		}
-// 	}, [videoTime])
+		const updateProgress = () => {
+			setCurrentTime(video.currentTime)
+			setProgress((video.currentTime / videoTime) * 100)
+		}
 
-// 	useEffect(() => {
-// 		const handleKeyDown = (e: KeyboardEvent) => {
-// 			switch (e.key) {
-// 				case 'ArrowRight': {
-// 					fastForward()
-// 					break
-// 				}
+		video.addEventListener('timeupdate', updateProgress)
 
-// 				case 'ArrowLeft': {
-// 					revert()
-// 					break
-// 				}
+		return () => {
+			video.removeEventListener('timeupdate', updateProgress)
+		}
+	}, [videoTime])
 
-// 				case ' ': {
-// 					e.preventDefault()
-// 					toggleVideo()
-// 					break
-// 				}
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			switch (e.key) {
+				case 'ArrowRight': {
+					fastForward()
+					break
+				}
 
-// 				case 'f': {
-// 					fullScreen()
-// 					break
-// 				}
+				case 'ArrowLeft': {
+					revert()
+					break
+				}
 
-// 				default: {
-// 					return
-// 				}
-// 			}
-// 		}
+				case ' ': {
+					e.preventDefault()
+					toggleVideo()
+					break
+				}
 
-// 		document.addEventListener('keydown', handleKeyDown)
+				case 'f': {
+					fullScreen()
+					break
+				}
 
-// 		return () => {
-// 			document.removeEventListener('keydown', handleKeyDown)
-// 		}
-// 	}, [toggleVideo])
+				default: {
+					return
+				}
+			}
+		}
 
-// 	return useMemo(
-// 		() => ({
-// 			videoRef,
-// 			actions: {
-// 				fullScreen,
-// 				revert,
-// 				fastForward,
-// 				toggleVideo,
-// 			},
-// 			video: {
-// 				isPlaying,
-// 				currentTime,
-// 				progress,
-// 				videoTime,
-// 			},
-// 		}),
-// 		[currentTime, progress, isPlaying, videoTime, toggleVideo]
-// 	)
-// }
+		document.addEventListener('keydown', handleKeyDown)
+
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown)
+		}
+	}, [toggleVideo])
+
+	return useMemo(
+		() => ({
+			videoRef,
+			actions: {
+				fullScreen,
+				revert,
+				fastForward,
+				toggleVideo,
+				changeProgress,
+				changeVolume,
+			},
+			video: {
+				isPlaying,
+				currentTime,
+				progress,
+				videoTime,
+				volume,
+			},
+		}),
+		[currentTime, progress, isPlaying, videoTime, toggleVideo, volume]
+	)
+}

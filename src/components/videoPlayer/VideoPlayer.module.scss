@@ -1,3 +1,5 @@
+@import '../../assets/mixins/mixin-media.scss';
+
 .videoPlayer {
 	display: flex;
 	position: relative;
@@ -13,30 +15,110 @@
 	opacity: 1;
 }
 .video {
-	height: 100%;
+	height: auto;
 	width: 100%;
 	object-fit: cover;
+	cursor: pointer;
 }
 .controls {
 	opacity: 0;
-	bottom: 0;
+	bottom: 15px;
 	position: absolute;
 	display: flex;
-	justify-content: space-between;
 	width: 100%;
-	height: 22px;
+	gap: 10px;
+	height: 10px;
+	max-height: 15px;
+	justify-content: space-between;
 	align-items: center;
-	padding: 0 20px 20px 20px;
+	padding: 0px 15px 0px;
 	button {
 		cursor: pointer;
 		background: none;
 		border: none;
 	}
+	@include respond-to(xl) {
+		gap: 25px;
+		padding: 0px 42px;
+		height: 20px;
+		bottom: 30x;
+	}
 }
+
+.volume__wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.volume__position {
+	position: absolute;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: -50px;
+	width: 100%;
+	opacity: 0;
+	transition: opacity var(--transition) ease;
+}
+
+.volume__wrapper:hover > .volume__position {
+	opacity: 1;
+}
+
+.option__wrapper {
+	display: flex;
+	align-items: center;
+	height: auto;
+	gap: 7px;
+}
+//progress line
+.progress__wrapper {
+	width: 100%;
+	height: 100%;
+	justify-content: space-between;
+	gap: 6px;
+	align-items: center;
+	display: flex;
+	font-size: 13px;
+	@include respond-to(lg) {
+		font-size: 15px;
+	}
+}
+.controls__progress {
+	width: 100%;
+}
+
+//controlers line
+
 .controls__volume {
 	display: flex;
-	max-width: 13px;
 	justify-content: left;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
+.controls__quality {
+	font-size: 13px;
+	@include respond-to(lg) {
+		font-size: 15px;
+	}
+}
+
+.controls__fullScreen {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+.option__img {
+	@include respond-to(lg) {
+		width: 30px;
+		height: 20px;
+	}
 }
 .controls__togglePlay {
 	opacity: 0;

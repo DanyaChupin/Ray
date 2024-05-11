@@ -1,5 +1,7 @@
-import { useRef } from 'react'
+'use client'
 import Image from 'next/image'
+import { useVideo } from './useVideo'
+import inputStyle from './inputStyle.module.scss'
 import styles from './VideoPlayer.module.scss'
 
 interface IVideoPlayer {
@@ -7,106 +9,102 @@ interface IVideoPlayer {
 }
 
 export function VideoPlayer({ isPrevies }: IVideoPlayer) {
-	const videoRef = useRef<HTMLVideoElement>(null)
-
-	const toggleVideo = () => {
-		if (videoRef.current) {
-			if (videoRef.current.paused) {
-				videoRef.current.play()
-			} else {
-				videoRef.current.pause()
-			}
-		}
-	}
-
-	const toggleVolume = () => {
-		if (videoRef.current) {
-			videoRef.current.muted = !videoRef.current.muted
-		}
-	}
-
+	const { actions, video, videoRef } = useVideo()
 	return (
 		<div className={styles['videoPlayer']}>
 			<video
 				src="/yoto.mp4"
 				autoPlay={isPrevies}
 				ref={videoRef}
+				onClick={actions.toggleVideo}
 				className={styles['video']}
-				playsInline
 			/>
 			<button
-				onClick={toggleVideo}
+				onClick={actions.toggleVideo}
 				className={styles['controls__togglePlay']}
 				draggable={false}
 			>
-				{videoRef.current?.paused ? (
-					<Image
-						src={'/images/play.svg'}
-						width={30}
-						height={37}
-						loading="lazy"
-						alt={'воспроизвести'}
-						draggable={false}
-					/>
-				) : (
-					<Image
-						src={'/images/pause.svg'}
-						width={30}
-						height={37}
-						loading="lazy"
-						alt={'пауза'}
-						draggable={false}
-					/>
-				)}
+				<Image
+					src={video.isPlaying ? '/images/pause.svg' : '/images/play.svg'}
+					width={30}
+					height={37}
+					loading="lazy"
+					alt={video.isPlaying ? 'пауза' : 'воспроизвести'}
+					draggable={false}
+				/>
 			</button>
 			<div className={styles['controls']}>
 				{!isPrevies && (
-					<>
-						<div className={styles['controls__time']}>00.00</div>
+					<div className={styles['progress__wrapper']}>
+						<span className={styles['controls__time']}>
+							{Math.floor(video.currentTime / 60) +
+								':' +
+								('0' + Math.floor(video.currentTime % 60)).slice(-2)}
+						</span>
 						<div className={styles['controls__progress']}>
-							<input type="range" className={styles['progress']} />
+							<input
+								min="0"
+								max="100"
+								step="0.1"
+								onChange={actions.changeProgress}
+								type="range"
+								value={video.progress}
+								className={inputStyle['progress']}
+							/>
 						</div>
-						<div className={styles['controls__videoLength']}>10.29</div>
-						<div className={styles['controls__quality']}>HD</div>
+						<span className={styles['controls__videoLength']}>
+							{Math.floor(video.videoTime / 60) +
+								':' +
+								('0' + Math.floor(video.videoTime % 60)).slice(-2)}
+						</span>
+					</div>
+				)}
+				<div className={styles['option__wrapper']}>
+					{!isPrevies && (
+						<span className={styles['controls__quality']}>HQ/HD</span>
+					)}
+					<div className={styles['volume__wrapper']}>
+						<div className={styles['volume__position']}>
+							<input
+								type="range"
+								min="0"
+								max="1"
+								step="0.1"
+								onChange={actions.changeVolume}
+								value={video.volume}
+								className={inputStyle['volume']}
+							/>
+						</div>
 						<button className={styles['controls__volume']}>
 							<Image
-								src="/images/volume.svg"
-								width={22}
-								height={22}
+								className={styles['option__img']}
+								src={
+									video.volume ? '/images/volume.svg' : '/images/zeroVolume.svg'
+								}
+								width={25}
+								height={15}
 								loading="eager"
-								alt="громкость"
+								alt="регулятор громкости"
 							/>
 						</button>
-						<button className={styles['controls__fullScreen']}>
+					</div>
+
+					{!isPrevies && (
+						<button
+							className={styles['controls__fullScreen']}
+							onClick={actions.fullScreen}
+						>
 							<Image
+								className={styles['option__img']}
 								src="/images/fullscreen.svg"
-								width={40}
-								height={20}
+								width={25}
+								height={15}
 								loading="eager"
 								alt="полный экран"
 							/>
 						</button>
-					</>
-				)}
-				<button className={styles['controls__volume']} onClick={toggleVolume}>
-					{videoRef.current?.muted ? (
-						<Image
-							src="/images/zeroVolume.svg"
-							width={20}
-							height={20}
-							loading="eager"
-							alt="громкость"
-						/>
-					) : (
-						<Image
-							src="/images/volume.svg"
-							width={20}
-							height={20}
-							loading="eager"
-							alt="громкость"
-						/>
 					)}
-				</button>
+				</div>
 			</div>
 		</div>
 	)

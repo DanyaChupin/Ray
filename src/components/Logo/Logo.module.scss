@@ -1,7 +1,6 @@
 @import '../../assets/mixins/mixin-media.scss';
 
 .logo {
-	margin-bottom: auto;
 	font-size: var(--fs-30);
 	font-weight: var(--bold);
 	@include respond-to(xl) {

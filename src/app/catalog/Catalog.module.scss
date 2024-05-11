@@ -1,11 +1,19 @@
+@import '../../assets/mixins/mixin-media.scss';
+
 .catalog {
 	width: 100%;
-	padding-bottom: 40px;
 	gap: 40px;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
+	padding: 0px 13px 20px;
+	@include respond-to(md) {
+		padding: 0px 30px 20px;
+	}
+	@include respond-to(xl) {
+		padding: 0px 20px 20px;
+	}
 }
 
 .catalog__fetchButton {

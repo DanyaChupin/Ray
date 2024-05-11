@@ -1,0 +1,116 @@
+/*********** Baseline, reset styles ***********/
+.progress {
+	-webkit-appearance: none;
+	appearance: none;
+	background: transparent;
+	cursor: pointer;
+	padding: 0px 10px;
+	width: 100%;
+	height: 15px;
+	display: flex;
+	align-items: end;
+}
+
+/* Removes default focus */
+.progress:focus {
+	outline: none;
+}
+
+/******** Chrome, Safari, Opera and Edge Chromium styles ********/
+/* slider track */
+.progress::-webkit-slider-runnable-track {
+	background-color: #ffffff;
+	height: 1px;
+}
+
+/* slider thumb */
+.progress::-webkit-slider-thumb {
+	-webkit-appearance: none; /* Override default look */
+	appearance: none;
+	margin-top: -7.5px; /* Centers thumb on the track */
+	background-color: #ffffff;
+	height: 1rem;
+	left: 30px;
+	width: 3.5px;
+}
+
+/*********** Firefox styles ***********/
+/* slider track */
+.progress::-moz-range-track {
+	background-color: #ffffff;
+	border-radius: 0.5rem;
+	height: 1px;
+}
+
+/* slider thumb */
+.progress::-moz-range-thumb {
+	background-color: #808080;
+	border: none; /*Removes extra border that FF applies*/
+	border-radius: 0px;
+	height: 1rem;
+	width: 3.5px;
+}
+
+.progress:focus::-moz-range-thumb {
+	outline: 3px solid #808080;
+	outline-offset: 0.125rem;
+}
+
+/*********** Baseline, reset styles ***********/
+.volume {
+	// display: flex;
+	// align-items: center;
+	// justify-content: center;
+	-webkit-appearance: none;
+	appearance: none;
+	background: transparent;
+	cursor: pointer;
+	width: 70px;
+	height: 20px;
+	transform: rotate(-90deg);
+}
+
+/* Removes default focus */
+.volume:focus {
+	outline: none;
+}
+
+/******** Chrome, Safari, Opera and Edge Chromium styles ********/
+/* slider track */
+.volume::-webkit-slider-runnable-track {
+	background-color: #ffffff;
+	height: 1px;
+}
+
+/* slider thumb */
+.volume::-webkit-slider-thumb {
+	-webkit-appearance: none; /* Override default look */
+	appearance: none;
+	margin-top: -7.5px; /* Centers thumb on the track */
+	background-color: #ffffff;
+	height: 1rem;
+	left: 30px;
+	width: 3.5px;
+}
+
+/*********** Firefox styles ***********/
+/* slider track */
+.volume::-moz-range-track {
+	background-color: #ffffff;
+	border-radius: 0.5rem;
+	height: 1px;
+}
+
+/* slider thumb */
+.volume::-moz-range-thumb {
+	background-color: #808080;
+	border: none; /*Removes extra border that FF applies*/
+	border-radius: 0px;
+	height: 1rem;
+	width: 3.5px;
+}
+
+.volume:focus::-moz-range-thumb {
+	outline: 3px solid #808080;
+	outline-offset: 0.125rem;
+}

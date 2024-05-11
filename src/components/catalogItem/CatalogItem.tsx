@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import styles from './CatalogItem.module.scss'
 import cn from 'classnames'
+import Link from 'next/link'
 
 export function CatalogItem({ elem }: { elem: number }) {
 	console.log(elem)
 	return (
-		<div className={styles['catalogItem']}>
+		<Link href="/catalog/1" className={styles['catalogItem']}>
 			<div className={styles['catalogItem__wrapper']}>
 				<Image
 					className={styles['catalogItem__img']}
@@ -32,6 +33,6 @@ export function CatalogItem({ elem }: { elem: number }) {
 					luch.world/Nike-SB-|-Yuto-Horigome-in-Tokyo
 				</p>
 			</div>
-		</div>
+		</Link>
 	)
 }

@@ -10,12 +10,12 @@ import {
 
 export const useVideo = (isAutoPlay: boolean) => {
 	const videoRef = useRef<IVideoElement>(null)
-
 	const [isPlaying, setIsPlaying] = useState(isAutoPlay)
 	const [currentTime, setCurrentTime] = useState(0)
 	const [videoTime, setVideoTime] = useState(0)
 	const [progress, setProgress] = useState(0)
 	const [volume, setVolume] = useState(1)
+	const [prevVolume, setPrevVolume] = useState(0)
 
 	useEffect(() => {
 		if (videoRef.current?.duration) {
@@ -45,18 +45,28 @@ export const useVideo = (isAutoPlay: boolean) => {
 
 	const changeVolume = (e: ChangeEvent<HTMLInputElement>) => {
 		if (!videoRef.current) return
-		setVolume(Number(e.target.value))
-
 		videoRef.current.volume = volume
+		setVolume(Number(e.target.value))
+	}
+	const toggleVolumeMobile = () => {
+		if (!videoRef.current) return
+		if (videoRef.current.muted) {
+			videoRef.current.muted = false
+		} else {
+			videoRef.current.muted = true
+		}
 	}
 	const toggleVolume = () => {
 		if (!videoRef.current) return
 		if (volume !== 0) {
+			setPrevVolume(volume)
+			videoRef.current.muted = true
 			videoRef.current.volume = 0
 			setVolume(0)
 		} else {
-			videoRef.current.volume = 1
-			setVolume(1)
+			videoRef.current.muted = false
+			videoRef.current.volume = prevVolume
+			setVolume(prevVolume)
 		}
 	}
 	const revert = () => {
@@ -143,6 +153,7 @@ export const useVideo = (isAutoPlay: boolean) => {
 				changeProgress,
 				changeVolume,
 				toggleVolume,
+				toggleVolumeMobile,
 			},
 			video: {
 				isPlaying,

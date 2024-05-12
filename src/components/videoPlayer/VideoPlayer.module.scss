@@ -20,6 +20,9 @@
 	object-fit: cover;
 	cursor: pointer;
 }
+.grab {
+	cursor: grab;
+}
 .controls {
 	opacity: 0;
 	bottom: 15px;
@@ -32,6 +35,7 @@
 	justify-content: space-between;
 	align-items: center;
 	padding: 0px 15px 0px;
+	transition: opacity var(--transition) ease;
 	button {
 		cursor: pointer;
 		background: none;
@@ -41,8 +45,12 @@
 		gap: 25px;
 		padding: 0px 42px;
 		height: 20px;
-		bottom: 30x;
+		bottom: 30px;
 	}
+}
+.padding {
+	padding: 0 20px;
+	bottom: 20px;
 }
 
 .volume__wrapper {
@@ -51,7 +59,7 @@
 	height: 100%;
 }
 
-.volume__position {
+.volume__positionRange {
 	position: absolute;
 	height: 100%;
 	display: flex;
@@ -59,12 +67,18 @@
 	justify-content: center;
 	top: -50px;
 	width: 100%;
-	opacity: 0;
-	transition: opacity var(--transition) ease;
+	display: none;
+	@include respond-to(xl) {
+		display: flex;
+		opacity: 0;
+		transition: opacity var(--transition) ease;
+	}
 }
 
-.volume__wrapper:hover > .volume__position {
-	opacity: 1;
+.volume__wrapper:hover > .volume__positionRange {
+	@include respond-to(xl) {
+		opacity: 1;
+	}
 }
 
 .option__wrapper {
@@ -124,26 +138,31 @@
 	opacity: 0;
 	cursor: pointer;
 	background: none;
+	border: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 50%;
-	width: 37px;
-	height: auto;
-	max-width: 122px;
-	max-height: 122px;
-	padding: 20px;
-	border: 1px solid #fff;
+	min-height: 13px;
+	min-width: 10px;
+	padding: 16px 12px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transition: opacity var(--transition) ease;
-	transform: translate(-50%, -50%);
-	top: 50%;
 	bottom: 50%;
-	img {
-		width: 11px;
-		max-width: 30px;
-		max-height: 37px;
+	transform: translate(-50%, -50%);
+	transition: opacity var(--transition) ease;
+	@include respond-to(lg) {
+		padding: 38px 22px;
+	}
+}
+.border {
+	border: 1px solid #fff;
+	border-radius: 50%;
+}
+
+.togglePlay__img {
+	@include respond-to(lg) {
+		width: 33px;
+		height: 30px;
 	}
 }

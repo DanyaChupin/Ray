@@ -5,9 +5,24 @@
 		.videoPrevies__close {
 			opacity: 1;
 		}
+		.videoPrevies__resize {
+			opacity: 1;
+		}
 	}
 }
-
+.videoPrevies__resize {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 2;
+	border-bottom: 5px solid var(--border-color);
+	border-right: 5px solid var(--border-color);
+	cursor: se-resize;
+	transition: opacity var(--transition) ease;
+	opacity: 0;
+}
 .videoPrevies__close {
 	transition: opacity var(--transition) ease;
 	opacity: 0;

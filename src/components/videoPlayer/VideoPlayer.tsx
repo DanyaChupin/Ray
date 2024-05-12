@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import { useVideo } from './useVideo'
 import inputStyle from './inputStyle.module.scss'
+import cn from 'classnames'
 import styles from './VideoPlayer.module.scss'
 
 interface IVideoPlayer {
@@ -9,32 +10,42 @@ interface IVideoPlayer {
 }
 
 export function VideoPlayer({ isPrevies }: IVideoPlayer) {
-	const { actions, video, videoRef } = useVideo()
+	const { actions, video, videoRef } = useVideo(isPrevies)
+
 	return (
 		<div className={styles['videoPlayer']}>
 			<video
 				src="/yoto.mp4"
 				autoPlay={isPrevies}
 				ref={videoRef}
-				onClick={actions.toggleVideo}
-				className={styles['video']}
+				onClick={() => !isPrevies && actions.toggleVideo()}
+				className={cn(styles['video'], {
+					[styles['grab']]: isPrevies,
+				})}
 				playsInline
 			/>
 			<button
 				onClick={actions.toggleVideo}
-				className={styles['controls__togglePlay']}
+				className={cn(styles['controls__togglePlay'], {
+					[styles['border']]: !isPrevies,
+				})}
 				draggable={false}
 			>
 				<Image
+					className={styles['togglePlay__img']}
 					src={video.isPlaying ? '/images/pause.svg' : '/images/play.svg'}
-					width={30}
-					height={37}
-					loading="lazy"
+					width={11}
+					height={13}
+					loading="eager"
 					alt={video.isPlaying ? 'пауза' : 'воспроизвести'}
 					draggable={false}
 				/>
 			</button>
-			<div className={styles['controls']}>
+			<div
+				className={cn(styles['controls'], {
+					[styles['padding']]: isPrevies,
+				})}
+			>
 				{!isPrevies && (
 					<div className={styles['progress__wrapper']}>
 						<span className={styles['controls__time']}>
@@ -65,18 +76,23 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 						<span className={styles['controls__quality']}>HQ/HD</span>
 					)}
 					<div className={styles['volume__wrapper']}>
-						<div className={styles['volume__position']}>
-							<input
-								type="range"
-								min="0"
-								max="1"
-								step="0.1"
-								onChange={actions.changeVolume}
-								value={video.volume}
-								className={inputStyle['volume']}
-							/>
-						</div>
-						<button className={styles['controls__volume']}>
+						{!isPrevies && (
+							<div className={styles['volume__positionRange']}>
+								<input
+									type="range"
+									min="0"
+									max="1"
+									step="0.1"
+									onChange={actions.changeVolume}
+									value={video.volume}
+									className={inputStyle['volume']}
+								/>
+							</div>
+						)}
+						<button
+							className={styles['controls__volume']}
+							onClick={actions.toggleVolume}
+						>
 							<Image
 								className={styles['option__img']}
 								src={

@@ -4,8 +4,8 @@ import { IVideo } from '../../shared/types/video.type'
 import { VideoPlayer } from '../videoPlayer/VideoPlayer'
 import { useActiveVideoContext } from '../../context/ActiveVideoContext'
 import { usePosition } from './usePosition'
-import { ResizeBox } from './ResizeBox'
 import styles from './VideoPrevies.module.scss'
+import { useResize } from './useResize'
 
 interface IVideoPrevies {
 	video: IVideo
@@ -14,19 +14,24 @@ interface IVideoPrevies {
 
 export function VideoPrevies({ video, changeZIndex }: IVideoPrevies) {
 	const [isDragging, setIsDragging] = useState(false)
+
 	const { position, generateRandomSize, handleMouseDown, handleTouchStart } =
 		usePosition(setIsDragging)
 
 	const { activeVideo, setActiveVideo } = useActiveVideoContext()
+
 	const [size, setSize] = useState(generateRandomSize())
+
 	const setDragPC = (e: MouseEvent) => {
 		changeZIndex()
 		handleMouseDown(e)
 	}
+
 	const setDragMobile = (e: TouchEvent) => {
 		changeZIndex()
 		handleTouchStart(e)
 	}
+
 	const changeSize = (newWidth: number, newHeight: number) => {
 		setSize({ initWidth: newWidth, initHeight: newHeight })
 	}
@@ -35,6 +40,12 @@ export function VideoPrevies({ video, changeZIndex }: IVideoPrevies) {
 		setActiveVideo(activeVideo.filter((aVideo) => aVideo.id !== video.id))
 	}
 
+	const { onMouseDown, onTouchStart } = useResize({
+		width: size.initWidth,
+		height: size.initHeight,
+		changeSize,
+		changeZIndex,
+	})
 	return (
 		<div
 			className={styles['videoPrevies']}
@@ -64,12 +75,12 @@ export function VideoPrevies({ video, changeZIndex }: IVideoPrevies) {
 					draggable={false}
 				/>
 			</button>
-			<ResizeBox
-				width={size.initWidth}
-				height={size.initHeight}
-				changeZIndex={changeZIndex}
-				changeSize={changeSize}
+			<div
+				className={styles['videoPrevies__resize']}
+				onTouchStart={onTouchStart}
+				onMouseDown={onMouseDown}
 			/>
+
 			<VideoPlayer isPrevies={true} />
 		</div>
 	)

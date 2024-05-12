@@ -32,7 +32,9 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 				draggable={false}
 			>
 				<Image
-					className={styles['togglePlay__img']}
+					className={cn(styles['togglePlay__img'], {
+						[styles['mobileSize']]: isPrevies,
+					})}
 					src={video.isPlaying ? '/images/pause.svg' : '/images/play.svg'}
 					width={11}
 					height={13}

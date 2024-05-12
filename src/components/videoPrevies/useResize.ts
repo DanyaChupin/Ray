@@ -1,7 +1,6 @@
 import { MouseEvent, TouchEvent } from 'react'
-import styles from './ResizeBox.module.scss'
 
-interface IResizeElem {
+interface IUseResize {
 	width: number
 	height: number
 	changeSize: (width: number, height: number) => void
@@ -11,12 +10,12 @@ interface IResizeElem {
 const minWidth = 200
 const minHeight = 200
 
-export function ResizeBox({
+export function useResize({
 	width,
 	height,
 	changeSize,
 	changeZIndex,
-}: IResizeElem) {
+}: IUseResize) {
 	const maxHeight = window.screen.height / 1.1
 	const maxWidth = window.screen.width / 1.1
 
@@ -93,11 +92,8 @@ export function ResizeBox({
 		document.addEventListener('mousemove', handleMouseMove as any)
 		document.addEventListener('mouseup', handleMouseUp)
 	}
-	return (
-		<div
-			className={styles['resizeBox']}
-			onTouchStart={onTouchStart}
-			onMouseDown={onMouseDown}
-		/>
-	)
+	return {
+		onTouchStart,
+		onMouseDown,
+	}
 }

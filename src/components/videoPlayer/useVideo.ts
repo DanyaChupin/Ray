@@ -8,14 +8,14 @@ import {
 	useState,
 } from 'react'
 
-export const useVideo = () => {
+export const useVideo = (isAutoPlay: boolean) => {
 	const videoRef = useRef<IVideoElement>(null)
 
-	const [isPlaying, setIsPlaying] = useState(false)
+	const [isPlaying, setIsPlaying] = useState(isAutoPlay)
 	const [currentTime, setCurrentTime] = useState(0)
 	const [videoTime, setVideoTime] = useState(0)
 	const [progress, setProgress] = useState(0)
-	const [volume, setVolume] = useState(0.6)
+	const [volume, setVolume] = useState(1)
 
 	useEffect(() => {
 		if (videoRef.current?.duration) {
@@ -49,7 +49,16 @@ export const useVideo = () => {
 
 		videoRef.current.volume = volume
 	}
-
+	const toggleVolume = () => {
+		if (!videoRef.current) return
+		if (volume !== 0) {
+			videoRef.current.volume = 0
+			setVolume(0)
+		} else {
+			videoRef.current.volume = 1
+			setVolume(1)
+		}
+	}
 	const revert = () => {
 		if (videoRef.current) videoRef.current.currentTime -= 5
 	}
@@ -133,6 +142,7 @@ export const useVideo = () => {
 				toggleVideo,
 				changeProgress,
 				changeVolume,
+				toggleVolume,
 			},
 			video: {
 				isPlaying,

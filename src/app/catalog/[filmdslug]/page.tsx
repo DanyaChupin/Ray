@@ -1,14 +1,16 @@
 import { Logo } from '@/components/Logo/Logo'
-import styles from './FilmPage.module.scss'
 import { VideoPlayer } from '@/components/videoPlayer/VideoPlayer'
 import { BackLink } from '@/components/backLink/BackLink'
 import { Footer } from '@/components/footer/Footer'
+import styles from './FilmPage.module.scss'
 
 export default function FilmPage() {
 	return (
 		<div className={styles['film__wrapper']}>
-			<Logo />
-			<div className={styles['film']}>
+			<header className={styles['film__header']}>
+				<Logo />
+			</header>
+			<main className={styles['film']}>
 				<div className={styles['film__border']}>
 					<VideoPlayer isPrevies={false} />
 				</div>
@@ -18,7 +20,8 @@ export default function FilmPage() {
 					</p>
 					<p className={styles['film__author']}>Yoto Horigome</p>
 				</div>
-			</div>
+			</main>
+
 			<div className={styles['film__bottom']}>
 				<Footer>
 					<BackLink returnBackUrl="/catalog" />

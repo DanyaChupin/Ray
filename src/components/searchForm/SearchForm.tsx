@@ -49,13 +49,11 @@ export function SearchForm({
 				{selectOptions.map((option) => (
 					<SelectItem
 						catalogStyle={catalogStyle}
-						onClick={
-							option.text === 'Что такое ЛУЧ?'
-								? () => {
-										setCheckDescription && setCheckDescription((prev) => !prev)
-									}
-								: () => {}
-						}
+						onClick={() => {
+							option.text === 'Что такое ЛУЧ?' &&
+								setCheckDescription &&
+								setCheckDescription((prev) => !prev)
+						}}
 						pathIcon="./images/search.svg"
 						option={option}
 						key={option.text}

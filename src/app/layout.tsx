@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { fonts } from '../assets/static-fonts/fonts'
 import '../assets/styles/globals.scss'
+import { ProgressBar } from '@/context/ProgressBar'
 
 export const viewport: Viewport = {
 	themeColor: 'black',
@@ -24,7 +25,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="ru">
-			<body className={fonts.className}>{children}</body>
+			<body className={fonts.className}>
+				<ProgressBar>{children}</ProgressBar>
+			</body>
 		</html>
 	)
 }

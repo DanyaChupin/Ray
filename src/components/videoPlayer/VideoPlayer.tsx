@@ -15,6 +15,10 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 	return (
 		<div className={styles['videoPlayer']}>
 			<video
+				// auto
+				preload="metadata"
+				poster="./photo.png"
+				loop
 				src="/yoto.mp4"
 				autoPlay={isPrevies}
 				ref={videoRef}

@@ -21,13 +21,13 @@ export function VideoPlayer({
 	onMouseDown,
 }: IVideoPlayer) {
 	const { actions, video, videoRef, divRef } = useVideo(isPrevies, isPrevies)
+	console.log(video.isFullScreen)
 	return (
 		<div ref={divRef} className={styles['videoPlayer']}>
 			<video
 				preload="metadata"
 				src="/yoto.mp4"
 				autoPlay={isPrevies}
-				x5-video-player-fullscreen="true"
 				x5-video-orientation="portraint"
 				x-webkit-airplay="allow"
 				ref={videoRef}
@@ -36,7 +36,7 @@ export function VideoPlayer({
 					[styles['grab']]: isPrevies,
 					[styles['objectFit']]: video.isFullScreen,
 				})}
-				playsInline={!video.isFullScreen}
+				playsInline={video.isFullScreen}
 				controls={false}
 			/>
 			{video.isWaiting ? (

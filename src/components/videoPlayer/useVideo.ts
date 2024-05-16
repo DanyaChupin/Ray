@@ -222,7 +222,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 			isPlaying,
 			videoTime,
 			isFullScreen,
-			// toggleVideo,
 			volume,
 			isWaiting,
 		]

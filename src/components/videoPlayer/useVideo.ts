@@ -45,6 +45,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 
 	useEffect(() => {
 		const handleFullScreenChange = () => {
+			console.log('document')
 			setIsFullScreen(document.fullscreenElement != null)
 		}
 
@@ -118,7 +119,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		if (!fullScreenBlock) return
 
 		if (!isFullScreen) {
-			if (fullScreenBlock.requestFullscreen) {
+			if (!document.fullscreenElement) {
 				fullScreenBlock.requestFullscreen()
 				// @ts-ignore: Unreachable code error
 			} else if (fullScreenBlock.webkitRequestFullScreen) {

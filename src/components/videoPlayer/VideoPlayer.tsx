@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useVideo } from './useVideo'
 import inputStyle from './inputStyle.module.scss'
 import cn from 'classnames'
+import { Spinner } from '../spinner/Spinner'
 import styles from './VideoPlayer.module.scss'
 
 interface IVideoPlayer {
@@ -10,46 +11,50 @@ interface IVideoPlayer {
 }
 
 export function VideoPlayer({ isPrevies }: IVideoPlayer) {
-	const { actions, video, videoRef } = useVideo(isPrevies)
-
+	const { actions, video, videoRef, divRef } = useVideo(isPrevies)
 	return (
-		<div className={styles['videoPlayer']}>
+		<div ref={divRef} className={styles['videoPlayer']}>
 			<video
-				// auto
 				preload="metadata"
-				poster="./photo.png"
-				loop
 				src="/yoto.mp4"
 				autoPlay={isPrevies}
 				ref={videoRef}
 				onClick={() => !isPrevies && actions.toggleVideo()}
 				className={cn(styles['video'], {
 					[styles['grab']]: isPrevies,
+					[styles['objectFit']]: video.isFullScreen,
 				})}
 				playsInline
+				controls={false}
 			/>
-			<button
-				onClick={actions.toggleVideo}
-				className={cn(styles['controls__togglePlay'], {
-					[styles['border']]: !isPrevies,
-				})}
-				draggable={false}
-			>
-				<Image
-					className={cn(styles['togglePlay__img'], {
-						[styles['mobileSize']]: isPrevies,
+			{video.isWaiting ? (
+				<Spinner />
+			) : (
+				<button
+					onClick={actions.toggleVideo}
+					className={cn(styles['controls__togglePlay'], {
+						[styles['border']]: !isPrevies,
+						[styles['showControls']]: video.showControls,
 					})}
-					src={video.isPlaying ? '/images/pause.svg' : '/images/play.svg'}
-					width={11}
-					height={13}
-					loading="eager"
-					alt={video.isPlaying ? 'пауза' : 'воспроизвести'}
 					draggable={false}
-				/>
-			</button>
+				>
+					<Image
+						className={cn(styles['togglePlay__img'], {
+							[styles['mobileSize']]: isPrevies,
+						})}
+						src={video.isPlaying ? '/images/pause.svg' : '/images/play.svg'}
+						width={11}
+						height={13}
+						loading="eager"
+						alt={video.isPlaying ? 'пауза' : 'воспроизвести'}
+						draggable={false}
+					/>
+				</button>
+			)}
 			<div
 				className={cn(styles['controls'], {
 					[styles['padding']]: isPrevies,
+					[styles['showControls']]: video.showControls,
 				})}
 			>
 				{!isPrevies && (

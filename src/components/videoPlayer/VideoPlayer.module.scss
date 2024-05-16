@@ -7,13 +7,10 @@
 	height: 100%;
 }
 
-.videoPlayer:hover .controls__togglePlay {
-	opacity: 1;
+.video::-webkit-media-controls {
+	display: none;
 }
 
-.videoPlayer:hover .controls {
-	opacity: 1;
-}
 .video {
 	height: auto;
 	width: 100%;
@@ -22,6 +19,9 @@
 }
 .grab {
 	cursor: grab;
+}
+.objectFit {
+	object-fit: contain;
 }
 .controls {
 	opacity: 0;
@@ -48,6 +48,7 @@
 		bottom: 30px;
 	}
 }
+
 .padding {
 	padding: 0 20px;
 	bottom: 20px;
@@ -169,4 +170,8 @@
 .mobileSize {
 	width: 33px;
 	height: 30px;
+}
+
+.showControls {
+	opacity: 1;
 }

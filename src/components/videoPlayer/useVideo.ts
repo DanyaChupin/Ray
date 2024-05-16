@@ -1,4 +1,3 @@
-import { IVideoElement } from '@/shared/types/video.types'
 import {
 	ChangeEvent,
 	useCallback,
@@ -7,8 +6,9 @@ import {
 	useRef,
 	useState,
 } from 'react'
+import { IVideoElement } from '@/shared/types/video.types'
 
-export const useVideo = (isAutoPlay: boolean) => {
+export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	const videoRef = useRef<IVideoElement>(null)
 	const divRef = useRef<HTMLDivElement>(null)
 	const [isPlaying, setIsPlaying] = useState(isAutoPlay)
@@ -19,9 +19,10 @@ export const useVideo = (isAutoPlay: boolean) => {
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
 	const [isFullScreen, setIsFullScreen] = useState(false)
+	const [showControls, setShowControls] = useState(!isPrevies)
 
-	const [showControls, setShowControls] = useState(true)
 	useEffect(() => {
+		if (!divRef.current) return
 		let timeoutId: string | number | NodeJS.Timeout | undefined
 
 		const handleMove = () => {
@@ -30,13 +31,15 @@ export const useVideo = (isAutoPlay: boolean) => {
 			timeoutId = setTimeout(() => setShowControls(false), 1500)
 		}
 
-		document.addEventListener('mousemove', handleMove)
-		document.addEventListener('touchmove', handleMove)
+		divRef.current.addEventListener('mousemove', handleMove)
+		divRef.current.addEventListener('touchmove', handleMove)
 
 		return () => {
-			document.removeEventListener('mousemove', handleMove)
-			document.removeEventListener('touchmove', handleMove)
-			clearTimeout(timeoutId)
+			if (divRef.current) {
+				divRef.current.removeEventListener('mousemove', handleMove)
+				divRef.current.removeEventListener('touchmove', handleMove)
+				clearTimeout(timeoutId)
+			}
 		}
 	}, [])
 
@@ -64,13 +67,6 @@ export const useVideo = (isAutoPlay: boolean) => {
 			setIsPlaying(false)
 		}
 	}, [isPlaying])
-
-	const fastForward = () => {
-		console.log(videoRef.current?.currentTime)
-		if (videoRef.current) {
-			videoRef.current.currentTime += 10
-		}
-	}
 
 	const changeProgress = (e: ChangeEvent<HTMLInputElement>) => {
 		if (!videoRef.current) return
@@ -104,9 +100,6 @@ export const useVideo = (isAutoPlay: boolean) => {
 			setVolume(prevVolume)
 		}
 	}
-	const revert = () => {
-		if (videoRef.current) videoRef.current.currentTime -= 10
-	}
 
 	const fullScreen = () => {
 		const fullScreenBlock = divRef.current
@@ -114,7 +107,9 @@ export const useVideo = (isAutoPlay: boolean) => {
 
 		if (!document.fullscreenElement) {
 			setIsFullScreen(true)
-			fullScreenBlock.requestFullscreen()
+			if (fullScreenBlock.requestFullscreen) {
+				fullScreenBlock.requestFullscreen()
+			}
 		} else {
 			setIsFullScreen(false)
 			document.exitFullscreen()
@@ -147,13 +142,8 @@ export const useVideo = (isAutoPlay: boolean) => {
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
 			switch (e.key) {
-				case 'ArrowRight': {
-					fastForward()
-					break
-				}
-
-				case 'ArrowLeft': {
-					revert()
+				case 'f': {
+					fullScreen()
 					break
 				}
 
@@ -162,12 +152,6 @@ export const useVideo = (isAutoPlay: boolean) => {
 					toggleVideo()
 					break
 				}
-
-				case 'f': {
-					fullScreen()
-					break
-				}
-
 				default: {
 					return
 				}
@@ -187,8 +171,6 @@ export const useVideo = (isAutoPlay: boolean) => {
 			divRef,
 			actions: {
 				fullScreen,
-				revert,
-				fastForward,
 				toggleVideo,
 				changeProgress,
 				changeVolume,

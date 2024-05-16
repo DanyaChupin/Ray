@@ -1,17 +1,26 @@
 'use client'
+import { MouseEvent, TouchEvent } from 'react'
 import Image from 'next/image'
 import { useVideo } from './useVideo'
-import inputStyle from './inputStyle.module.scss'
 import cn from 'classnames'
 import { Spinner } from '../spinner/Spinner'
+import inputStyle from './inputStyle.module.scss'
 import styles from './VideoPlayer.module.scss'
 
 interface IVideoPlayer {
 	isPrevies: boolean
+	removeVideo?: () => void
+	onTouchStart?: (e: TouchEvent) => void
+	onMouseDown?: (e: MouseEvent) => void
 }
 
-export function VideoPlayer({ isPrevies }: IVideoPlayer) {
-	const { actions, video, videoRef, divRef } = useVideo(isPrevies)
+export function VideoPlayer({
+	isPrevies,
+	removeVideo,
+	onTouchStart,
+	onMouseDown,
+}: IVideoPlayer) {
+	const { actions, video, videoRef, divRef } = useVideo(isPrevies, isPrevies)
 	return (
 		<div ref={divRef} className={styles['videoPlayer']}>
 			<video
@@ -50,6 +59,33 @@ export function VideoPlayer({ isPrevies }: IVideoPlayer) {
 						draggable={false}
 					/>
 				</button>
+			)}
+			{isPrevies && (
+				<>
+					<button
+						className={cn(styles['videoPlayer__close'], {
+							[styles['showControls']]: video.showControls,
+						})}
+						onClick={removeVideo}
+						draggable={false}
+					>
+						<Image
+							src="/images/close.svg"
+							width={25}
+							height={25}
+							loading="eager"
+							alt="закрыть"
+							draggable={false}
+						/>
+					</button>
+					<div
+						className={cn(styles['videoPlayer__resize'], {
+							[styles['showControls']]: video.showControls,
+						})}
+						onTouchStart={onTouchStart}
+						onMouseDown={onMouseDown}
+					/>
+				</>
 			)}
 			<div
 				className={cn(styles['controls'], {

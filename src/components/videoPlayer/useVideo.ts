@@ -10,12 +10,35 @@ import {
 
 export const useVideo = (isAutoPlay: boolean) => {
 	const videoRef = useRef<IVideoElement>(null)
+	const divRef = useRef<HTMLDivElement>(null)
 	const [isPlaying, setIsPlaying] = useState(isAutoPlay)
 	const [currentTime, setCurrentTime] = useState(0)
 	const [videoTime, setVideoTime] = useState(0)
 	const [progress, setProgress] = useState(0)
+	const [isWaiting, setIsWaiting] = useState(false)
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
+	const [isFullScreen, setIsFullScreen] = useState(false)
+
+	const [showControls, setShowControls] = useState(true)
+	useEffect(() => {
+		let timeoutId: string | number | NodeJS.Timeout | undefined
+
+		const handleMove = () => {
+			setShowControls(true)
+			clearTimeout(timeoutId)
+			timeoutId = setTimeout(() => setShowControls(false), 1500)
+		}
+
+		document.addEventListener('mousemove', handleMove)
+		document.addEventListener('touchmove', handleMove)
+
+		return () => {
+			document.removeEventListener('mousemove', handleMove)
+			document.removeEventListener('touchmove', handleMove)
+			clearTimeout(timeoutId)
+		}
+	}, [])
 
 	useEffect(() => {
 		if (videoRef.current?.duration) {
@@ -32,6 +55,7 @@ export const useVideo = (isAutoPlay: boolean) => {
 	}, [videoRef.current?.paused])
 
 	const toggleVideo = useCallback(() => {
+		if (isWaiting) setIsWaiting(false)
 		if (!isPlaying) {
 			videoRef.current?.play()
 			setIsPlaying(true)
@@ -42,7 +66,10 @@ export const useVideo = (isAutoPlay: boolean) => {
 	}, [isPlaying])
 
 	const fastForward = () => {
-		if (videoRef.current) videoRef.current.currentTime += 5
+		console.log(videoRef.current?.currentTime)
+		if (videoRef.current) {
+			videoRef.current.currentTime += 10
+		}
 	}
 
 	const changeProgress = (e: ChangeEvent<HTMLInputElement>) => {
@@ -78,22 +105,19 @@ export const useVideo = (isAutoPlay: boolean) => {
 		}
 	}
 	const revert = () => {
-		if (videoRef.current) videoRef.current.currentTime -= 5
+		if (videoRef.current) videoRef.current.currentTime -= 10
 	}
 
 	const fullScreen = () => {
-		const video = videoRef.current
+		const fullScreenBlock = divRef.current
+		if (!fullScreenBlock) return
 
-		if (!video) return
-
-		if (video.requestFullscreen) {
-			video.requestFullscreen()
-		} else if (video.msRequestFullscreen) {
-			video.msRequestFullscreen()
-		} else if (video.mozRequestFullScreen) {
-			video.mozRequestFullScreen()
-		} else if (video.webkitRequestFullscreen) {
-			video.webkitRequestFullscreen()
+		if (!document.fullscreenElement) {
+			setIsFullScreen(true)
+			fullScreenBlock.requestFullscreen()
+		} else {
+			setIsFullScreen(false)
+			document.exitFullscreen()
 		}
 	}
 
@@ -101,15 +125,22 @@ export const useVideo = (isAutoPlay: boolean) => {
 		const video = videoRef.current
 		if (!video) return
 
+		const onWaiting = () => {
+			setIsWaiting(true)
+		}
+
 		const updateProgress = () => {
+			setIsWaiting(false)
 			setCurrentTime(video.currentTime)
 			setProgress((video.currentTime / videoTime) * 100)
 		}
 
 		video.addEventListener('timeupdate', updateProgress)
+		video.addEventListener('waiting', onWaiting)
 
 		return () => {
 			video.removeEventListener('timeupdate', updateProgress)
+			video.removeEventListener('waiting', onWaiting)
 		}
 	}, [videoTime])
 
@@ -153,6 +184,7 @@ export const useVideo = (isAutoPlay: boolean) => {
 	return useMemo(
 		() => ({
 			videoRef,
+			divRef,
 			actions: {
 				fullScreen,
 				revert,
@@ -164,13 +196,24 @@ export const useVideo = (isAutoPlay: boolean) => {
 				toggleVolumeMobile,
 			},
 			video: {
+				isWaiting,
 				isPlaying,
 				currentTime,
 				progress,
 				videoTime,
 				volume,
+				isFullScreen,
+				showControls,
 			},
 		}),
-		[currentTime, progress, isPlaying, videoTime, toggleVideo, volume]
+		[
+			currentTime,
+			progress,
+			isPlaying,
+			videoTime,
+			toggleVideo,
+			volume,
+			isWaiting,
+		]
 	)
 }

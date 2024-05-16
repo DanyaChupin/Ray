@@ -44,6 +44,18 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	}, [])
 
 	useEffect(() => {
+		const handleFullScreenChange = () => {
+			setIsFullScreen(document.fullscreenElement != null)
+		}
+
+		document.addEventListener('fullscreenchange', handleFullScreenChange)
+
+		return () => {
+			document.removeEventListener('fullscreenchange', handleFullScreenChange)
+		}
+	}, [])
+
+	useEffect(() => {
 		if (videoRef.current?.duration) {
 			setVideoTime(videoRef.current.duration)
 		}
@@ -117,13 +129,11 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				// @ts-ignore: Unreachable code error
 				fullScreenBlock.mozRequestFullScreen()
 			}
-
-			setIsFullScreen(true)
 		} else {
-			if (document.exitFullscreen) {
+			if (document.fullscreenElement) {
 				document.exitFullscreen()
 				// @ts-ignore: Unreachable code error
-			} else if (document.webkitCancelFullScreen) {
+			} else if (document.webkitRequstFullScreen) {
 				// @ts-ignore: Unreachable code error
 				document.webkitCancelFullScreen()
 				// @ts-ignore: Unreachable code error
@@ -131,7 +141,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				// @ts-ignore: Unreachable code error
 				document.mozCancelFullScreen()
 			}
-			setIsFullScreen(false)
 		}
 	}
 
@@ -212,7 +221,8 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 			progress,
 			isPlaying,
 			videoTime,
-			toggleVideo,
+			isFullScreen,
+			// toggleVideo,
 			volume,
 			isWaiting,
 		]

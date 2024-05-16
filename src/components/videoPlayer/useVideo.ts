@@ -105,14 +105,33 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		const fullScreenBlock = divRef.current
 		if (!fullScreenBlock) return
 
-		if (!document.fullscreenElement) {
-			setIsFullScreen(true)
+		if (!isFullScreen) {
 			if (fullScreenBlock.requestFullscreen) {
 				fullScreenBlock.requestFullscreen()
+				// @ts-ignore: Unreachable code error
+			} else if (fullScreenBlock.webkitRequestFullScreen) {
+				// @ts-ignore: Unreachable code error
+				fullScreenBlock.webkitRequestFullScreen()
+				// @ts-ignore: Unreachable code error
+			} else if (fullScreenBlock.mozRequestFullScreen) {
+				// @ts-ignore: Unreachable code error
+				fullScreenBlock.mozRequestFullScreen()
 			}
+
+			setIsFullScreen(true)
 		} else {
+			if (document.exitFullscreen) {
+				document.exitFullscreen()
+				// @ts-ignore: Unreachable code error
+			} else if (document.webkitCancelFullScreen) {
+				// @ts-ignore: Unreachable code error
+				document.webkitCancelFullScreen()
+				// @ts-ignore: Unreachable code error
+			} else if (document.mozRequestFullScreen) {
+				// @ts-ignore: Unreachable code error
+				document.mozCancelFullScreen()
+			}
 			setIsFullScreen(false)
-			document.exitFullscreen()
 		}
 	}
 

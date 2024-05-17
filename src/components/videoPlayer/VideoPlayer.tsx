@@ -36,7 +36,7 @@ export function VideoPlayer({
 					[styles['grab']]: isPrevies,
 					[styles['objectFit']]: video.isFullScreen,
 				})}
-				playsInline={isPrevies}
+				playsInline={true}
 				controls={false}
 			/>
 			{video.isWaiting ? (
@@ -159,7 +159,8 @@ export function VideoPlayer({
 					{!isPrevies && (
 						<button
 							className={styles['controls__fullScreen']}
-							onClick={actions.fullScreen}
+							onMouseEnter={actions.fullScreen}
+							onTouchStart={actions.fullScreenMobile}
 						>
 							<Image
 								className={styles['option__img']}

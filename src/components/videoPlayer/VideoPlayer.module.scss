@@ -7,11 +7,9 @@
 	height: 100%;
 }
 
-.video::-webkit-media-controls {
-	@include respond-to(xl) {
-		display: none;
-	}
-}
+// .video::-webkit-media-controls {
+// 	display: none;
+// }
 
 .video {
 	height: auto;
@@ -151,12 +149,12 @@
 
 .controls__fullScreen {
 	display: none;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-	@include respond-to(xl) {
+	@include respond-to(lg) {
 		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
 	}
 }
 .option__img {

@@ -45,6 +45,22 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	}, [])
 
 	useEffect(() => {
+		const changeFullScreenOnMobile = () => {
+			if (document.fullscreenElement) {
+				setIsFullScreen(true)
+			} else {
+				setIsFullScreen(false)
+			}
+		}
+
+		document.addEventListener('fullscreenchange', changeFullScreenOnMobile)
+
+		return () => {
+			document.removeEventListener('fullscreenchange', changeFullScreenOnMobile)
+		}
+	}, [])
+
+	useEffect(() => {
 		if (videoRef.current?.duration) {
 			setVideoTime(videoRef.current.duration)
 		}
@@ -89,8 +105,11 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 
 	const fullScreen = () => {
 		const fullScreenBlock = divRef.current
+
 		if (!fullScreenBlock) return
+
 		setIsFullScreen(!isFullScreen)
+
 		if (screenfull.isEnabled) {
 			screenfull.toggle(fullScreenBlock)
 		}

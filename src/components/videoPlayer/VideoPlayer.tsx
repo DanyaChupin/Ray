@@ -36,7 +36,7 @@ export function VideoPlayer({
 					[styles['grab']]: isPrevies,
 					[styles['objectFit']]: video.isFullScreen,
 				})}
-				playsInline={!video.isFullScreen}
+				playsInline={isPrevies}
 				controls={false}
 			/>
 			{video.isWaiting ? (

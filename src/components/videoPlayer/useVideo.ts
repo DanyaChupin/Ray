@@ -19,7 +19,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	const [isWaiting, setIsWaiting] = useState(false)
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
-	const [isFullScreen, setIsFullScreen] = useState(false)
 	const [showControls, setShowControls] = useState(!isPrevies)
 
 	useEffect(() => {
@@ -41,22 +40,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				divRef.current.removeEventListener('touchmove', handleMove)
 				clearTimeout(timeoutId)
 			}
-		}
-	}, [])
-
-	useEffect(() => {
-		const changeFullScreenOnMobile = () => {
-			if (document.fullscreenElement) {
-				setIsFullScreen(true)
-			} else {
-				setIsFullScreen(false)
-			}
-		}
-
-		document.addEventListener('fullscreenchange', changeFullScreenOnMobile)
-
-		return () => {
-			document.removeEventListener('fullscreenchange', changeFullScreenOnMobile)
 		}
 	}, [])
 
@@ -108,18 +91,8 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 
 		if (!fullScreenBlock) return
 
-		// setIsFullScreen(!isFullScreen)
-
 		if (screenfull.isEnabled) {
 			screenfull.toggle(fullScreenBlock)
-		}
-	}
-
-	const fullScreenMobile = () => {
-		const video = videoRef.current
-		if (!video) return
-		if (screenfull.isEnabled) {
-			screenfull.toggle(video)
 		}
 	}
 
@@ -182,14 +155,12 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				changeProgress,
 				changeVolume,
 				toggleVolume,
-				fullScreenMobile,
 			},
 			video: {
 				isWaiting,
 				isPlaying,
 				currentTime,
 				progress,
-				isFullScreen,
 				videoTime,
 				volume,
 				showControls,
@@ -198,7 +169,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		[
 			currentTime,
 			progress,
-			isFullScreen,
 			isPlaying,
 			videoTime,
 			toggleVideo,

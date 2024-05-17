@@ -5,8 +5,8 @@ import { useVideo } from './useVideo'
 import cn from 'classnames'
 import { Spinner } from '../spinner/Spinner'
 import inputStyle from './inputStyle.module.scss'
-import styles from './VideoPlayer.module.scss'
 import screenfull from 'screenfull'
+import styles from './VideoPlayer.module.scss'
 
 interface IVideoPlayer {
 	isPrevies: boolean
@@ -34,7 +34,7 @@ export function VideoPlayer({
 				ref={videoRef}
 				className={cn(styles['video'], {
 					[styles['grab']]: isPrevies,
-					[styles['objectFit']]: video.isFullScreen,
+					[styles['fullScreenVideo']]: screenfull.isFullscreen,
 				})}
 				playsInline={isPrevies}
 				controls={false}
@@ -159,8 +159,7 @@ export function VideoPlayer({
 					{!isPrevies && (
 						<button
 							className={styles['controls__fullScreen']}
-							onMouseEnter={actions.fullScreen}
-							onTouchStart={actions.fullScreenMobile}
+							onClick={actions.fullScreen}
 						>
 							<Image
 								className={styles['option__img']}

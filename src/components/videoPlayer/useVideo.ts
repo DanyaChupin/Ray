@@ -7,6 +7,7 @@ import {
 	useState,
 } from 'react'
 import { IVideoElement } from '@/shared/types/video.types'
+import screenfull from 'screenfull'
 
 export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	const videoRef = useRef<IVideoElement>(null)
@@ -18,7 +19,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	const [isWaiting, setIsWaiting] = useState(false)
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
-	const [isFullScreen, setIsFullScreen] = useState(false)
 	const [showControls, setShowControls] = useState(!isPrevies)
 
 	useEffect(() => {
@@ -40,19 +40,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				divRef.current.removeEventListener('touchmove', handleMove)
 				clearTimeout(timeoutId)
 			}
-		}
-	}, [])
-
-	useEffect(() => {
-		const handleFullScreenChange = () => {
-			console.log('document')
-			setIsFullScreen(document.fullscreenElement != null)
-		}
-
-		document.addEventListener('fullscreenchange', handleFullScreenChange)
-
-		return () => {
-			document.removeEventListener('fullscreenchange', handleFullScreenChange)
 		}
 	}, [])
 
@@ -110,31 +97,8 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		const fullScreenBlock = divRef.current
 		if (!fullScreenBlock) return
 
-		if (!isFullScreen) {
-			if (fullScreenBlock.requestFullscreen) {
-				fullScreenBlock.requestFullscreen()
-				// @ts-ignore: Unreachable code error
-			} else if (fullScreenBlock.webkitRequestFullScreen) {
-				// @ts-ignore: Unreachable code error
-				fullScreenBlock.webkitRequestFullScreen()
-				// @ts-ignore: Unreachable code error
-			} else if (fullScreenBlock.mozRequestFullScreen) {
-				// @ts-ignore: Unreachable code error
-				fullScreenBlock.mozRequestFullScreen()
-			}
-		} else {
-			if (isFullScreen) {
-				console.log('closeFullScreen')
-				document.exitFullscreen()
-				// @ts-ignore: Unreachable code error
-			} else if (document.webkitRequstFullScreen) {
-				// @ts-ignore: Unreachable code error
-				document.webkitCancelFullScreen()
-				// @ts-ignore: Unreachable code error
-			} else if (document.mozRequestFullScreen) {
-				// @ts-ignore: Unreachable code error
-				document.mozCancelFullScreen()
-			}
+		if (screenfull.isEnabled) {
+			screenfull.toggle(fullScreenBlock)
 		}
 	}
 
@@ -206,7 +170,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				progress,
 				videoTime,
 				volume,
-				isFullScreen,
 				showControls,
 			},
 		}),
@@ -215,7 +178,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 			progress,
 			isPlaying,
 			videoTime,
-			isFullScreen,
+			toggleVideo,
 			volume,
 			isWaiting,
 		]

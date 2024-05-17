@@ -22,6 +22,7 @@ export function VideoPlayer({
 	onMouseDown,
 }: IVideoPlayer) {
 	const { actions, video, videoRef, divRef } = useVideo(isPrevies, isPrevies)
+	console.log(screenfull.isFullscreen)
 	return (
 		<div ref={divRef} className={styles['videoPlayer']}>
 			<video
@@ -35,7 +36,7 @@ export function VideoPlayer({
 					[styles['grab']]: isPrevies,
 					[styles['objectFit']]: screenfull.isFullscreen,
 				})}
-				playsInline={!screenfull.isFullscreen}
+				// playsInline={!screenfull.isFullscreen}
 				controls={false}
 			/>
 			{video.isWaiting ? (

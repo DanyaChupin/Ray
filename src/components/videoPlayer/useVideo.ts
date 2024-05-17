@@ -19,6 +19,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	const [isWaiting, setIsWaiting] = useState(false)
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
+	// const [isScreenFull, setIsScreenFull] = useState(false)
 	const [showControls, setShowControls] = useState(!isPrevies)
 
 	useEffect(() => {
@@ -71,14 +72,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		videoRef.current.volume = volume
 		setVolume(Number(e.target.value))
 	}
-	const toggleVolumeMobile = () => {
-		if (!videoRef.current) return
-		if (videoRef.current.muted) {
-			videoRef.current.muted = false
-		} else {
-			videoRef.current.muted = true
-		}
-	}
+
 	const toggleVolume = () => {
 		if (!videoRef.current) return
 		if (volume !== 0) {
@@ -98,7 +92,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		if (!fullScreenBlock) return
 
 		if (screenfull.isEnabled) {
-			screenfull.toggle(fullScreenBlock)
+			screenfull.toggle(fullScreenBlock, { navigationUI: 'hide' })
 		}
 	}
 
@@ -161,7 +155,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				changeProgress,
 				changeVolume,
 				toggleVolume,
-				toggleVolumeMobile,
 			},
 			video: {
 				isWaiting,

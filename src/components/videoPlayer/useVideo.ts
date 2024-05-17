@@ -72,14 +72,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		videoRef.current.volume = volume
 		setVolume(Number(e.target.value))
 	}
-	const toggleVolumeMobile = () => {
-		if (!videoRef.current) return
-		if (videoRef.current.muted) {
-			videoRef.current.muted = false
-		} else {
-			videoRef.current.muted = true
-		}
-	}
+
 	const toggleVolume = () => {
 		if (!videoRef.current) return
 		if (volume !== 0) {
@@ -162,7 +155,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				changeProgress,
 				changeVolume,
 				toggleVolume,
-				toggleVolumeMobile,
 			},
 			video: {
 				isWaiting,

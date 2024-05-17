@@ -6,6 +6,7 @@ import cn from 'classnames'
 import { Spinner } from '../spinner/Spinner'
 import inputStyle from './inputStyle.module.scss'
 import styles from './VideoPlayer.module.scss'
+import screenfull from 'screenfull'
 
 interface IVideoPlayer {
 	isPrevies: boolean
@@ -21,7 +22,6 @@ export function VideoPlayer({
 	onMouseDown,
 }: IVideoPlayer) {
 	const { actions, video, videoRef, divRef } = useVideo(isPrevies, isPrevies)
-	console.log(video.isFullScreen)
 	return (
 		<div ref={divRef} className={styles['videoPlayer']}>
 			<video
@@ -33,9 +33,9 @@ export function VideoPlayer({
 				ref={videoRef}
 				className={cn(styles['video'], {
 					[styles['grab']]: isPrevies,
-					[styles['objectFit']]: video.isFullScreen,
+					[styles['objectFit']]: screenfull.isFullscreen,
 				})}
-				// playsInline={creen}
+				playsInline={!screenfull.isFullscreen}
 				controls={false}
 			/>
 			{video.isWaiting ? (

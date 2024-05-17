@@ -122,8 +122,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				// @ts-ignore: Unreachable code error
 				fullScreenBlock.mozRequestFullScreen()
 			}
-			setIsFullScreen(true)
-			console.log('openFullScreen')
 		} else {
 			if (isFullScreen) {
 				console.log('closeFullScreen')
@@ -138,7 +136,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				document.mozCancelFullScreen()
 			}
 		}
-		setIsFullScreen(false)
 	}
 
 	useEffect(() => {

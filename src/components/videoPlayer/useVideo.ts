@@ -108,10 +108,18 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 
 		if (!fullScreenBlock) return
 
-		setIsFullScreen(!isFullScreen)
+		// setIsFullScreen(!isFullScreen)
 
 		if (screenfull.isEnabled) {
 			screenfull.toggle(fullScreenBlock)
+		}
+	}
+
+	const fullScreenMobile = () => {
+		const video = videoRef.current
+		if (!video) return
+		if (screenfull.isEnabled) {
+			screenfull.toggle(video)
 		}
 	}
 
@@ -174,6 +182,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				changeProgress,
 				changeVolume,
 				toggleVolume,
+				fullScreenMobile,
 			},
 			video: {
 				isWaiting,

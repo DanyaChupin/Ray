@@ -31,7 +31,6 @@ export function VideoPlayer({
 				x5-video-orientation="portraint"
 				x-webkit-airplay="allow"
 				ref={videoRef}
-				onClick={() => !isPrevies && actions.toggleVideo()}
 				className={cn(styles['video'], {
 					[styles['grab']]: isPrevies,
 					[styles['objectFit']]: video.isFullScreen,

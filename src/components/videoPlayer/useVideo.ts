@@ -62,14 +62,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		}
 	}, [videoRef.current?.duration])
 
-	useEffect(() => {
-		if (videoRef.current?.paused) {
-			setIsPlaying(false)
-		} else {
-			setIsPlaying(true)
-		}
-	}, [videoRef.current?.paused])
-
 	const toggleVideo = useCallback(() => {
 		if (isWaiting) setIsWaiting(false)
 		if (!isPlaying) {

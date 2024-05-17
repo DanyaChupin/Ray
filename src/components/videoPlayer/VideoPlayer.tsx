@@ -34,9 +34,9 @@ export function VideoPlayer({
 				ref={videoRef}
 				className={cn(styles['video'], {
 					[styles['grab']]: isPrevies,
-					[styles['objectFit']]: screenfull.isFullscreen,
+					[styles['objectFit']]: video.isFullScreen,
 				})}
-				playsInline={!screenfull.isFullscreen}
+				playsInline={!video.isFullScreen}
 				controls={false}
 			/>
 			{video.isWaiting ? (

@@ -75,8 +75,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 			video?.pause()
 			setIsPlaying(false)
 		}
-		video.controls = false
-	}, [isPlaying])
+	}, [videoRef, isPlaying])
 
 	const changeProgress = (e: ChangeEvent<HTMLInputElement>) => {
 		if (!videoRef.current) return

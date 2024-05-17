@@ -111,7 +111,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		if (!fullScreenBlock) return
 
 		if (!isFullScreen) {
-			if (!document.fullscreenElement) {
+			if (fullScreenBlock.requestFullscreen) {
 				fullScreenBlock.requestFullscreen()
 				// @ts-ignore: Unreachable code error
 			} else if (fullScreenBlock.webkitRequestFullScreen) {
@@ -122,8 +122,10 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 				// @ts-ignore: Unreachable code error
 				fullScreenBlock.mozRequestFullScreen()
 			}
+			console.log('openFullScreen')
 		} else {
-			if (document.fullscreenElement) {
+			if (isFullScreen) {
+				console.log('closeFullScreen')
 				document.exitFullscreen()
 				// @ts-ignore: Unreachable code error
 			} else if (document.webkitRequstFullScreen) {

@@ -66,13 +66,16 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 
 	const toggleVideo = useCallback(() => {
 		if (isWaiting) setIsWaiting(false)
+		const video = videoRef.current
+		if (!video) return
 		if (!isPlaying) {
-			videoRef.current?.play()
+			video?.play()
 			setIsPlaying(true)
 		} else {
-			videoRef.current?.pause()
+			video?.pause()
 			setIsPlaying(false)
 		}
+		video.controls = false
 	}, [isPlaying])
 
 	const changeProgress = (e: ChangeEvent<HTMLInputElement>) => {

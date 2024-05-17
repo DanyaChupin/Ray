@@ -29,14 +29,16 @@ export function VideoPlayer({
 				preload="metadata"
 				src="/yoto.mp4"
 				autoPlay={isPrevies}
-				x5-video-orientation="portraint"
 				x-webkit-airplay="allow"
+				x5-video-player-type="h5"
+				x5-video-player-fullscreen="true"
+				x5-video-orientation="portraint"
 				ref={videoRef}
 				className={cn(styles['video'], {
 					[styles['grab']]: isPrevies,
 					[styles['fullScreenVideo']]: screenfull.isFullscreen,
 				})}
-				playsInline={isPrevies}
+				playsInline
 				controls={false}
 			/>
 			{video.isWaiting ? (

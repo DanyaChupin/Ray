@@ -36,10 +36,10 @@ export function VideoPlayer({
 				ref={videoRef}
 				className={cn(styles['video'], {
 					[styles['grab']]: isPrevies,
-					[styles['fullScreenVideo']]: screenfull.isFullscreen,
+					[styles['fullScreenVideo']]: video.isFullScreen,
 				})}
-				playsInline
-				controls={false}
+				playsInline={isPrevies}
+				controls={video.isFullScreen}
 			/>
 			{video.isWaiting ? (
 				<Spinner />

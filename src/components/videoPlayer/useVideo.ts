@@ -19,6 +19,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	const [isWaiting, setIsWaiting] = useState(false)
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
+	const [isScreenFull, setIsScreenFull] = useState(false)
 	const [showControls, setShowControls] = useState(!isPrevies)
 
 	useEffect(() => {
@@ -98,7 +99,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		if (!fullScreenBlock) return
 
 		if (screenfull.isEnabled) {
-			screenfull.toggle(fullScreenBlock)
+			screenfull.toggle(fullScreenBlock, { navigationUI: 'hide' })
 		}
 	}
 

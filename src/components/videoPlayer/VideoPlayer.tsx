@@ -39,7 +39,7 @@ export function VideoPlayer({
 					[styles['fullScreenVideo']]: video.isFullScreen,
 				})}
 				playsInline={isPrevies}
-				controls={video.isFullScreen}
+				// controls={true}
 			/>
 			{video.isWaiting ? (
 				<Spinner />

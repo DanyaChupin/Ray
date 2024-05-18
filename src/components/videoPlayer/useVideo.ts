@@ -23,9 +23,8 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 
 	useEffect(() => {
 		// состояние для анимации появления и исчезновения контролеров
-		const videoWrapper = divRef.current
 		const video = videoRef.current
-		if (!video || !videoWrapper) return
+		if (!video) return
 		let timeoutId: string | number | NodeJS.Timeout | undefined
 
 		const handleMove = () => {
@@ -33,13 +32,13 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 			clearTimeout(timeoutId)
 			timeoutId = setTimeout(() => setShowControls(false), 1000)
 		}
-		videoWrapper.addEventListener('mousemove', handleMove)
-		videoWrapper.addEventListener('touchmove', handleMove)
-		video.addEventListener('webkitbeginfullscreen', handleMove)
+		video.addEventListener('mousemove', handleMove)
+		video.addEventListener('touchmove', handleMove)
+		// video.addEventListener('webkitbeginfullscreen', handleMove)
 		return () => {
-			videoWrapper.removeEventListener('mousemove', handleMove)
-			videoWrapper.removeEventListener('touchmove', handleMove)
-			video.removeEventListener('webkitbeginfullscreen', handleMove)
+			video.removeEventListener('mousemove', handleMove)
+			video.removeEventListener('touchmove', handleMove)
+			// video.removeEventListener('webkitbeginfullscreen', handleMove)
 			clearTimeout(timeoutId)
 		}
 	}, [showControls])

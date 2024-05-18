@@ -5,8 +5,8 @@ import { useVideo } from './useVideo'
 import cn from 'classnames'
 import { Spinner } from '../spinner/Spinner'
 import inputStyle from './inputStyle.module.scss'
-import screenfull from 'screenfull'
 import styles from './VideoPlayer.module.scss'
+import screenfull from 'screenfull'
 
 interface IVideoPlayer {
 	isPrevies: boolean
@@ -160,7 +160,7 @@ export function VideoPlayer({
 					{!isPrevies && (
 						<button
 							className={styles['controls__fullScreen']}
-							onClick={actions.fullScreen}
+							onClick={actions.toggleFullScreen}
 						>
 							<Image
 								className={styles['option__img']}

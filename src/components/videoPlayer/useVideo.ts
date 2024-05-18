@@ -20,7 +20,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
 	const [showControls, setShowControls] = useState(!isPrevies)
-	const [isFullScreen, setIsFullScreen] = useState(false)
 
 	useEffect(() => {
 		if (!divRef.current) return
@@ -98,17 +97,8 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		if (screenfull.isEnabled) {
 			screenfull.toggle(videoWrapper)
 		}
-
-		if (!isFullScreen) {
-			console.log('mobile fullscreen')
-			//@ts-ignore
-			video.webkitEnterFullscreen()
-		} else {
-			console.log('mobile nofullscreen')
-			//@ts-ignore
-			video.webkitbeginfullscreen()
-		}
-		setIsFullScreen(!isFullScreen)
+		//@ts-ignore
+		video.webkitEnterFullscreen()
 	}
 
 	useEffect(() => {
@@ -174,7 +164,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 			video: {
 				isWaiting,
 				isPlaying,
-				isFullScreen,
 				currentTime,
 				progress,
 				videoTime,

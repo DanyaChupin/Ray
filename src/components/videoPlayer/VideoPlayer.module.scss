@@ -7,22 +7,21 @@
 	height: 100%;
 }
 
-// .video::-webkit-media-controls {
-// 	display: none;
-// }
-
 .video {
 	height: auto;
 	width: 100%;
 	object-fit: cover;
 	cursor: pointer;
 }
+
 .grab {
 	cursor: grab;
 }
+
 .fullScreenVideo {
 	object-fit: contain;
 }
+
 .controls {
 	opacity: 0;
 	bottom: 15px;

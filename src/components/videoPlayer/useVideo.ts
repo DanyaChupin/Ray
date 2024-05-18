@@ -50,20 +50,6 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		}
 	}, [videoRef.current?.duration])
 
-	useEffect(() => {
-		const changeFullScreenOnMobile = () => {
-			if (document.fullscreenElement) {
-				setIsFullScreen(true)
-			} else {
-				setIsFullScreen(false)
-			}
-		}
-		document.addEventListener('fullscreenchange', changeFullScreenOnMobile)
-		return () => {
-			document.removeEventListener('fullscreenchange', changeFullScreenOnMobile)
-		}
-	}, [])
-
 	const toggleVideo = useCallback(() => {
 		if (isWaiting) setIsWaiting(false)
 		const video = videoRef.current
@@ -104,13 +90,25 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	}
 
 	const fullScreen = () => {
-		const fullScreenBlock = divRef.current
-
-		if (!fullScreenBlock) return
+		const videoWrapper = divRef.current
+		const video = videoRef.current
+		if (!video) return
+		if (!videoWrapper) return
 
 		if (screenfull.isEnabled) {
-			screenfull.toggle(fullScreenBlock)
+			screenfull.toggle(videoWrapper)
 		}
+
+		if (!isFullScreen) {
+			console.log('mobile fullscreen')
+			//@ts-ignore
+			video.webkitEnterFullscreen()
+		} else {
+			console.log('mobile nofullscreen')
+			//@ts-ignore
+			video.webkitbeginfullscreen()
+		}
+		setIsFullScreen(!isFullScreen)
 	}
 
 	useEffect(() => {

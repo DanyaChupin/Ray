@@ -22,7 +22,11 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	const [showControls, setShowControls] = useState(!isPrevies)
 
 	useEffect(() => {
-		if (!divRef.current) return
+		// состояние для анимации появления и исчезновения контролеров
+		const videoWrapper = divRef.current
+		const video = videoRef.current
+		if (!video) return
+		if (!videoWrapper) return
 		let timeoutId: string | number | NodeJS.Timeout | undefined
 
 		const handleMove = () => {
@@ -30,16 +34,31 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 			clearTimeout(timeoutId)
 			timeoutId = setTimeout(() => setShowControls(false), 1500)
 		}
+		videoWrapper.addEventListener('mousemove', handleMove)
+		videoWrapper.addEventListener('touchmove', handleMove)
+		video.addEventListener('webkitbeginfullscreen', handleMove)
+		return () => {
+			videoWrapper.removeEventListener('mousemove', handleMove)
+			videoWrapper.removeEventListener('touchmove', handleMove)
+			video.removeEventListener('webkitbeginfullscreen', handleMove)
+			clearTimeout(timeoutId)
+		}
+	}, [showControls])
 
-		divRef.current.addEventListener('mousemove', handleMove)
-		divRef.current.addEventListener('touchmove', handleMove)
+	useEffect(() => {
+		const video = videoRef.current
+		if (!video) return
+
+		const handleI = () => {
+			if (isPlaying) {
+				video.play()
+			}
+		}
+
+		video.addEventListener('webkitbeginfullscreen', handleI)
 
 		return () => {
-			if (divRef.current) {
-				divRef.current.removeEventListener('mousemove', handleMove)
-				divRef.current.removeEventListener('touchmove', handleMove)
-				clearTimeout(timeoutId)
-			}
+			video.removeEventListener('webkitbeginfullscreen', handleI)
 		}
 	}, [])
 
@@ -60,30 +79,32 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 			video?.pause()
 			setIsPlaying(false)
 		}
-	}, [videoRef, isPlaying])
+	}, [isPlaying])
 
 	const changeProgress = (e: ChangeEvent<HTMLInputElement>) => {
-		if (!videoRef.current) return
-		videoRef.current.currentTime =
-			(Number(e.target.value) * videoRef.current.duration) / 100
+		const video = videoRef.current
+		if (!video) return
+		video.currentTime = (Number(e.target.value) * video.duration) / 100
 	}
 
 	const changeVolume = (e: ChangeEvent<HTMLInputElement>) => {
-		if (!videoRef.current) return
-		videoRef.current.volume = volume
+		const video = videoRef.current
+		if (!video) return
+		video.volume = volume
 		setVolume(Number(e.target.value))
 	}
 
 	const toggleVolume = () => {
-		if (!videoRef.current) return
+		const video = videoRef.current
+		if (!video) return
 		if (volume !== 0) {
 			setPrevVolume(volume)
-			videoRef.current.muted = true
-			videoRef.current.volume = 0
+			video.muted = true
+			video.volume = 0
 			setVolume(0)
 		} else {
-			videoRef.current.muted = false
-			videoRef.current.volume = prevVolume
+			video.muted = false
+			video.volume = prevVolume
 			setVolume(prevVolume)
 		}
 	}

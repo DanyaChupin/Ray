@@ -25,14 +25,13 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		// состояние для анимации появления и исчезновения контролеров
 		const videoWrapper = divRef.current
 		const video = videoRef.current
-		if (!video) return
-		if (!videoWrapper) return
+		if (!video || !videoWrapper) return
 		let timeoutId: string | number | NodeJS.Timeout | undefined
 
 		const handleMove = () => {
 			setShowControls(true)
 			clearTimeout(timeoutId)
-			timeoutId = setTimeout(() => setShowControls(false), 1500)
+			timeoutId = setTimeout(() => setShowControls(false), 1000)
 		}
 		videoWrapper.addEventListener('mousemove', handleMove)
 		videoWrapper.addEventListener('touchmove', handleMove)
@@ -49,18 +48,16 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		const video = videoRef.current
 		if (!video) return
 
-		const handleI = () => {
-			if (isPlaying) {
-				video.play()
-			}
+		const handlePlayPause = () => {
+			setIsPlaying(!video.paused)
 		}
-
-		video.addEventListener('webkitbeginfullscreen', handleI)
-
+		video.addEventListener('play', handlePlayPause)
+		video.addEventListener('pause', handlePlayPause)
 		return () => {
-			video.removeEventListener('webkitbeginfullscreen', handleI)
+			video.removeEventListener('play', handlePlayPause)
+			video.removeEventListener('pause', handlePlayPause)
 		}
-	}, [])
+	}, [isPlaying])
 
 	useEffect(() => {
 		if (videoRef.current?.duration) {
@@ -69,22 +66,37 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	}, [videoRef.current?.duration])
 
 	const toggleVideo = useCallback(() => {
-		if (isWaiting) setIsWaiting(false)
 		const video = videoRef.current
+
 		if (!video) return
-		if (!isPlaying) {
+		if (video.paused) {
 			video?.play()
-			setIsPlaying(true)
 		} else {
 			video?.pause()
-			setIsPlaying(false)
 		}
 	}, [isPlaying])
+
+	const fastForward = () => {
+		if (videoRef.current) {
+			videoRef.current.currentTime += 10
+
+			setProgress((videoRef.current.currentTime / videoTime) * 100)
+		}
+	}
+
+	const revert = () => {
+		if (videoRef.current) {
+			videoRef.current.currentTime -= 10
+
+			setProgress((videoRef.current.currentTime / videoTime) * 100)
+		}
+	}
 
 	const changeProgress = (e: ChangeEvent<HTMLInputElement>) => {
 		const video = videoRef.current
 		if (!video) return
 		video.currentTime = (Number(e.target.value) * video.duration) / 100
+		setProgress((video.currentTime / videoTime) * 100)
 	}
 
 	const changeVolume = (e: ChangeEvent<HTMLInputElement>) => {
@@ -109,7 +121,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		}
 	}
 
-	const fullScreen = () => {
+	const toggleFullScreen = () => {
 		const videoWrapper = divRef.current
 		const video = videoRef.current
 		if (!video) return
@@ -120,6 +132,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		}
 		//@ts-ignore
 		video.webkitEnterFullscreen()
+		// fullScreen on Ios
 	}
 
 	useEffect(() => {
@@ -129,19 +142,23 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		const onWaiting = () => {
 			setIsWaiting(true)
 		}
+		const removeWaiting = () => {
+			setIsWaiting(false)
+		}
 
 		const updateProgress = () => {
-			setIsWaiting(false)
 			setCurrentTime(video.currentTime)
 			setProgress((video.currentTime / videoTime) * 100)
 		}
 
 		video.addEventListener('timeupdate', updateProgress)
 		video.addEventListener('waiting', onWaiting)
+		video.addEventListener('canplay', removeWaiting)
 
 		return () => {
 			video.removeEventListener('timeupdate', updateProgress)
 			video.removeEventListener('waiting', onWaiting)
+			video.removeEventListener('canplay', removeWaiting)
 		}
 	}, [videoTime])
 
@@ -149,10 +166,18 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		const handleKeyDown = (e: KeyboardEvent) => {
 			switch (e.key) {
 				case 'f': {
-					fullScreen()
+					toggleFullScreen()
+					break
+				}
+				case 'ArrowRight': {
+					fastForward()
 					break
 				}
 
+				case 'ArrowLeft': {
+					revert()
+					break
+				}
 				case ' ': {
 					e.preventDefault()
 					toggleVideo()
@@ -176,7 +201,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 			videoRef,
 			divRef,
 			actions: {
-				fullScreen,
+				toggleFullScreen,
 				toggleVideo,
 				changeProgress,
 				changeVolume,

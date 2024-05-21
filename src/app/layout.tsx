@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { fonts } from '../assets/static-fonts/fonts'
 import '../assets/styles/globals.scss'
 import { ProgressBar } from '@/context/ProgressBar'
+import { ReactQueryClientProvider } from '@/context/ReactQueryClientProvider'
 
 export const viewport: Viewport = {
 	themeColor: 'black',
@@ -24,10 +25,12 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang="ru">
-			<body className={fonts.className}>
-				<ProgressBar>{children}</ProgressBar>
-			</body>
-		</html>
+		<ReactQueryClientProvider>
+			<html lang="ru">
+				<body className={fonts.className}>
+					<ProgressBar>{children}</ProgressBar>
+				</body>
+			</html>
+		</ReactQueryClientProvider>
 	)
 }

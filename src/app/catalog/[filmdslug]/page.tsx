@@ -12,7 +12,7 @@ export default function FilmPage() {
 			</header>
 			<main className={styles['film']}>
 				<div className={styles['film__border']}>
-					<VideoPlayer isPrevies={false} />
+					<VideoPlayer autoPlay={false} isPrevies={false} />
 				</div>
 				<div className={styles['film__info']}>
 					<p className={styles['film__name']}>

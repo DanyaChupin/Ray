@@ -13,6 +13,7 @@ interface IVideoPlayer {
 	removeVideo?: () => void
 	onTouchStart?: (e: TouchEvent) => void
 	onMouseDown?: (e: MouseEvent) => void
+	autoPlay: boolean
 }
 
 export function VideoPlayer({
@@ -20,8 +21,9 @@ export function VideoPlayer({
 	removeVideo,
 	onTouchStart,
 	onMouseDown,
+	autoPlay,
 }: IVideoPlayer) {
-	const { actions, video, videoRef, divRef } = useVideo(isPrevies, isPrevies)
+	const { actions, video, videoRef, divRef } = useVideo(autoPlay, isPrevies)
 	return (
 		<div ref={divRef} className={styles['videoPlayer']}>
 			<video

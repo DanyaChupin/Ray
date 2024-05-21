@@ -6,7 +6,7 @@ import {
 	useRef,
 	useState,
 } from 'react'
-import { IVideoElement } from '@/shared/types/video.types'
+import { IVideoElement } from '@/shared/types/videoPlayer.types'
 import screenfull from 'screenfull'
 
 export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
@@ -34,11 +34,9 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 		}
 		video.addEventListener('mousemove', handleMove)
 		video.addEventListener('touchmove', handleMove)
-		// video.addEventListener('webkitbeginfullscreen', handleMove)
 		return () => {
 			video.removeEventListener('mousemove', handleMove)
 			video.removeEventListener('touchmove', handleMove)
-			// video.removeEventListener('webkitbeginfullscreen', handleMove)
 			clearTimeout(timeoutId)
 		}
 	}, [showControls])

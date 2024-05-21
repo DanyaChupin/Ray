@@ -31,7 +31,7 @@
 
 	@include respond-to(xl) {
 		max-width: 1101px;
-		max-height: 822px;
+		max-height: 722px;
 		gap: 25px;
 		box-shadow: var(--shadow-item);
 		background-color: var(--black-bg);
@@ -42,7 +42,6 @@
 .film__border {
 	width: 100%;
 	height: auto;
-	object-fit: contain;
 	display: flex;
 	overflow: hidden;
 	border-radius: var(--border-radius-film);

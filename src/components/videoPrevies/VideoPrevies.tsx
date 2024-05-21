@@ -62,6 +62,7 @@ export function VideoPrevies({ video, changeZIndex }: IVideoPrevies) {
 		>
 			<VideoPlayer
 				isPrevies={true}
+				autoPlay={true}
 				removeVideo={removeVideo}
 				onTouchStart={onTouchStart}
 				onMouseDown={onMouseDown}

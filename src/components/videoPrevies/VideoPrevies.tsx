@@ -5,8 +5,8 @@ import { useActiveVideoContext } from '../../context/ActiveVideoContext'
 import { usePosition } from './usePosition'
 import { useResize } from './useResize'
 import cn from 'classnames'
-import { SkeletonVideoPrevies } from './SkeletonVIdeoPrevies'
 import styles from './VideoPrevies.module.scss'
+import { SkeletonVideoPrevies } from './SkeletonVIdeoPrevies'
 
 interface IVideoPreviesProps {
 	video: IVideoPrevies

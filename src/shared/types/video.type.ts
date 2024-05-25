@@ -1,70 +1,40 @@
-export interface IVideo {
+export interface IVideoPrevies {
 	id: string
-	title: string
+	poster: string
 	src: string
 	zIndex: number
 }
 export interface IVideoRespose {
-	data: IVideoR[]
+	data: IVideo[]
+	pogination: {
+		itemsTotal: number
+	}
 }
-
-export interface IVideoR {
-	id: string
-	project_id: string
-	folder_id: null
-	player_id: string
-	version: number
+export interface IVideo {
+	videoId: string
 	title: string
-	subtitle: string
 	description: string
-	status: string
-	progress: number
-	duration: number
-	assets: Asset[]
-	chapters: Chapters
-	privacy_type: string
-	privacy_domains: any[]
+	public: boolean
+	panoramic: boolean
+	mp4Support: boolean
+	publishedAt: Date
+	createdAt: Date
+	updatedAt: Date
 	tags: any[]
-	poster: Poster
-	additional_materials: any[]
-	additional_materials_enabled: boolean
-	play_link: string
-	embed_link: string
-	created_at: Date
-	updated_at: null
-	subtitles: any[]
-	subtitles_enabled: boolean
-	hls_link: string
+	metadata: any[]
+	source: IVideoSource
+	assets: IVideoAssets
 }
 
-export interface Asset {
-	id: string
-	video_id: string
-	original_name: string
-	file_size: number
-	md5?: string
-	filetype: string
-	quality: string
-	resolution: string
-	created_at: Date
-	url: string
-	download_link: string
+export interface IVideoAssets {
+	iframe: string
+	player: string
+	hls: string
+	thumbnail: string
+	mp4: string
 }
 
-export interface Chapters {
-	items: any[]
-	enabled: boolean
-}
-export interface Poster {
-	id: string
+export interface IVideoSource {
 	type: string
-	media_id: string
-	status: string
-	active: boolean
-	original: string
-	md: string
-	sm: string
-	xs: string
-	from_time: number
-	to_time: number
+	uri: string
 }

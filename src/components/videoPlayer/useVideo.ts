@@ -9,7 +9,7 @@ import {
 import { IVideoElement } from '@/shared/types/videoPlayer.types'
 import screenfull from 'screenfull'
 
-export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
+export const useVideo = (isAutoPlay: boolean) => {
 	const videoRef = useRef<IVideoElement>(null)
 	const divRef = useRef<HTMLDivElement>(null)
 	const [isPlaying, setIsPlaying] = useState(isAutoPlay)
@@ -19,7 +19,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	const [isWaiting, setIsWaiting] = useState(false)
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
-	const [showControls, setShowControls] = useState(!isPrevies)
+	const [showControls, setShowControls] = useState(false)
 
 	useEffect(() => {
 		// состояние для анимации появления и исчезновения контролеров
@@ -39,7 +39,7 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 			video.removeEventListener('touchmove', handleMove)
 			clearTimeout(timeoutId)
 		}
-	}, [showControls])
+	}, [])
 
 	useEffect(() => {
 		const video = videoRef.current
@@ -57,10 +57,23 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 	}, [isPlaying])
 
 	useEffect(() => {
-		if (videoRef.current?.duration) {
-			setVideoTime(videoRef.current.duration)
+		const video = videoRef.current
+		if (!video) return
+
+		const handlePlayPause = () => {
+			setVideoTime(video.duration)
+			setShowControls(true)
 		}
-	}, [videoRef.current?.duration])
+		video.addEventListener('loadedmetadata', handlePlayPause)
+		return () => {
+			video.removeEventListener('loadedmetadata', handlePlayPause)
+		}
+	}, [])
+	// useEffect(() => {
+	// 	if (videoRef.current?.duration) {
+	// 		setVideoTime(videoRef.current.duration)
+	// 	}
+	// }, [videoRef.current?.duration])
 
 	const toggleVideo = useCallback(() => {
 		const video = videoRef.current
@@ -145,13 +158,12 @@ export const useVideo = (isAutoPlay: boolean, isPrevies: boolean) => {
 
 		const updateProgress = () => {
 			setCurrentTime(video.currentTime)
-			setProgress((video.currentTime / videoTime) * 100)
+			setProgress((video.currentTime / videoTime) * 100 || 0)
 		}
 
 		video.addEventListener('timeupdate', updateProgress)
 		video.addEventListener('waiting', onWaiting)
 		video.addEventListener('canplay', removeWaiting)
-
 		return () => {
 			video.removeEventListener('timeupdate', updateProgress)
 			video.removeEventListener('waiting', onWaiting)

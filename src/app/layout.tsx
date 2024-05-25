@@ -25,12 +25,12 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<ReactQueryClientProvider>
-			<html lang="ru">
-				<body className={fonts.className}>
-					<ProgressBar>{children}</ProgressBar>
-				</body>
-			</html>
-		</ReactQueryClientProvider>
+		<html lang="ru">
+			<body className={fonts.className}>
+				<ProgressBar>
+					<ReactQueryClientProvider>{children}</ReactQueryClientProvider>
+				</ProgressBar>
+			</body>
+		</html>
 	)
 }

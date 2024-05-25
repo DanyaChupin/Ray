@@ -1,0 +1,25 @@
+.error__wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin: auto 0;
+	font-size: 14px;
+	margin: auto;
+	height: 80vh;
+	justify-content: center;
+}
+
+.error__title {
+	font-size: 19px;
+}
+.error__description {
+	font-weight: 700;
+}
+.error__button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	height: 50px;
+	border-radius: var(--border-radius);
+	border: 1px solid var(--border-color);
+}

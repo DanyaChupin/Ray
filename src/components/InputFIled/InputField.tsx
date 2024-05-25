@@ -4,31 +4,31 @@ import cn from 'classnames'
 import styles from './InputField.module.scss'
 
 interface IFormInput extends InputHTMLAttributes<HTMLInputElement> {
-	pathIcon: string
 	catalogStyle?: boolean
+	isLoading: boolean
 }
 
 export function InputField({
 	catalogStyle = false,
-	pathIcon,
+	isLoading,
 	...rest
 }: IFormInput) {
+	console.log(isLoading)
 	return (
 		<div className={styles['inputField__wrapper']}>
-			{pathIcon && (
-				<Image
-					className={cn(styles['inputField__icon'], {
-						[styles['catalogImg']]: catalogStyle,
-					})}
-					width={16}
-					height={16}
-					loading="eager"
-					src={pathIcon}
-					priority
-					alt="поиск"
-					draggable={false}
-				/>
-			)}
+			<Image
+				className={cn(styles['inputField__icon'], {
+					[styles['catalogImg']]: catalogStyle,
+					[styles['loading']]: isLoading,
+				})}
+				width={16}
+				height={16}
+				loading="eager"
+				src="./images/search.svg"
+				priority
+				alt="поиск"
+				draggable={false}
+			/>
 			<input {...rest} className={styles['inputField__input']} />
 		</div>
 	)

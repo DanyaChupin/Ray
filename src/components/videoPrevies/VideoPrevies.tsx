@@ -1,19 +1,21 @@
 import { MouseEvent, TouchEvent, useState } from 'react'
-import { IVideo } from '../../shared/types/video.type'
+import { IVideoPrevies } from '../../shared/types/video.type'
 import { VideoPlayer } from '../videoPlayer/VideoPlayer'
 import { useActiveVideoContext } from '../../context/ActiveVideoContext'
 import { usePosition } from './usePosition'
 import { useResize } from './useResize'
+import cn from 'classnames'
+import { SkeletonVideoPrevies } from './SkeletonVIdeoPrevies'
 import styles from './VideoPrevies.module.scss'
 
-interface IVideoPrevies {
-	video: IVideo
+interface IVideoPreviesProps {
+	video: IVideoPrevies
 	changeZIndex: () => void
 }
 
-export function VideoPrevies({ video, changeZIndex }: IVideoPrevies) {
+export function VideoPrevies({ video, changeZIndex }: IVideoPreviesProps) {
 	const [isDragging, setIsDragging] = useState(false)
-
+	const [localIsLoading, setLocalIsLoading] = useState(true)
 	const { position, generateRandomSize, handleMouseDown, handleTouchStart } =
 		usePosition(setIsDragging)
 
@@ -60,13 +62,23 @@ export function VideoPrevies({ video, changeZIndex }: IVideoPrevies) {
 			onMouseDown={setDragPC}
 			onTouchStart={setDragMobile}
 		>
-			<VideoPlayer
-				isPrevies={true}
-				autoPlay={true}
-				removeVideo={removeVideo}
-				onTouchStart={onTouchStart}
-				onMouseDown={onMouseDown}
-			/>
+			<div
+				className={cn(styles['videoPrevies__wrapper'], {
+					[styles['videoPrevies__hidden']]: localIsLoading,
+				})}
+			>
+				<VideoPlayer
+					onLoadLocal={setLocalIsLoading}
+					poster={video.poster}
+					src={video.src}
+					isPrevies={true}
+					autoPlay={true}
+					removeVideo={removeVideo}
+					onTouchStart={onTouchStart}
+					onMouseDown={onMouseDown}
+				/>
+			</div>
+			{localIsLoading && <SkeletonVideoPrevies />}
 		</div>
 	)
 }

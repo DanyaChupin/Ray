@@ -30,11 +30,19 @@
 	width: 100%;
 	border: none;
 	@include respond-to(xl) {
-		font-size: 20px;
+		font-size: 15px;
 	}
 }
 
 //icon size
 .catalogImg {
 	width: 16px;
+}
+@keyframes blink {
+	50% {
+		opacity: 30%;
+	}
+}
+.loading {
+	animation: blink 1s linear infinite;
 }

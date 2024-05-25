@@ -1,12 +1,12 @@
 'use client'
-import { MouseEvent, TouchEvent } from 'react'
+import { Dispatch, MouseEvent, SetStateAction, TouchEvent } from 'react'
 import Image from 'next/image'
 import { useVideo } from './useVideo'
 import cn from 'classnames'
 import { Spinner } from '../spinner/Spinner'
 import inputStyle from './inputStyle.module.scss'
-import styles from './VideoPlayer.module.scss'
 import screenfull from 'screenfull'
+import styles from './VideoPlayer.module.scss'
 
 interface IVideoPlayer {
 	isPrevies: boolean
@@ -14,6 +14,9 @@ interface IVideoPlayer {
 	onTouchStart?: (e: TouchEvent) => void
 	onMouseDown?: (e: MouseEvent) => void
 	autoPlay: boolean
+	src: string
+	poster: string
+	onLoadLocal?: Dispatch<SetStateAction<boolean>>
 }
 
 export function VideoPlayer({
@@ -22,14 +25,20 @@ export function VideoPlayer({
 	onTouchStart,
 	onMouseDown,
 	autoPlay,
+	src,
+	poster,
+	onLoadLocal,
 }: IVideoPlayer) {
-	const { actions, video, videoRef, divRef } = useVideo(autoPlay, isPrevies)
+	const { actions, video, videoRef, divRef } = useVideo(autoPlay)
+
 	return (
 		<div ref={divRef} className={styles['videoPlayer']}>
 			<video
+				poster={poster}
+				onLoadedData={() => onLoadLocal && onLoadLocal(false)}
 				preload="metadata"
-				src="/yoto.mp4"
-				autoPlay={isPrevies}
+				src={src}
+				autoPlay={autoPlay}
 				x-webkit-airplay="allow"
 				x5-video-player-type="h5"
 				x5-video-player-fullscreen="true"

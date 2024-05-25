@@ -6,12 +6,19 @@
 	height: 100%;
 	display: flex;
 	gap: 5px;
+
+	animation: opacity var(--transition) forwards;
 	flex-direction: column;
+	@include respond-to(xl) {
+		gap: 10px;
+	}
 }
 .catalogItem__wrapper {
 	width: 100%;
 }
 .catalogItem__img {
+	width: 100%;
+	height: auto;
 	border-radius: var(--border-radius-item);
 	box-shadow: var(--shadow-item);
 }
@@ -19,17 +26,45 @@
 	display: flex;
 	flex-direction: column;
 	gap: 3px;
+	z-index: -1;
+	font-size: 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	@include respond-to(xl) {
+		font-size: 14px;
+	}
+	@include respond-to(xl) {
+		gap: 10px;
+	}
 }
 .text {
-	font-size: 10px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 .catalogItem__name {
+	display: flex;
+	align-items: center;
+	gap: 5px;
 	color: var(--text-color);
 }
 
+.catalogItem__title {
+	font-weight: 700;
+}
+.catalogItem__author {
+	min-width: max-content;
+}
 .catalogItem__link {
 	opacity: 0.5;
+}
+
+@keyframes opacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 100%;
+	}
 }

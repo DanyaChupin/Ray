@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react'
 import { InputField } from '../InputFIled/InputField'
 import { Select } from '../select/Select'
 import { SelectItem } from '../selectItem/SelectItem'
@@ -13,6 +13,8 @@ interface IForm {
 	setCheckDescription?: Dispatch<SetStateAction<boolean>>
 	catalogStyle?: boolean
 	selectOptions: IOption[]
+	isLoading: boolean
+	onSubmit: (e: FormEvent) => void
 }
 
 export function SearchForm({
@@ -21,6 +23,8 @@ export function SearchForm({
 	setCheckDescription,
 	catalogStyle = false,
 	selectOptions,
+	isLoading,
+	onSubmit,
 }: IForm) {
 	const { ref, isActive, setIsActive } = useOutsideClick(false)
 
@@ -34,16 +38,17 @@ export function SearchForm({
 				[styles['formHomeSize']]: !catalogStyle,
 			})}
 			ref={ref}
+			onSubmit={onSubmit}
 		>
 			<InputField
 				value={inputValue}
 				onChange={changeInput}
 				onFocus={toggleSelect}
 				onClick={toggleSelect}
-				pathIcon="./images/search.svg"
 				type="text"
 				catalogStyle={catalogStyle}
 				aria-label="поиск"
+				isLoading={isLoading}
 			/>
 			<Select isOpen={isActive} catalogStyle={catalogStyle}>
 				{selectOptions.map((option) => (
@@ -56,7 +61,7 @@ export function SearchForm({
 						}}
 						pathIcon="./images/search.svg"
 						option={option}
-						key={option.text}
+						key={option.to}
 					/>
 				))}
 			</Select>

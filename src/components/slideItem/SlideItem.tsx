@@ -2,15 +2,15 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useScreenSize } from '../../hooks/useScreenSize'
-import { IVideo } from '../../shared/types/video.type'
+import { IVideoPrevies } from '../../shared/types/video.type'
 import cn from 'classnames'
 import styles from './SlideItem.module.scss'
 
 interface ISlideItem {
-	video: IVideo
-	setDragVideo: Dispatch<SetStateAction<IVideo>>
-	activeVideo: IVideo[]
-	setActiveVideo: Dispatch<SetStateAction<IVideo[]>>
+	video: IVideoPrevies
+	setDragVideo: Dispatch<SetStateAction<IVideoPrevies>>
+	activeVideo: IVideoPrevies[]
+	setActiveVideo: Dispatch<SetStateAction<IVideoPrevies[]>>
 }
 
 export function SlideItem({
@@ -36,7 +36,7 @@ export function SlideItem({
 	}
 
 	const clearDragVideo = () => {
-		setDragVideo({ id: '', src: '', title: '', zIndex: 1 })
+		setDragVideo({ id: '', src: '', poster: '', zIndex: 1 })
 	}
 
 	const openVideoPreviesClick = () => {
@@ -62,7 +62,7 @@ export function SlideItem({
 					width={70}
 					height={55}
 					src="/images/net.png"
-					alt="photo"
+					alt="взято"
 					draggable={false}
 					priority
 				/>
@@ -78,9 +78,9 @@ export function SlideItem({
 					})}
 					width={70}
 					height={55}
-					src={video.src}
+					src={video.poster}
 					draggable={true}
-					alt="photo"
+					alt="фильм"
 					priority
 				/>
 			)}

@@ -14,7 +14,6 @@ export default function FilmPage({
 	params: { videoId: string }
 }) {
 	const { data, isLoading, error } = useFilm(videoId)
-	console.log(isLoading)
 	return (
 		<div className={styles['film__wrapper']}>
 			<header className={styles['film__header']}>

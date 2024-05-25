@@ -4,7 +4,7 @@ import { VideoPlayer } from '../videoPlayer/VideoPlayer'
 import { useActiveVideoContext } from '../../context/ActiveVideoContext'
 import { usePosition } from './usePosition'
 import { useResize } from './useResize'
-import { SkeletonVideoPrevies } from './SkeletonVideoPrevies'
+import { SkeletonPrevies } from './SkeletonPrevies'
 import cn from 'classnames'
 import styles from './VideoPrevies.module.scss'
 
@@ -78,7 +78,7 @@ export function VideoPrevies({ video, changeZIndex }: IVideoPreviesProps) {
 					onMouseDown={onMouseDown}
 				/>
 			</div>
-			{localIsLoading && <SkeletonVideoPrevies />}
+			{localIsLoading && <SkeletonPrevies />}
 		</div>
 	)
 }

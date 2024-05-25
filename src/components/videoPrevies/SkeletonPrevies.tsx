@@ -1,5 +1,5 @@
 import styles from './SkeletonVideoPrevies.module.scss'
 
-export function SkeletonVideoPrevies() {
+export function SkeletonPrevies() {
 	return <div className={styles['skeleton']}></div>
 }

@@ -1,71 +1,20 @@
-import { IVideo } from '@/shared/types/video.type'
+import { IVideoPrevies } from '@/shared/types/video.type'
 import { Slide } from '../slide/Slide'
 import { Dispatch, SetStateAction } from 'react'
 import cn from 'classnames'
 import styles from './Slider.module.scss'
+import { useFilmsByTag } from './useFilmsByTag'
+import { videoPreviesTransformation } from '@/utils/videoPreviesTransformation'
 
 interface ISlider {
-	setDragVideo: Dispatch<SetStateAction<IVideo>>
+	setDragVideo: Dispatch<SetStateAction<IVideoPrevies>>
 	hidden: boolean
 }
 
 export function Slider({ setDragVideo, hidden }: ISlider) {
-	const mock: IVideo[] = [
-		{
-			id: '1',
-			title: 'Video',
-			src: '/photo.png',
-			zIndex: 10,
-		},
-		{
-			id: '2',
-			title: 'Video',
-			src: '/photo.png',
-			zIndex: 10,
-		},
-		{
-			id: '3',
-			title: 'Video',
-			src: '/photo.png',
-			zIndex: 10,
-		},
-		{
-			id: '4',
-			title: 'Video',
-			src: '/photo.png',
-			zIndex: 10,
-		},
-		{
-			id: '5',
-			title: 'Video',
-			src: '/photo.png',
-			zIndex: 10,
-		},
-		{
-			id: '6',
-			title: 'Video',
-			src: '/photo.png',
-			zIndex: 10,
-		},
-		{
-			id: '7',
-			title: 'Video',
-			src: '/photo.png',
-			zIndex: 10,
-		},
-		{
-			id: '8',
-			title: 'Video',
-			src: '/photo.png',
-			zIndex: 10,
-		},
-		{
-			id: '9',
-			title: 'Video',
-			src: '/photo.png',
-			zIndex: 10,
-		},
-	]
+	const { data, isLoading, isError } = useFilmsByTag()
+	const videoPrevies = videoPreviesTransformation(data)
+
 	return (
 		<div
 			className={cn(styles['slider'], {
@@ -73,10 +22,20 @@ export function Slider({ setDragVideo, hidden }: ISlider) {
 			})}
 		>
 			<div className={styles['first']}>
-				<Slide sideLeft={true} setDragVideo={setDragVideo} videoArray={mock} />
+				<Slide
+					isLoading={isLoading || isError}
+					sideLeft={true}
+					setDragVideo={setDragVideo}
+					videoPrevies={videoPrevies || []}
+				/>
 			</div>
 			<div>
-				<Slide sideLeft={false} setDragVideo={setDragVideo} videoArray={mock} />
+				<Slide
+					isLoading={isLoading || isError}
+					sideLeft={false}
+					setDragVideo={setDragVideo}
+					videoPrevies={videoPrevies || []}
+				/>
 			</div>
 		</div>
 	)

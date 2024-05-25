@@ -16,3 +16,14 @@
 		grid-template-columns: repeat(4, 1fr);
 	}
 }
+.catalog__fetchButton {
+	background: none;
+	cursor: pointer;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-button);
+	font-size: 10px;
+	font-weight: var(--bold);
+	padding: 4px 8px;
+	background-color: var(--bg-color);
+	box-shadow: var(--shadow-button);
+}

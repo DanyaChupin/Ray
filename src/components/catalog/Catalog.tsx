@@ -1,18 +1,76 @@
 'use client'
-import { Suspense } from 'react'
 import { CatalogItem } from '../catalogItem/CatalogItem'
+import { SkeletonCatalogItem } from '../catalogItem/SkeletonCatalogItem'
+import { useFilms } from './useFilms'
 import styles from './Catalog.module.scss'
+import { useSearchParams } from 'next/navigation'
+import { useFilmSearch } from '../header/useFilmSearch'
+import { ErrorMessage } from '../errorMessage/ErrorMessage'
+import { useEffect } from 'react'
 
-export async function Catalog(data: any) {
-	const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11, 1]
-	console.log(data)
+const elemLoading = Array(12).fill('')
+
+export function Catalog() {
+	const searchParams = useSearchParams()
+	const searchParam = searchParams.get('search')
+
+	const { data, isLoading, fetchNextPage, isError, isFetchingNextPage, error } =
+		useFilms(searchParam || '')
+
+	const {
+		searchData,
+		searchRefetch,
+		searchIsError,
+		searchIsLoading,
+		searchError,
+	} = useFilmSearch(searchParam || '', 'searchCatalog')
+
+	useEffect(() => {
+		if (searchParam) {
+			searchRefetch()
+		}
+	}, [searchParam])
+
+	if (searchIsError) {
+		return (
+			<ErrorMessage error={searchError?.message || ''} redirect="catalog" />
+		)
+	}
+
+	if (isError) {
+		return <ErrorMessage error={error?.message || ''} redirect="catalog" />
+	}
+
 	return (
-		<div className={styles['catalog']}>
-			{arr.map((elem) => (
-				<Suspense fallback={<p>Loading...</p>}>
-					<CatalogItem elem={elem} />
-				</Suspense>
-			))}
-		</div>
+		<>
+			<div className={styles['catalog']}>
+				{searchData &&
+					searchData.data.map((film) => (
+						<CatalogItem film={film} key={film.videoId} />
+					))}
+				{data?.pages &&
+					!searchParam &&
+					data.pages.map((page) =>
+						page.map((film) => <CatalogItem film={film} key={film.videoId} />)
+					)}
+
+				{(isLoading || isFetchingNextPage || searchIsLoading) && (
+					<>
+						{elemLoading.map((_elem, index) => (
+							<SkeletonCatalogItem key={index} />
+						))}
+					</>
+				)}
+			</div>
+
+			{data?.pages[data.pages.length - 1].length === 12 && !searchParam && (
+				<button
+					onClick={() => fetchNextPage()}
+					className={styles['catalog__fetchButton']}
+				>
+					{isFetchingNextPage ? 'Загрузка...' : 'Загрузить еще'}
+				</button>
+			)}
+		</>
 	)
 }

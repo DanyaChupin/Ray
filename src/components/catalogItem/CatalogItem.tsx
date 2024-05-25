@@ -1,36 +1,53 @@
 import Image from 'next/image'
-import styles from './CatalogItem.module.scss'
 import cn from 'classnames'
 import Link from 'next/link'
+import { IVideo } from '@/shared/types/video.type'
+import styles from './CatalogItem.module.scss'
 
-export function CatalogItem({ elem }: { elem: number }) {
-	console.log(elem)
+export function CatalogItem({ film }: { film: IVideo }) {
+	const title = film.title.toLowerCase()
+	const author = film.description.toLowerCase()
+	const link = ('luch.world/' + film.title).replace(/\.? /g, '-').toLowerCase()
 	return (
-		<Link href="/catalog/1" className={styles['catalogItem']}>
+		<Link href={`/catalog/${film.videoId}`} className={styles['catalogItem']}>
 			<div className={styles['catalogItem__wrapper']}>
 				<Image
 					className={styles['catalogItem__img']}
-					src="/photo.png"
+					src={film.assets.thumbnail}
 					width={160}
-					height={100}
+					height={90}
 					layout="responsive"
-					alt="film"
+					alt={film.title}
 				/>
 			</div>
 			<div className={styles['catalogItem__info']}>
-				<p
-					className={cn(styles['catalogItem__name'], {
-						[styles['text']]: true,
-					})}
-				>
-					Nike SB | Yuto Horigome in Tokyo
-				</p>
+				<div className={styles['catalogItem__name']}>
+					<p
+						className={cn(styles['catalogItem__title'], {
+							[styles['text']]: true,
+						})}
+					>
+						{title}
+					</p>
+					{author && (
+						<>
+							<span className={styles['catalogItem__line']}>|</span>
+							<p
+								className={cn(styles['catalogItem__author'], {
+									[styles['text']]: true,
+								})}
+							>
+								{author}
+							</p>
+						</>
+					)}
+				</div>
 				<p
 					className={cn(styles['catalogItem__link'], {
 						[styles['text']]: true,
 					})}
 				>
-					luch.world/Nike-SB-|-Yuto-Horigome-in-Tokyo
+					{link}
 				</p>
 			</div>
 		</Link>

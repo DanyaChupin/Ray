@@ -2,26 +2,31 @@ import {
 	ChangeEvent,
 	Dispatch,
 	DragEvent,
+	FormEvent,
 	SetStateAction,
 	useState,
 } from 'react'
 import { Logo } from '../Logo/Logo'
 import { FlexBox } from '../ui/flexBox/FlexBox'
+import { useRouter } from 'next/navigation'
 import { VideoPrevies } from '../videoPrevies/VideoPrevies'
 import { SearchForm } from '../searchForm/SearchForm'
-import { IVideo } from '../../shared/types/video.type'
+import { IVideoPrevies } from '../../shared/types/video.type'
 import { Footer } from '../footer/Footer'
 import { BackLink } from '../backLink/BackLink'
 import { ButtonLang } from '../buttonLang/ButtonLang'
 import { DESCRIPTION } from '../../utils/description'
 import { defaultSelect } from '@/utils/default-select'
 import cn from 'classnames'
+import { useDebounce } from '@/hooks/useDebounce'
+import { useFilmSearch } from '../header/useFilmSearch'
+import { selectTransformation } from '@/utils/selectTransformation'
 import styles from './DragDropSearch.module.scss'
 
 interface IDragDropSearch {
-	dragVideo: IVideo
-	activeVideo: IVideo[]
-	setActiveVideo: Dispatch<SetStateAction<IVideo[]>>
+	dragVideo: IVideoPrevies
+	activeVideo: IVideoPrevies[]
+	setActiveVideo: Dispatch<SetStateAction<IVideoPrevies[]>>
 }
 export function DragDropSearch({
 	dragVideo,
@@ -31,9 +36,24 @@ export function DragDropSearch({
 	const [inputValue, setInputValue] = useState('')
 	const [checkDescription, setCheckDescription] = useState(false)
 	const [dragActive, setDragActive] = useState(false)
-
+	const router = useRouter()
+	const debouncedSearch = useDebounce(inputValue, 300)
 	const changeInput = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value)
+	}
+	const { searchData, searchIsLoading } = useFilmSearch(
+		debouncedSearch,
+		'searchSelect'
+	)
+
+	const options = selectTransformation(searchData)?.slice(0, 3)
+	const onSubmit = (e: FormEvent) => {
+		e.preventDefault()
+		if (inputValue) {
+			router.push(`/catalog?search=${inputValue}`)
+		} else {
+			router.push(`/catalog`)
+		}
 	}
 
 	const handleDrag = (e: DragEvent<HTMLDivElement>) => {
@@ -52,7 +72,7 @@ export function DragDropSearch({
 		setDragActive(false)
 	}
 
-	const updateZIndex = (video: IVideo) => {
+	const updateZIndex = (video: IVideoPrevies) => {
 		setActiveVideo((prev) => {
 			const updateZIndexVideo = prev.map((aVideo) => {
 				if (aVideo.id === video.id) {
@@ -93,7 +113,9 @@ export function DragDropSearch({
 							<p className={styles['description']}>{DESCRIPTION}</p>
 						) : (
 							<SearchForm
-								selectOptions={defaultSelect}
+								onSubmit={onSubmit}
+								isLoading={searchIsLoading}
+								selectOptions={inputValue ? options || [] : defaultSelect}
 								inputValue={inputValue}
 								changeInput={changeInput}
 								setCheckDescription={setCheckDescription}

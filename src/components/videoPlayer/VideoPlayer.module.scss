@@ -5,13 +5,14 @@
 	position: relative;
 	width: 100%;
 	height: 100%;
+	opacity: 0;
+	animation: opacity var(--transition) forwards;
 }
 
 .video {
 	height: auto;
 	width: 100%;
 	object-fit: cover;
-	cursor: pointer;
 }
 
 .grab {
@@ -198,4 +199,13 @@
 
 .showControls {
 	opacity: 1;
+}
+
+@keyframes opacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 100%;
+	}
 }

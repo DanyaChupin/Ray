@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, createContext, useContext } from 'react'
-import { IVideo } from '@/shared/types/video.type'
+import { IVideoPrevies } from '@/shared/types/video.type'
 
 export type IActiveVideo = {
-	activeVideo: IVideo[]
-	setActiveVideo: Dispatch<SetStateAction<IVideo[]>>
+	activeVideo: IVideoPrevies[]
+	setActiveVideo: Dispatch<SetStateAction<IVideoPrevies[]>>
 }
 
 export const ActiveVideoContext = createContext<IActiveVideo>({

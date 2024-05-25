@@ -1,17 +1,26 @@
 import { Dispatch, SetStateAction } from 'react'
 import { SlideItem } from '../slideItem/SlideItem'
-import { IVideo } from '@/shared/types/video.type'
+import { IVideoPrevies } from '@/shared/types/video.type'
 import cn from 'classnames'
 import { useActiveVideoContext } from '@/context/ActiveVideoContext'
+import { SkeletonSlideItem } from '../slideItem/SkeletonSlideItem'
 import styles from './Slide.module.scss'
 
 interface ISlide {
 	sideLeft: boolean
-	videoArray: IVideo[]
-	setDragVideo: Dispatch<SetStateAction<IVideo>>
+	videoPrevies: IVideoPrevies[]
+	setDragVideo: Dispatch<SetStateAction<IVideoPrevies>>
+	isLoading: boolean
 }
 
-export function Slide({ sideLeft, videoArray, setDragVideo }: ISlide) {
+const elemLoading = Array(9).fill('')
+
+export function Slide({
+	sideLeft,
+	videoPrevies,
+	setDragVideo,
+	isLoading,
+}: ISlide) {
 	const { activeVideo, setActiveVideo } = useActiveVideoContext()
 	return (
 		<div className={styles['slide']}>
@@ -21,7 +30,9 @@ export function Slide({ sideLeft, videoArray, setDragVideo }: ISlide) {
 					[styles['slide-right']]: !sideLeft,
 				})}
 			>
-				{videoArray.map((video) => (
+				{isLoading &&
+					elemLoading.map((_elem, index) => <SkeletonSlideItem key={index} />)}
+				{videoPrevies.map((video) => (
 					<SlideItem
 						video={video}
 						setDragVideo={setDragVideo}
@@ -37,7 +48,9 @@ export function Slide({ sideLeft, videoArray, setDragVideo }: ISlide) {
 					[styles['slide-right']]: !sideLeft,
 				})}
 			>
-				{videoArray.map((video) => (
+				{isLoading &&
+					elemLoading.map((_elem, index) => <SkeletonSlideItem key={index} />)}
+				{videoPrevies.map((video) => (
 					<SlideItem
 						video={video}
 						activeVideo={activeVideo}

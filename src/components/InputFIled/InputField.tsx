@@ -13,7 +13,6 @@ export function InputField({
 	isLoading,
 	...rest
 }: IFormInput) {
-	console.log(isLoading)
 	return (
 		<div className={styles['inputField__wrapper']}>
 			<Image

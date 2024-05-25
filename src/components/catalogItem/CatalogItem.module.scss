@@ -6,7 +6,7 @@
 	height: 100%;
 	display: flex;
 	gap: 5px;
-
+	opacity: 0;
 	animation: opacity var(--transition) forwards;
 	flex-direction: column;
 	@include respond-to(xl) {

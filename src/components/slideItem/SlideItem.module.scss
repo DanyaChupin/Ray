@@ -6,6 +6,9 @@
 	height: 54px;
 	object-position: center;
 	cursor: grab;
+	opacity: 0;
+
+	animation: opacity var(--transition) forwards;
 	@include respond-to(md) {
 		width: 120px;
 		height: 90px;
@@ -20,4 +23,13 @@
 }
 .dragging {
 	cursor: grabbing;
+}
+
+@keyframes opacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 100%;
+	}
 }

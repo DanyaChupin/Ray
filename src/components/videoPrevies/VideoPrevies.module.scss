@@ -1,6 +1,8 @@
 .videoPrevies {
 	position: fixed;
 	cursor: grab;
+
+	animation: opacity var(--transition) forwards;
 }
 
 .videoPrevies__wrapper {
@@ -9,4 +11,13 @@
 }
 .videoPrevies__hidden {
 	display: none;
+}
+
+@keyframes opacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 100%;
+	}
 }

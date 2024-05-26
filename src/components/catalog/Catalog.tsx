@@ -68,7 +68,7 @@ export function Catalog() {
 					onClick={() => fetchNextPage()}
 					className={styles['catalog__fetchButton']}
 				>
-					{isFetchingNextPage ? 'Загрузка...' : 'Загрузить еще'}
+					{isFetchingNextPage ? 'ЗАГРУЗКА...' : 'ЗАГРУЗИТЬ ЕЩЕ'}
 				</button>
 			)}
 		</>

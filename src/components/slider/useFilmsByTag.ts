@@ -6,7 +6,6 @@ export const useFilmsByTag = () => {
 		queryKey: ['getByTag'],
 		queryFn: () => filmService.getByTag(),
 	})
-
 	return {
 		data,
 		isLoading,

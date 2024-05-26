@@ -18,6 +18,9 @@
 }
 
 .film__header {
+	@media screen and (max-height: 500px) {
+		margin-top: 30px;
+	}
 	a h1 {
 		font-size: 20px;
 	}
@@ -93,4 +96,7 @@
 }
 .film__bottom {
 	align-self: flex-start;
+	@media screen and (max-height: 560px) {
+		margin-top: 30px;
+	}
 }

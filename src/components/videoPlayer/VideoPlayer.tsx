@@ -30,6 +30,7 @@ export function VideoPlayer({
 	onLoadLocal,
 }: IVideoPlayer) {
 	const { actions, video, videoRef, divRef } = useVideo(autoPlay)
+	console.log(video.volume)
 	return (
 		<div
 			ref={divRef}
@@ -165,7 +166,11 @@ export function VideoPlayer({
 							<Image
 								className={styles['option__img']}
 								src={
-									video.volume ? '/images/volume.svg' : '/images/zeroVolume.svg'
+									video.volume >= 0.5
+										? '/images/fullvolume.svg'
+										: video.volume > 0.1
+											? '/images/midvolume.svg'
+											: '/images/zerovolume.svg'
 								}
 								width={25}
 								height={15}

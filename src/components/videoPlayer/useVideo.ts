@@ -86,8 +86,15 @@ export const useVideo = (isAutoPlay: boolean) => {
 	const changeVolume = (e: ChangeEvent<HTMLInputElement>) => {
 		const video = videoRef.current
 		if (!video) return
-		video.volume = volume
-		setVolume(Number(e.target.value))
+		if (Number(e.target.value) === 0) {
+			video.muted = true
+			video.volume = volume
+			setVolume(0)
+		} else {
+			video.muted = false
+			video.volume = volume
+			setVolume(Number(e.target.value))
+		}
 	}
 
 	const toggleVolume = () => {

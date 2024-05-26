@@ -1,11 +1,4 @@
-import {
-	ChangeEvent,
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-} from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { IVideoElement } from '@/shared/types/videoPlayer.types'
 import screenfull from 'screenfull'
 
@@ -50,7 +43,7 @@ export const useVideo = (isAutoPlay: boolean) => {
 		}
 	}, [])
 
-	const toggleVideo = useCallback(() => {
+	const toggleVideo = () => {
 		const video = videoRef.current
 		if (!video) return
 		if (video.paused) {
@@ -58,7 +51,7 @@ export const useVideo = (isAutoPlay: boolean) => {
 		} else {
 			video?.pause()
 		}
-	}, [isPlaying])
+	}
 
 	const fastForward = () => {
 		if (videoRef.current) {
@@ -194,37 +187,25 @@ export const useVideo = (isAutoPlay: boolean) => {
 		}
 	}, [toggleVideo])
 
-	return useMemo(
-		() => ({
-			videoRef,
-			divRef,
-			actions: {
-				toggleFullScreen,
-				toggleVideo,
-				changeProgress,
-				changeVolume,
-				toggleVolume,
-				handleMove,
-			},
-			video: {
-				isWaiting,
-				isPlaying,
-				currentTime,
-				progress,
-				videoTime,
-				volume,
-				showControls,
-			},
-		}),
-		[
-			currentTime,
-			showControls,
-			progress,
-			isPlaying,
-			videoTime,
+	return {
+		videoRef,
+		divRef,
+		actions: {
+			toggleFullScreen,
 			toggleVideo,
-			volume,
+			changeProgress,
+			changeVolume,
+			toggleVolume,
+			handleMove,
+		},
+		video: {
 			isWaiting,
-		]
-	)
+			isPlaying,
+			currentTime,
+			progress,
+			videoTime,
+			volume,
+			showControls,
+		},
+	}
 }

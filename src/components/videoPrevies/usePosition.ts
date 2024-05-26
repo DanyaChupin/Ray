@@ -32,7 +32,7 @@ export function usePosition(setIsDragging: Dispatch<SetStateAction<boolean>>) {
 
 	// Случайная позиция видео превью
 	function generateCoordinates() {
-		const x = Math.floor(Math.random() * halfScreenWidth)
+		const x = Math.floor(Math.random() * screenSize.width - 200)
 		const y =
 			Math.floor(Math.random() * 100 + halfScreenHeight) - halfScreenHeight / 2
 		return { x, y }

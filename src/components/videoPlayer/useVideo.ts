@@ -9,6 +9,7 @@ import {
 import { IVideoElement } from '@/shared/types/videoPlayer.types'
 import screenfull from 'screenfull'
 
+let timeoutId: string | number | NodeJS.Timeout | undefined
 export const useVideo = (isAutoPlay: boolean) => {
 	const videoRef = useRef<IVideoElement>(null)
 	const divRef = useRef<HTMLDivElement>(null)
@@ -20,26 +21,6 @@ export const useVideo = (isAutoPlay: boolean) => {
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
 	const [showControls, setShowControls] = useState(false)
-
-	useEffect(() => {
-		// состояние для анимации появления и исчезновения контролеров
-		const video = videoRef.current
-		if (!video) return
-		let timeoutId: string | number | NodeJS.Timeout | undefined
-
-		const handleMove = () => {
-			setShowControls(true)
-			clearTimeout(timeoutId)
-			timeoutId = setTimeout(() => setShowControls(false), 1000)
-		}
-		video.addEventListener('mousemove', handleMove)
-		video.addEventListener('touchmove', handleMove)
-		return () => {
-			video.removeEventListener('mousemove', handleMove)
-			video.removeEventListener('touchmove', handleMove)
-			clearTimeout(timeoutId)
-		}
-	}, [])
 
 	useEffect(() => {
 		const video = videoRef.current
@@ -62,22 +43,15 @@ export const useVideo = (isAutoPlay: boolean) => {
 
 		const handlePlayPause = () => {
 			setVideoTime(video.duration)
-			setShowControls(true)
 		}
 		video.addEventListener('loadedmetadata', handlePlayPause)
 		return () => {
 			video.removeEventListener('loadedmetadata', handlePlayPause)
 		}
 	}, [])
-	// useEffect(() => {
-	// 	if (videoRef.current?.duration) {
-	// 		setVideoTime(videoRef.current.duration)
-	// 	}
-	// }, [videoRef.current?.duration])
 
 	const toggleVideo = useCallback(() => {
 		const video = videoRef.current
-
 		if (!video) return
 		if (video.paused) {
 			video?.play()
@@ -144,6 +118,27 @@ export const useVideo = (isAutoPlay: boolean) => {
 		video.webkitEnterFullscreen()
 		// fullScreen on Ios
 	}
+	const handleMove = () => {
+		setShowControls(true)
+		clearTimeout(timeoutId)
+		timeoutId = setTimeout(() => setShowControls(false), 1000)
+		return () => {
+			clearTimeout(timeoutId)
+		}
+	}
+	// useEffect(() => {
+	// 	// состояние для анимации появления и исчезновения контролеров
+	// 	const video = videoRef.current
+	// 	if (!video) return
+
+	// 	video.addEventListener('mousemove', handleMove)
+	// 	video.addEventListener('touchmove', handleMove)
+	// 	return () => {
+	// 		video.removeEventListener('mousemove', handleMove)
+	// 		video.removeEventListener('touchmove', handleMove)
+	// 		clearTimeout(timeoutId)
+	// 	}
+	// }, [toggleVideo, isPlaying])
 
 	useEffect(() => {
 		const video = videoRef.current
@@ -215,6 +210,7 @@ export const useVideo = (isAutoPlay: boolean) => {
 				changeProgress,
 				changeVolume,
 				toggleVolume,
+				handleMove,
 			},
 			video: {
 				isWaiting,
@@ -228,6 +224,7 @@ export const useVideo = (isAutoPlay: boolean) => {
 		}),
 		[
 			currentTime,
+			showControls,
 			progress,
 			isPlaying,
 			videoTime,

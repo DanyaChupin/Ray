@@ -30,13 +30,18 @@ export function VideoPlayer({
 	onLoadLocal,
 }: IVideoPlayer) {
 	const { actions, video, videoRef, divRef } = useVideo(autoPlay)
-
+	console.log(video.showControls)
 	return (
 		<div ref={divRef} className={styles['videoPlayer']}>
 			<video
 				poster={poster}
-				onLoadedData={() => onLoadLocal && onLoadLocal(false)}
+				onLoadedData={() => {
+					onLoadLocal && onLoadLocal(false)
+					actions.handleMove()
+				}}
 				preload="metadata"
+				onMouseMove={actions.handleMove}
+				onTouchMove={actions.handleMove}
 				src={src}
 				autoPlay={autoPlay}
 				x-webkit-airplay="allow"
@@ -112,7 +117,7 @@ export function VideoPlayer({
 					<div className={styles['progress__wrapper']}>
 						<span className={styles['controls__time']}>
 							{Math.floor(video.currentTime / 60) +
-								':' +
+								'.' +
 								('0' + Math.floor(video.currentTime % 60)).slice(-2)}
 						</span>
 						<div className={styles['controls__progress']}>
@@ -128,7 +133,7 @@ export function VideoPlayer({
 						</div>
 						<span className={styles['controls__videoLength']}>
 							{Math.floor(video.videoTime / 60) +
-								':' +
+								'.' +
 								('0' + Math.floor(video.videoTime % 60)).slice(-2)}
 						</span>
 					</div>

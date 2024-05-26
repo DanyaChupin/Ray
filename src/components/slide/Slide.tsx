@@ -13,7 +13,7 @@ interface ISlide {
 	isLoading: boolean
 }
 
-const elemLoading = Array(9).fill('')
+const elemLoading = Array(12).fill('')
 
 export function Slide({
 	sideLeft,

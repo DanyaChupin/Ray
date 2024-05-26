@@ -7,6 +7,7 @@ import { useFilm } from './useFIlm'
 import { SkeletonFilm } from './SkeletonFilm'
 import { ErrorMessage } from '@/components/errorMessage/ErrorMessage'
 import styles from './FilmPage.module.scss'
+import Link from 'next/link'
 
 export default function FilmPage({
 	params: { videoId },
@@ -17,7 +18,9 @@ export default function FilmPage({
 	return (
 		<div className={styles['film__wrapper']}>
 			<header className={styles['film__header']}>
-				<Logo />
+				<Link href={'/'}>
+					<Logo />
+				</Link>
 			</header>
 			<main className={styles['film']}>
 				{isLoading && <SkeletonFilm />}

@@ -23,7 +23,7 @@ export function InputField({
 				width={16}
 				height={16}
 				loading="eager"
-				src="./images/search.svg"
+				src="/images/search.svg"
 				priority
 				alt="поиск"
 				draggable={false}

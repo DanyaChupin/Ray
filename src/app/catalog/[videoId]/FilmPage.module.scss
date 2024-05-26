@@ -5,18 +5,27 @@
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 30px;
 }
-.film__header {
-	font-size: 20px;
-	margin-top: auto;
-	@include respond-to(md) {
-		margin-top: 44px;
-	}
+.film__top {
+	display: flex;
+	margin: auto 0;
+	align-items: center;
+	flex-direction: column;
+	gap: 16px;
 	@include respond-to(xl) {
-		font-size: 30px;
+		gap: 22px;
+	}
+}
+
+.film__header {
+	a h1 {
+		font-size: 20px;
+	}
+
+	@include respond-to(xl) {
+		a h1 {
+			font-size: 30px;
+		}
 	}
 }
 .film {
@@ -30,32 +39,39 @@
 	align-items: center;
 
 	@include respond-to(xl) {
-		max-width: 1101px;
-		max-height: 722px;
 		gap: 25px;
 		box-shadow: var(--shadow-item);
 		background-color: var(--black-bg);
 		padding: 30px 25px;
 		border-radius: var(--border-radius);
+		max-width: 901px;
+		max-height: 622px;
+	}
+	@include respond-to(xxl) {
+		max-width: 1000px;
+		max-height: 717px;
 	}
 }
 .film__border {
 	width: 100%;
-	height: auto;
+	height: 100%;
 	display: flex;
 	overflow: hidden;
 	border-radius: var(--border-radius-film);
-
 	@include respond-to(xl) {
+		max-width: 901px;
 		box-shadow: var(--shadow-item);
+	}
+	@include respond-to(xxl) {
+		max-width: 1100px;
 	}
 }
 .film__info {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	height: 22px;
 	align-items: center;
-
 	font-size: 10px;
 	@include respond-to(lg) {
 		font-size: 20px;
@@ -76,5 +92,5 @@
 	margin-left: auto;
 }
 .film__bottom {
-	align-self: start;
+	align-self: flex-start;
 }

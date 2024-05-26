@@ -30,9 +30,13 @@ export function VideoPlayer({
 	onLoadLocal,
 }: IVideoPlayer) {
 	const { actions, video, videoRef, divRef } = useVideo(autoPlay)
-	console.log(video.showControls)
 	return (
-		<div ref={divRef} className={styles['videoPlayer']}>
+		<div
+			ref={divRef}
+			className={styles['videoPlayer']}
+			onMouseMove={actions.handleMove}
+			onTouchMove={actions.handleMove}
+		>
 			<video
 				poster={poster}
 				onLoadedData={() => {
@@ -40,8 +44,6 @@ export function VideoPlayer({
 					actions.handleMove()
 				}}
 				preload="metadata"
-				onMouseMove={actions.handleMove}
-				onTouchMove={actions.handleMove}
 				src={src}
 				autoPlay={autoPlay}
 				x-webkit-airplay="allow"

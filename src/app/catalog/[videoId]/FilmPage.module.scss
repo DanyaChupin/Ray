@@ -63,7 +63,7 @@
 		box-shadow: var(--shadow-item);
 	}
 	@include respond-to(xxl) {
-		max-width: 1100px;
+		max-width: 1000px;
 	}
 }
 .film__info {

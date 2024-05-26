@@ -30,7 +30,6 @@ export function VideoPlayer({
 	onLoadLocal,
 }: IVideoPlayer) {
 	const { actions, video, videoRef, divRef } = useVideo(autoPlay)
-	console.log(video.showControls)
 	return (
 		<div
 			ref={divRef}

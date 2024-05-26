@@ -1,8 +1,10 @@
 .videoPrevies {
 	position: fixed;
 	cursor: grab;
-
 	animation: opacity var(--transition) forwards;
+	div:first-child {
+		height: 100%;
+	}
 }
 
 .videoPrevies__wrapper {

@@ -72,7 +72,9 @@ export function SearchForm({
 				))}
 				{localOption &&
 					localOption
-						.filter((filterOption) => filterOption.text.includes(inputValue))
+						.filter((filterOption) =>
+							filterOption.text.toLowerCase().includes(inputValue)
+						)
 						.map((option) => (
 							<SelectItem
 								catalogStyle={catalogStyle}

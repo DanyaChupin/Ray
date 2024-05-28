@@ -15,7 +15,7 @@ export function useLocalStorage(
 
 	const addSearchStory = (newValue: IOption) => {
 		const isValueInArray = searchStory.some(
-			(item) => item.text === newValue.text
+			(item) => item.text === newValue.text.toLowerCase()
 		)
 		if (!isValueInArray) {
 			localStorage.setItem(

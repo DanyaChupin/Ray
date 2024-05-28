@@ -15,6 +15,7 @@ interface IForm {
 	selectOptions: IOption[]
 	isLoading: boolean
 	onSubmit: (e: FormEvent) => void
+	localOption?: IOption[]
 }
 
 export function SearchForm({
@@ -25,12 +26,15 @@ export function SearchForm({
 	selectOptions,
 	isLoading,
 	onSubmit,
+	localOption,
 }: IForm) {
 	const { ref, isActive, setIsActive } = useOutsideClick(false)
-
 	const toggleSelect = () => {
-		if (isActive) return
 		setIsActive(!isActive)
+	}
+	const formAction = (e: FormEvent) => {
+		onSubmit(e)
+		toggleSelect()
 	}
 	return (
 		<form
@@ -38,13 +42,15 @@ export function SearchForm({
 				[styles['formHomeSize']]: !catalogStyle,
 			})}
 			ref={ref}
-			onSubmit={onSubmit}
+			onSubmit={formAction}
 		>
 			<InputField
 				value={inputValue}
-				onChange={changeInput}
-				onFocus={toggleSelect}
-				onClick={toggleSelect}
+				onChange={(e) => {
+					changeInput(e), setIsActive(true)
+				}}
+				onFocus={() => setIsActive(true)}
+				onClick={() => setIsActive(true)}
 				type="text"
 				catalogStyle={catalogStyle}
 				aria-label="поиск"
@@ -61,9 +67,22 @@ export function SearchForm({
 						}}
 						pathIcon="./images/search.svg"
 						option={option}
-						key={option.to}
+						key={option.text}
 					/>
 				))}
+				{localOption &&
+					localOption
+						.filter((filterOption) => filterOption.text.includes(inputValue))
+						.map((option) => (
+							<SelectItem
+								catalogStyle={catalogStyle}
+								onClick={() => setIsActive(false)}
+								pathIcon="./images/earlierSearch.svg"
+								deleteOpportunity={true}
+								option={option}
+								key={option.text}
+							/>
+						))}
 			</Select>
 		</form>
 	)

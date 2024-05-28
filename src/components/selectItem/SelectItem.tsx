@@ -1,14 +1,15 @@
 import { IOption } from '../../shared/types/options.type'
 import Image from 'next/image'
-import Link from 'next/link'
 import cn from 'classnames'
 import styles from './SelectItem.module.scss'
+import { useRouter } from 'next/navigation'
 
-interface ISelectItem {
+export interface ISelectItem {
 	option: IOption
 	pathIcon: string
 	onClick?: () => void
 	catalogStyle?: boolean
+	deleteOpportunity?: boolean
 }
 
 export function SelectItem({
@@ -17,13 +18,13 @@ export function SelectItem({
 	option,
 	catalogStyle,
 }: ISelectItem) {
+	const router = useRouter()
+	const navigate = () => {
+		router.push(option.to)
+	}
 	return (
-		<li className={styles['select-item']}>
-			<Link
-				className={styles['select-item__link']}
-				onClick={onClick && onClick}
-				href={option.to}
-			>
+		<li className={styles['select-item']} onClick={onClick && onClick}>
+			<div className={styles['select-item__link']} onClick={navigate}>
 				<Image
 					className={cn(styles['select-item__icon'], {
 						[styles['catalogIcon']]: catalogStyle,
@@ -42,7 +43,7 @@ export function SelectItem({
 				>
 					{option.text}
 				</p>
-			</Link>
+			</div>
 		</li>
 	)
 }

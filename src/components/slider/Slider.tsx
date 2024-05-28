@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from 'react'
 import cn from 'classnames'
 import styles from './Slider.module.scss'
 import { useFilmsByTag } from './useFilmsByTag'
+import { filmQuantityPrevies } from '@/utils/constants'
 import { videoPreviesTransformation } from '@/utils/videoPreviesTransformation'
 
 interface ISlider {
@@ -13,7 +14,9 @@ interface ISlider {
 
 export function Slider({ setDragVideo, hidden }: ISlider) {
 	const { data, isLoading, isError } = useFilmsByTag()
-	const videoPrevies = videoPreviesTransformation(data)
+	const videoPrevies = videoPreviesTransformation(
+		data?.slice(0, filmQuantityPrevies)
+	)
 
 	return (
 		<div

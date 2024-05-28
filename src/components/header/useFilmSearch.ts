@@ -13,7 +13,6 @@ export const useFilmSearch = (searchParam: string, key: string) => {
 		queryFn: () => filmService.getBySearch(searchParam),
 		enabled: !!searchParam,
 	})
-
 	return {
 		searchIsError,
 		searchRefetch,

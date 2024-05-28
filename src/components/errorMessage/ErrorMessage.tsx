@@ -1,15 +1,6 @@
-import { useRouter } from 'next/navigation'
 import styles from './ErrorMessage.module.scss'
 
-export function ErrorMessage({
-	error,
-	redirect,
-}: {
-	error: string
-	redirect: string
-}) {
-	const router = useRouter()
-	router.push(redirect)
+export function ErrorMessage({ error }: { error: string; redirect?: string }) {
 	const reloadWindow = () => {
 		window.location.reload()
 	}

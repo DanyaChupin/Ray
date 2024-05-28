@@ -5,6 +5,7 @@ import cn from 'classnames'
 import { useActiveVideoContext } from '@/context/ActiveVideoContext'
 import { SkeletonSlideItem } from '../slideItem/SkeletonSlideItem'
 import styles from './Slide.module.scss'
+import { filmQuantityPrevies } from '@/utils/constants'
 
 interface ISlide {
 	sideLeft: boolean
@@ -13,7 +14,7 @@ interface ISlide {
 	isLoading: boolean
 }
 
-const elemLoading = Array(12).fill('')
+const elemLoading = Array(filmQuantityPrevies).fill('')
 
 export function Slide({
 	sideLeft,

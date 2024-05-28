@@ -49,7 +49,7 @@ export function DragDropSearch({
 	const options = selectTransformation(searchData)?.slice(0, 3)
 	const onSubmit = (e: FormEvent) => {
 		e.preventDefault()
-		if (inputValue) {
+		if (debouncedSearch) {
 			router.push(`/catalog?search=${inputValue}`)
 		} else {
 			router.push(`/catalog`)

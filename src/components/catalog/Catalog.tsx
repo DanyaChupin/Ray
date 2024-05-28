@@ -7,8 +7,9 @@ import { useSearchParams } from 'next/navigation'
 import { useFilmSearch } from '../header/useFilmSearch'
 import { ErrorMessage } from '../errorMessage/ErrorMessage'
 import { useEffect } from 'react'
+import { filmQuantityCatalog } from '@/utils/constants'
 
-const elemLoading = Array(12).fill('')
+const elemLoading = Array(filmQuantityCatalog).fill('')
 
 export function Catalog() {
 	const searchParams = useSearchParams()
@@ -32,28 +33,28 @@ export function Catalog() {
 	}, [searchParam])
 
 	if (searchIsError) {
-		return (
-			<ErrorMessage error={searchError?.message || ''} redirect="catalog" />
-		)
+		return <ErrorMessage error={searchError?.message || ''} />
 	}
 
 	if (isError) {
-		return <ErrorMessage error={error?.message || ''} redirect="catalog" />
+		return <ErrorMessage error={error?.message || ''} />
 	}
 
 	return (
 		<>
 			<div className={styles['catalog']}>
-				{searchData &&
-					searchData.data.map((film) => (
-						<CatalogItem film={film} key={film.videoId} />
-					))}
 				{data?.pages &&
 					!searchParam &&
 					data.pages.map((page) =>
 						page.map((film) => <CatalogItem film={film} key={film.videoId} />)
 					)}
-
+				{!searchData?.data.length && searchParam && !searchIsLoading ? (
+					<div>Ничего не найдено</div>
+				) : (
+					searchData?.data.map((film) => (
+						<CatalogItem film={film} key={film.videoId} />
+					))
+				)}
 				{(isLoading || isFetchingNextPage || searchIsLoading) && (
 					<>
 						{elemLoading.map((_elem, index) => (
@@ -63,14 +64,15 @@ export function Catalog() {
 				)}
 			</div>
 
-			{data?.pages[data.pages.length - 1].length === 12 && !searchParam && (
-				<button
-					onClick={() => fetchNextPage()}
-					className={styles['catalog__fetchButton']}
-				>
-					{isFetchingNextPage ? 'ЗАГРУЗКА...' : 'ЗАГРУЗИТЬ ЕЩЕ'}
-				</button>
-			)}
+			{data?.pages[data.pages.length - 1].length === filmQuantityCatalog &&
+				!searchParam && (
+					<button
+						onClick={() => fetchNextPage()}
+						className={styles['catalog__fetchButton']}
+					>
+						{isFetchingNextPage ? 'ЗАГРУЗКА...' : 'ЗАГРУЗИТЬ ЕЩЕ'}
+					</button>
+				)}
 		</>
 	)
 }

@@ -2,7 +2,6 @@ import { IOption } from '../../shared/types/options.type'
 import Image from 'next/image'
 import cn from 'classnames'
 import styles from './SelectItem.module.scss'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 export interface ISelectItem {

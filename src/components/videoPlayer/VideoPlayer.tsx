@@ -167,7 +167,7 @@ export function VideoPlayer({
 								src={
 									video.volume >= 0.5
 										? '/images/fullvolume.svg'
-										: video.volume > 0.1
+										: video.volume >= 0.1
 											? '/images/midvolume.svg'
 											: '/images/zerovolume.svg'
 								}

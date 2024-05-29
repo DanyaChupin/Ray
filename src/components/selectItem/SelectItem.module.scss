@@ -19,7 +19,6 @@
 	align-items: center;
 	text-align: center;
 	gap: 18px;
-	text-align: center;
 }
 
 .select-item__text {
@@ -36,8 +35,6 @@
 .select-item__icon {
 	width: 16px;
 	height: auto;
-	// filter: brightness(0) saturate(100%) invert(77%) sepia(6%) saturate(0%)
-	// hue-rotate(162deg) brightness(110%) contrast(98%);
 	opacity: 0.5;
 	@include respond-to(xl) {
 		width: 24px;

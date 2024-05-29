@@ -1,8 +1,8 @@
-import { IOption } from '../../shared/types/options.type'
-import cn from 'classnames'
 import Link from 'next/link'
-import styles from './SelectItem.module.scss'
 import Image from 'next/image'
+import cn from 'classnames'
+import { IOption } from '../../shared/types/options.type'
+import styles from './SelectItem.module.scss'
 
 export interface ISelectItem {
 	option: IOption

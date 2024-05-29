@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { filmService } from '@/services/film.service'
+import { FilmService } from '@/services/film.service'
 
 export const useFilms = (search: string) => {
 	const {
@@ -14,7 +14,7 @@ export const useFilms = (search: string) => {
 	} = useInfiniteQuery({
 		queryKey: ['getFilms'],
 		queryFn: async ({ pageParam }) => {
-			const result = await filmService.getAll(String(pageParam))
+			const result = await FilmService.getAll(String(pageParam))
 			return result
 		},
 		enabled: !search,

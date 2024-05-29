@@ -197,6 +197,7 @@ export const useVideo = (isAutoPlay: boolean) => {
 			changeVolume,
 			toggleVolume,
 			handleMove,
+			setShowControls,
 		},
 		video: {
 			isWaiting,

@@ -73,7 +73,7 @@ export function SearchForm({
 				{localOption &&
 					localOption
 						.filter((filterOption) =>
-							filterOption.text.toLowerCase().includes(inputValue)
+							filterOption.text.toLowerCase().includes(inputValue.toLowerCase())
 						)
 						.map((option) => (
 							<SelectItem

@@ -41,7 +41,7 @@ export function VideoPlayer({
 				poster={poster}
 				onLoadedData={() => {
 					onLoadLocal && onLoadLocal(false)
-					actions.handleMove()
+					!isPrevies && actions.setShowControls(true)
 				}}
 				preload="metadata"
 				src={src}

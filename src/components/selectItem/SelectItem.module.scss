@@ -19,7 +19,6 @@
 	align-items: center;
 	text-align: center;
 	gap: 18px;
-	text-align: center;
 }
 
 .select-item__text {
@@ -36,6 +35,7 @@
 .select-item__icon {
 	width: 16px;
 	height: auto;
+	opacity: 0.5;
 	@include respond-to(xl) {
 		width: 24px;
 	}

@@ -65,7 +65,7 @@ export function SearchForm({
 								setCheckDescription &&
 								setCheckDescription((prev) => !prev)
 						}}
-						pathIcon="./images/search.svg"
+						pathIcon="/images/search.svg"
 						option={option}
 						key={option.text}
 					/>
@@ -73,7 +73,7 @@ export function SearchForm({
 				{localOption &&
 					localOption
 						.filter((filterOption) =>
-							filterOption.text.toLowerCase().includes(inputValue)
+							filterOption.text.toLowerCase().includes(inputValue.toLowerCase())
 						)
 						.map((option) => (
 							<SelectItem

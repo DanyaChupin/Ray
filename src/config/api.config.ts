@@ -1,20 +1,19 @@
 import { filmQuantityCatalog } from '@/utils/constants'
 
+export const API_URL = 'https://sandbox.api.video'
 class AllUrls {
-	private API_URL = 'https://sandbox.api.video'
-
 	getFilmById = (videoId: string) => {
-		return `${this.API_URL}/videos/${videoId}`
+		return `${API_URL}/videos/${videoId}`
 	}
 	getFilms = (page: string) => {
-		return `${this.API_URL}/videos?currentPage=${page}&pageSize=${String(filmQuantityCatalog)}&sortBy=createdAt`
+		return `${API_URL}/videos?currentPage=${page}&pageSize=${String(filmQuantityCatalog)}&sortBy=createdAt`
 	}
 	getFilmsBySearch = (slug: string) => {
-		return `${this.API_URL}/videos?title=${slug}`
+		return `${API_URL}/videos?title=${slug}`
 	}
 
 	getFilmsByTag = () => {
-		return `${this.API_URL}/videos?tags=previes`
+		return `${API_URL}/videos?tags=previes`
 	}
 }
 

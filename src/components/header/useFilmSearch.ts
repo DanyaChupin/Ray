@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { filmService } from '@/services/film.service'
+import { FilmService } from '@/services/film.service'
 
 export const useFilmSearch = (searchParam: string, key: string) => {
 	const {
@@ -10,7 +10,7 @@ export const useFilmSearch = (searchParam: string, key: string) => {
 		error: searchError,
 	} = useQuery({
 		queryKey: [key, searchParam],
-		queryFn: () => filmService.getBySearch(searchParam),
+		queryFn: () => FilmService.getBySearch(searchParam),
 		enabled: !!searchParam,
 	})
 	return {

@@ -41,7 +41,7 @@ export function Header() {
 		if (!searchTerm) {
 			router.push('/catalog')
 		}
-	}, [searchTerm])
+	}, [router, searchTerm])
 
 	const onSubmit = (e: FormEvent) => {
 		e.preventDefault()

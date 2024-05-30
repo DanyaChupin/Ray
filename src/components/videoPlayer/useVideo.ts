@@ -1,4 +1,11 @@
-import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react'
+import {
+	ChangeEvent,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react'
 import { IVideoElement } from '@/shared/types/videoPlayer.types'
 import screenfull from 'screenfull'
 
@@ -43,7 +50,7 @@ export const useVideo = (autoPlay: boolean) => {
 		}
 	}, [])
 
-	const toggleVideo = () => {
+	const toggleVideo = useCallback(() => {
 		const video = videoRef.current
 		if (!video) return
 		if (video.paused) {
@@ -51,23 +58,23 @@ export const useVideo = (autoPlay: boolean) => {
 		} else {
 			video?.pause()
 		}
-	}
+	}, [])
 
-	const fastForward = () => {
+	const fastForward = useCallback(() => {
 		if (videoRef.current) {
 			videoRef.current.currentTime += 10
 
 			setProgress((videoRef.current.currentTime / videoTime) * 100)
 		}
-	}
+	}, [videoTime])
 
-	const revert = () => {
+	const revert = useCallback(() => {
 		if (videoRef.current) {
 			videoRef.current.currentTime -= 10
 
 			setProgress((videoRef.current.currentTime / videoTime) * 100)
 		}
-	}
+	}, [videoTime])
 
 	const changeProgress = (e: ChangeEvent<HTMLInputElement>) => {
 		const video = videoRef.current
@@ -185,7 +192,7 @@ export const useVideo = (autoPlay: boolean) => {
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown)
 		}
-	}, [toggleVideo])
+	}, [fastForward, revert, toggleVideo])
 
 	return useMemo(
 		() => ({
@@ -210,6 +217,7 @@ export const useVideo = (autoPlay: boolean) => {
 				showControls,
 			},
 		}),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[currentTime, progress, isPlaying, videoTime, toggleVideo]
 	)
 }

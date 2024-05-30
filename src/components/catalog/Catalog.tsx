@@ -30,7 +30,7 @@ export function Catalog() {
 		if (searchParam) {
 			searchRefetch()
 		}
-	}, [searchParam])
+	}, [searchParam, searchRefetch])
 
 	if (searchIsError) {
 		return <ErrorMessage error={searchError?.message || ''} />

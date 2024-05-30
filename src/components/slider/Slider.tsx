@@ -35,6 +35,7 @@ export function Slider({ setDragVideo }: ISlider) {
 				</div>
 			</div>
 		),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[isLoading]
 	)
 }

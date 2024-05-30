@@ -54,9 +54,10 @@ export const useVideo = (autoPlay: boolean) => {
 		const video = videoRef.current
 		if (!video) return
 		if (video.paused) {
-			video?.play()
+			video.play()
 		} else {
-			video?.pause()
+			video.pause()
+			handleMove()
 		}
 	}, [])
 
@@ -218,6 +219,14 @@ export const useVideo = (autoPlay: boolean) => {
 			},
 		}),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[currentTime, progress, volume, isPlaying, videoTime, toggleVideo]
+		[
+			currentTime,
+			showControls,
+			isWaiting,
+			progress,
+			volume,
+			isPlaying,
+			videoTime,
+		]
 	)
 }

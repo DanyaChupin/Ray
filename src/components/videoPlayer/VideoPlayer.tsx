@@ -30,13 +30,12 @@ export function VideoPlayer({
 	onLoadLocal,
 }: IVideoPlayer) {
 	const { actions, video, videoRef, divRef } = useVideo(autoPlay)
-	console.log(onLoadLocal)
 	return (
 		<div
-			ref={divRef}
-			className={styles['videoPlayer']}
 			onMouseMove={actions.handleMove}
 			onTouchMove={actions.handleMove}
+			ref={divRef}
+			className={styles['videoPlayer']}
 		>
 			<video
 				poster={poster}

@@ -1,0 +1,17 @@
+{
+	"root": {
+		"metadata": {
+			"title": "Luch",
+			"description": "Cinema site with original films"
+		},
+		"errortitle": "Something went wrong",
+		"error": "Error",
+		"reload": "Reload"
+	},
+	"home": {
+		"logo": "LUCH",
+		"familiarization": "— this is an attempt to consolidate and create independent films free from strict boundaries.",
+		"howLuch": "What is a Luch?",
+		"catalog": "Film catalog"
+	}
+}

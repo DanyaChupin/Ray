@@ -1,13 +1,25 @@
+'use client'
 import { IVideo } from '@/shared/types/video.type'
-
-export function videoPreviesTransformation(videoPrevies: IVideo[] | undefined) {
+import { filmQuantityPrevies } from './constants'
+function getRandomObjects(arr: IVideo[]) {
+	const shuffled = arr
+		.sort(() => 0.5 - Math.random())
+		.slice(0, filmQuantityPrevies)
+	return shuffled
+}
+export const videoPreviesTransformation = (
+	videoPrevies: IVideo[] | undefined
+) => {
 	if (videoPrevies) {
-		return videoPrevies?.map((filmPrevies) => ({
+		const randomVideos = getRandomObjects(videoPrevies)
+		const randomPreviesVideo = randomVideos.map((filmPrevies) => ({
 			id: filmPrevies.videoId,
 			poster: filmPrevies.assets.thumbnail,
 			src: filmPrevies.assets.mp4,
 			zIndex: 10,
 		}))
+
+		return randomPreviesVideo
 	}
 	return
 }

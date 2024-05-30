@@ -1,4 +1,4 @@
-@import '../../../assets/mixins/mixin-media.scss';
+@import '../../../../assets/mixins/mixin-media.scss';
 
 .film__wrapper {
 	width: 100%;
@@ -51,7 +51,6 @@
 	}
 	@include respond-to(xxl) {
 		max-width: 1000px;
-		max-height: 717px;
 	}
 }
 .film__border {

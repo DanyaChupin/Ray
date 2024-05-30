@@ -4,11 +4,11 @@
 	margin: 0 10px 0 0;
 	width: 70px;
 	height: 54px;
-	object-position: center;
 	cursor: grab;
+	object-fit: cover;
 	opacity: 0;
-
 	animation: opacity var(--transition) forwards;
+
 	@include respond-to(md) {
 		width: 120px;
 		height: 90px;
@@ -21,6 +21,7 @@
 		width: 160px;
 	}
 }
+
 .dragging {
 	cursor: grabbing;
 }

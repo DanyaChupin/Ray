@@ -6,6 +6,7 @@ import { IOption } from '@/shared/types/options.type'
 import useOutsideClick from '@/hooks/useOutsideClick'
 import cn from 'classnames'
 import styles from './SearchForm.module.scss'
+import { useTranslations } from 'next-intl'
 
 interface IForm {
 	inputValue: string
@@ -36,6 +37,8 @@ export function SearchForm({
 		onSubmit(e)
 		toggleSelect()
 	}
+
+	const t = useTranslations('home')
 	return (
 		<form
 			className={cn(styles['form'], {
@@ -61,7 +64,7 @@ export function SearchForm({
 					<SelectItem
 						catalogStyle={catalogStyle}
 						onClick={() => {
-							option.text === 'Что такое ЛУЧ?' &&
+							option.text === t('howLuch') &&
 								setCheckDescription &&
 								setCheckDescription((prev) => !prev)
 						}}

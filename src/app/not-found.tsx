@@ -1,13 +1,13 @@
-import { Logo } from '@/components/Logo/Logo'
-import styles from './NotFound.module.scss'
-import { BackLink } from '@/components/backLink/BackLink'
+'use client'
 
 export default function NotFound() {
 	return (
-		<div className={styles['notFound']}>
-			<Logo />
-			<p className={styles['description']}>Страница не найдена </p>
-			<BackLink returnBackUrl="/" />
-		</div>
+		<html>
+			<body>
+				<div>
+					<h1>Страница не найдена </h1>
+				</div>
+			</body>
+		</html>
 	)
 }

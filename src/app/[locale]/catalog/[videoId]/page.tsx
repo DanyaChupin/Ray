@@ -18,33 +18,37 @@ export default function FilmPage({
 	return (
 		<div className={styles['film__wrapper']}>
 			<div className={styles['film__top']}>
-				<header className={styles['film__header']}>
-					<Link href={'/'}>
-						<Logo />
-					</Link>
-				</header>
 				{error ? (
 					<ErrorMessage error={error.message} redirect="1" />
 				) : (
-					<main className={styles['film']}>
-						{isLoading && <SkeletonFilm />}
-						{data && (
-							<>
-								<div className={styles['film__border']}>
-									<VideoPlayer
-										src={data?.assets.mp4 || ''}
-										poster={data?.assets.thumbnail || ''}
-										autoPlay={false}
-										isPrevies={false}
-									/>
-								</div>
-								<div className={styles['film__info']}>
-									<p className={styles['film__name']}>{data?.title}</p>
-									<p className={styles['film__author']}>{data?.description}</p>
-								</div>
-							</>
-						)}
-					</main>
+					<>
+						<header className={styles['film__header']}>
+							<Link href={'/'}>
+								<Logo />
+							</Link>
+						</header>
+						<main className={styles['film']}>
+							{isLoading && <SkeletonFilm />}
+							{data && (
+								<>
+									<div className={styles['film__border']}>
+										<VideoPlayer
+											src={data?.assets.mp4 || ''}
+											poster={data?.assets.thumbnail || ''}
+											autoPlay={false}
+											isPrevies={false}
+										/>
+									</div>
+									<div className={styles['film__info']}>
+										<p className={styles['film__name']}>{data?.title}</p>
+										<p className={styles['film__author']}>
+											{data?.description}
+										</p>
+									</div>
+								</>
+							)}
+						</main>
+					</>
 				)}
 			</div>
 

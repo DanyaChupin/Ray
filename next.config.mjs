@@ -1,9 +1,14 @@
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin()
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
 		domains: ['vod.api.video'],
 	},
+
 	poweredByHeader: false,
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)

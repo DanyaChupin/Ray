@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { getHeaders } from './api.helpers'
-import { API_URL } from '@/config/api.config'
 
+const API_URL = 'https://sandbox.api.video'
 export const axiosClassic = axios.create({
 	baseURL: API_URL,
 	headers: getHeaders(),

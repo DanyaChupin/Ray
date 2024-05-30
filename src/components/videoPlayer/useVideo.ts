@@ -21,7 +21,7 @@ export const useVideo = (autoPlay: boolean) => {
 	const [isWaiting, setIsWaiting] = useState(false)
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
-	const [showControls, setShowControls] = useState(false)
+	const [showControls, setShowControls] = useState(!autoPlay)
 	useEffect(() => {
 		const video = videoRef.current
 		if (!video) return
@@ -218,6 +218,6 @@ export const useVideo = (autoPlay: boolean) => {
 			},
 		}),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[currentTime, progress, isPlaying, videoTime, toggleVideo]
+		[currentTime, progress, volume, isPlaying, videoTime, toggleVideo]
 	)
 }

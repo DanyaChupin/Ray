@@ -41,9 +41,8 @@ export function VideoPlayer({
 				poster={poster}
 				onLoadedData={() => {
 					onLoadLocal && onLoadLocal(false)
-					!isPrevies && actions.setShowControls(true)
 				}}
-				preload="metadata"
+				preload="auto"
 				src={src}
 				autoPlay={autoPlay}
 				x-webkit-airplay="allow"
@@ -167,9 +166,9 @@ export function VideoPlayer({
 								src={
 									video.volume >= 0.5
 										? '/images/fullvolume.svg'
-										: video.volume >= 0.1
-											? '/images/midvolume.svg'
-											: '/images/zerovolume.svg'
+										: video.volume === 0
+											? '/images/zerovolume.svg'
+											: '/images/midvolume.svg'
 								}
 								width={25}
 								height={15}

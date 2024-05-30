@@ -68,7 +68,7 @@ export function SearchForm({
 								setCheckDescription &&
 								setCheckDescription((prev) => !prev)
 						}}
-						pathIcon="/images/search.svg"
+						isLocalSearch={false}
 						option={option}
 						key={option.text}
 					/>
@@ -80,9 +80,9 @@ export function SearchForm({
 						)
 						.map((option) => (
 							<SelectItem
+								isLocalSearch={true}
 								catalogStyle={catalogStyle}
 								onClick={() => setIsActive(false)}
-								pathIcon="./images/earlierSearch.svg"
 								deleteOpportunity={true}
 								option={option}
 								key={option.text}

@@ -1,6 +1,5 @@
 'use client'
 import { Dispatch, MouseEvent, SetStateAction, TouchEvent } from 'react'
-import Image from 'next/image'
 import { useVideo } from './useVideo'
 import cn from 'classnames'
 import { Spinner } from '../spinner/Spinner'
@@ -69,17 +68,62 @@ export function VideoPlayer({
 					})}
 					draggable={false}
 				>
-					<Image
-						className={cn(styles['togglePlay__img'], {
-							[styles['mobileSize']]: isPrevies,
-						})}
-						src={video.isPlaying ? '/images/pause.svg' : '/images/play.svg'}
-						width={11}
-						height={13}
-						loading="eager"
-						alt={video.isPlaying ? 'пауза' : 'воспроизвести'}
-						draggable={false}
-					/>
+					{!video.isPlaying ? (
+						<svg
+							className={cn(styles['togglePlay__img'], {
+								[styles['mobileSize']]: isPrevies,
+							})}
+							height="20px"
+							width="20px"
+							version="1.1"
+							id="Capa_1"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 32 32"
+							fill="#fff"
+						>
+							<g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+							<g
+								id="SVGRepo_tracerCarrier"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+
+							<g id="SVGRepo_iconCarrier">
+								<g>
+									<g id="play">
+										<polygon points="4,0 28,16 4,32 " />
+									</g>
+								</g>
+							</g>
+						</svg>
+					) : (
+						<svg
+							className={cn(styles['togglePlay__img'], {
+								[styles['mobileSize']]: isPrevies,
+							})}
+							width="20px"
+							height="20px"
+							viewBox="0 0 31 39"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<rect
+								x="0.826904"
+								y="0.181641"
+								width="11.0632"
+								height="37.9308"
+								fill="white"
+							/>
+							<rect
+								x="19.7922"
+								y="0.181641"
+								width="11.0632"
+								height="37.9308"
+								fill="white"
+							/>
+						</svg>
+					)}
 				</button>
 			)}
 			{isPrevies && (
@@ -91,14 +135,32 @@ export function VideoPlayer({
 						onClick={removeVideo}
 						draggable={false}
 					>
-						<Image
-							src="/images/close.svg"
-							width={25}
-							height={25}
-							loading="eager"
-							alt="закрыть"
-							draggable={false}
-						/>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0,0,256,256"
+							width="25px"
+							height="25px"
+						>
+							<g
+								fill="#ffffff"
+								fill-rule="nonzero"
+								stroke="none"
+								stroke-width="1"
+								stroke-linecap="butt"
+								stroke-linejoin="miter"
+								stroke-miterlimit="10"
+								stroke-dasharray=""
+								stroke-dashoffset="0"
+								font-family="none"
+								font-weight="none"
+								font-size="none"
+								text-anchor="none"
+							>
+								<g transform="scale(5.12,5.12)">
+									<path d="M7.71875,6.28125l-1.4375,1.4375l17.28125,17.28125l-17.28125,17.28125l1.4375,1.4375l17.28125,-17.28125l17.28125,17.28125l1.4375,-1.4375l-17.28125,-17.28125l17.28125,-17.28125l-1.4375,-1.4375l-17.28125,17.28125z"></path>
+								</g>
+							</g>
+						</svg>
 					</button>
 					<div
 						className={cn(styles['videoPlayer__resize'], {
@@ -187,7 +249,7 @@ export function VideoPlayer({
 							) : video.volume !== 0 ? (
 								<svg
 									className={styles['option__img']}
-									width="18"
+									width="23"
 									height="20"
 									viewBox="0 0 18 20"
 									fill="none"
@@ -205,7 +267,7 @@ export function VideoPlayer({
 							) : (
 								<svg
 									className={styles['option__img']}
-									width="13"
+									width="23"
 									height="20"
 									viewBox="0 0 13 20"
 									fill="none"
@@ -225,14 +287,25 @@ export function VideoPlayer({
 							className={styles['controls__fullScreen']}
 							onClick={actions.toggleFullScreen}
 						>
-							<Image
+							<svg
 								className={styles['option__img']}
-								src="/images/fullscreen.svg"
-								width={25}
-								height={15}
-								loading="eager"
-								alt="полный экран"
-							/>
+								width="36"
+								height="23"
+								viewBox="0 0 36 23"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path d="M0.760254 14.1096V22.1276H12.7872" stroke="white" />
+								<path
+									d="M12.7876 1.28088L0.760649 1.28088L0.760649 9.29885"
+									stroke="white"
+								/>
+								<path d="M23.2109 22.1276H35.2379V14.1096" stroke="white" />
+								<path
+									d="M35.2373 9.29895V1.28099L23.2104 1.28099"
+									stroke="white"
+								/>
+							</svg>
 						</button>
 					)}
 				</div>

@@ -3,12 +3,16 @@
 		"metadata": {
 			"title": "Luch",
 			"description": "Cinema site with original films"
-		}
+		},
+		"errortitle": "Something went wrong",
+		"error": "Error",
+		"notfound": "Page not found",
+		"reload": "Reload"
 	},
 	"home": {
 		"logo": "LUCH",
-		"familiarization": "— is an attempt to consolidate and create independent films free from strict boundaries.",
-		"howLuch": "How to Luch?",
-		"catalog": "Move to film catalog"
+		"familiarization": "— this is an attempt to consolidate and create independent films free from strict boundaries.",
+		"howLuch": "What is a Luch?",
+		"catalog": "Film catalog"
 	}
 }

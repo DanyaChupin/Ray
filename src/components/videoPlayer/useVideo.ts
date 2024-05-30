@@ -1,13 +1,13 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react'
 import { IVideoElement } from '@/shared/types/videoPlayer.types'
 import screenfull from 'screenfull'
 
 let timeoutId: NodeJS.Timeout
 
-export const useVideo = (isAutoPlay: boolean) => {
+export const useVideo = (autoPlay: boolean) => {
 	const videoRef = useRef<IVideoElement>(null)
 	const divRef = useRef<HTMLDivElement>(null)
-	const [isPlaying, setIsPlaying] = useState(isAutoPlay)
+	const [isPlaying, setIsPlaying] = useState(autoPlay)
 	const [currentTime, setCurrentTime] = useState(0)
 	const [videoTime, setVideoTime] = useState(0)
 	const [progress, setProgress] = useState(0)
@@ -187,26 +187,29 @@ export const useVideo = (isAutoPlay: boolean) => {
 		}
 	}, [toggleVideo])
 
-	return {
-		videoRef,
-		divRef,
-		actions: {
-			toggleFullScreen,
-			toggleVideo,
-			changeProgress,
-			changeVolume,
-			toggleVolume,
-			handleMove,
-			setShowControls,
-		},
-		video: {
-			isWaiting,
-			isPlaying,
-			currentTime,
-			progress,
-			videoTime,
-			volume,
-			showControls,
-		},
-	}
+	return useMemo(
+		() => ({
+			videoRef,
+			divRef,
+			actions: {
+				toggleFullScreen,
+				toggleVideo,
+				changeProgress,
+				changeVolume,
+				toggleVolume,
+				handleMove,
+				setShowControls,
+			},
+			video: {
+				isWaiting,
+				isPlaying,
+				currentTime,
+				progress,
+				videoTime,
+				volume,
+				showControls,
+			},
+		}),
+		[currentTime, progress, isPlaying, videoTime, toggleVideo]
+	)
 }

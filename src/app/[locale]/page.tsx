@@ -2,9 +2,10 @@
 import { useState } from 'react'
 import { DragDropSearch } from '../../components/dragDropSearch/DragDropSearch'
 import { Slider } from '../../components/slider/Slider'
-import { useScreenSize } from '../../hooks/useScreenSize'
 import { IVideoPrevies } from '../../shared/types/video.type'
+import cn from 'classnames'
 import { ActiveVideoContext } from '../../context/ActiveVideoContext'
+import { useScreenSize } from '@/hooks/useScreenSize'
 import styles from './Home.module.scss'
 
 export default function HomePage() {
@@ -15,18 +16,20 @@ export default function HomePage() {
 		zIndex: 10,
 	})
 
+	const [activeVideo, setActiveVideo] = useState<IVideoPrevies[]>([])
 	const { isScreenXl } = useScreenSize()
 	const maxActiveVideo = isScreenXl ? 4 : 2
-
-	const [activeVideo, setActiveVideo] = useState<IVideoPrevies[]>([])
 
 	return (
 		<div className={styles['wrapper']}>
 			<ActiveVideoContext.Provider value={{ activeVideo, setActiveVideo }}>
-				<Slider
-					setDragVideo={setDragVideo}
-					hidden={activeVideo.length === maxActiveVideo ? true : false}
-				/>
+				<div
+					className={cn(styles['slider__wrapper'], {
+						[styles['hidden']]: maxActiveVideo === activeVideo.length,
+					})}
+				>
+					<Slider setDragVideo={setDragVideo} />
+				</div>
 				<div className={styles['home']}>
 					<DragDropSearch
 						dragVideo={dragVideo}

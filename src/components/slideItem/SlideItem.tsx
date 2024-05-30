@@ -61,7 +61,7 @@ export function SlideItem({
 					className={styles['slideItem']}
 					width={70}
 					height={55}
-					src="/images/net.svg"
+					src="/images/net.png"
 					alt="взято"
 					draggable={false}
 					priority

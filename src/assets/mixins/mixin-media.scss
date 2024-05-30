@@ -19,5 +19,9 @@
 		@media only screen and (min-width: 1440px) {
 			@content;
 		}
+	} @else if ($media == xxxl) {
+		@media only screen and (min-width: 1920px) {
+			@content;
+		}
 	}
 }

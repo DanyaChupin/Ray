@@ -18,6 +18,8 @@ export function CatalogItem({ film }: { film: IVideo }) {
 					height={90}
 					layout="responsive"
 					alt={film.title}
+					loading="lazy"
+					// priority
 				/>
 			</div>
 			<div className={styles['catalogItem__info']}>

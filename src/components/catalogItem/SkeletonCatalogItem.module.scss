@@ -3,6 +3,8 @@
 .wrapper {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	height: 100%;
 	gap: 5px;
 	@include respond-to(xl) {
 		gap: 10px;
@@ -10,10 +12,10 @@
 }
 .skeleton {
 	opacity: 0.7;
+	flex-grow: 1;
 	animation: skeleton-loading 1s linear infinite alternate;
 	border-radius: var(--border-radius-item);
 	height: 0;
-	padding-top: calc(186 / 330 * 100%);
 }
 
 .skeleton__text {

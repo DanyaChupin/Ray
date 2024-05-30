@@ -4,16 +4,24 @@
 	padding: 19px 0;
 	width: 100%;
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(2, minmax(160px, 1fr));
+	grid-auto-rows: auto;
+	grid-auto-rows: 172px;
 	justify-content: center;
 	gap: 25px;
 	flex-wrap: wrap;
 
-	@include respond-to(md) {
+	@include respond-to(lg) {
 		grid-template-columns: repeat(3, 1fr);
 	}
 	@include respond-to(xl) {
+		grid-auto-rows: 242px;
+	}
+	@include respond-to(xxl) {
 		grid-template-columns: repeat(4, 1fr);
+	}
+	@include respond-to(xxxl) {
+		grid-template-columns: repeat(5, 1fr);
 	}
 }
 .catalog__fetchButton {

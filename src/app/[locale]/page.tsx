@@ -1,10 +1,10 @@
 'use client'
 import { useState } from 'react'
-import { DragDropSearch } from '../components/dragDropSearch/DragDropSearch'
-import { Slider } from '../components/slider/Slider'
-import { useScreenSize } from '../hooks/useScreenSize'
-import { IVideoPrevies } from '../shared/types/video.type'
-import { ActiveVideoContext } from '../context/ActiveVideoContext'
+import { DragDropSearch } from '../../components/dragDropSearch/DragDropSearch'
+import { Slider } from '../../components/slider/Slider'
+import { useScreenSize } from '../../hooks/useScreenSize'
+import { IVideoPrevies } from '../../shared/types/video.type'
+import { ActiveVideoContext } from '../../context/ActiveVideoContext'
 import styles from './Home.module.scss'
 
 export default function HomePage() {

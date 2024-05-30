@@ -14,14 +14,13 @@ import { SearchForm } from '../searchForm/SearchForm'
 import { IVideoPrevies } from '../../shared/types/video.type'
 import { Footer } from '../footer/Footer'
 import { BackLink } from '../backLink/BackLink'
-import { ButtonLang } from '../buttonLang/ButtonLang'
-import { DESCRIPTION } from '../../utils/description'
-import { defaultSelect } from '@/utils/default-select'
 import cn from 'classnames'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useFilmSearch } from '../header/useFilmSearch'
 import { selectTransformation } from '@/utils/selectTransformation'
 import styles from './DragDropSearch.module.scss'
+import { useTranslations } from 'next-intl'
+import { ButtonLang } from '../buttonLang/ButtonLang'
 
 interface IDragDropSearch {
 	dragVideo: IVideoPrevies
@@ -38,9 +37,21 @@ export function DragDropSearch({
 	const [dragActive, setDragActive] = useState(false)
 	const router = useRouter()
 	const debouncedSearch = useDebounce(inputValue, 300)
+	const t = useTranslations('home')
 	const changeInput = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value)
 	}
+	const defaultSelect = [
+		{
+			text: t('howLuch'),
+			to: '',
+		},
+		{
+			text: t('catalog'),
+			to: '/catalog',
+		},
+	]
+
 	const { searchData, searchIsLoading } = useFilmSearch(
 		debouncedSearch,
 		'searchSelect'
@@ -110,7 +121,7 @@ export function DragDropSearch({
 					<FlexBox column center>
 						<Logo />
 						{checkDescription ? (
-							<p className={styles['description']}>{DESCRIPTION}</p>
+							<p className={styles['description']}>{t('familiarization')}</p>
 						) : (
 							<SearchForm
 								onSubmit={onSubmit}

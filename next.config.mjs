@@ -1,3 +1,6 @@
+import createNextIntPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntPlugin()
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
@@ -6,4 +9,4 @@ const nextConfig = {
 	poweredByHeader: false,
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)

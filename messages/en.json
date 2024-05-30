@@ -1,0 +1,14 @@
+{
+	"root": {
+		"metadata": {
+			"title": "Luch",
+			"description": "Cinema site with original films"
+		}
+	},
+	"home": {
+		"logo": "LUCH",
+		"familiarization": "— is an attempt to consolidate and create independent films free from strict boundaries.",
+		"howLuch": "How to Luch?",
+		"catalog": "Move to film catalog"
+	}
+}

@@ -1,39 +1,44 @@
 'use client'
-import { useState } from 'react'
-import styles from './ButtonLang.module.scss'
+import { useLocale } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { Locale } from '@/utils/localse'
 import cn from 'classnames'
-
-const LANG: 'RU' | 'EN' = 'RU'
+import styles from './ButtonLang.module.scss'
 
 export function ButtonLang() {
-	const [lang, setLang] = useState(LANG)
+	const locale = useLocale() as Locale
+	const router = useRouter()
+
+	function handleLocaleChange(newLocale: Locale): void {
+		document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`
+		router.refresh()
+	}
 
 	const changeLang = () => {
-		if (lang === 'RU') {
-			setLang('EN')
+		if (locale === 'ru') {
+			handleLocaleChange('en')
 		} else {
-			setLang(LANG)
+			handleLocaleChange('ru')
 		}
 	}
+
 	return (
-		<div className={styles['buttonLang']}>
-			<button
-				onClick={changeLang}
+		<button className={styles['buttonLang']} onClick={changeLang}>
+			<span
 				className={cn(styles['button'], {
-					[styles['bold']]: lang === 'RU',
+					[styles['bold']]: locale === 'ru',
 				})}
 			>
 				RU
-			</button>
+			</span>
 			<span className={styles['separation']}>/</span>
-			<button
-				onClick={changeLang}
+			<span
 				className={cn(styles['button'], {
-					[styles['bold']]: lang === 'EN',
+					[styles['bold']]: locale === 'en',
 				})}
 			>
 				EN
-			</button>
-		</div>
+			</span>
+		</button>
 	)
 }

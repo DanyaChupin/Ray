@@ -21,7 +21,7 @@ export const useVideo = (autoPlay: boolean) => {
 	const [isWaiting, setIsWaiting] = useState(false)
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
-	const [showControls, setShowControls] = useState(!autoPlay)
+	const [showControls, setShowControls] = useState(false)
 	useEffect(() => {
 		const video = videoRef.current
 		if (!video) return

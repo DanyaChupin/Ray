@@ -40,8 +40,8 @@ export function VideoPlayer({
 		>
 			<video
 				poster={poster}
-				onLoadStart={() => !isPrevies && actions.setShowControls(true)}
 				onLoadedData={() => {
+					!isPrevies && actions.setShowControls(true)
 					onLoadLocal && onLoadLocal(false)
 				}}
 				preload="auto"

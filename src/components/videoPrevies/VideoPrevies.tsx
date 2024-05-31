@@ -68,6 +68,7 @@ export function VideoPrevies({ video, changeZIndex }: IVideoPreviesProps) {
 				})}
 			>
 				<VideoPlayer
+					videoId={video.id}
 					onLoadLocal={setLocalIsLoading}
 					poster={video.poster}
 					src={video.src}

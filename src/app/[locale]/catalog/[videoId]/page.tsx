@@ -33,6 +33,7 @@ export default function FilmPage({
 								<>
 									<div className={styles['film__border']}>
 										<VideoPlayer
+											videoId={videoId}
 											src={data?.assets.mp4 || ''}
 											poster={data?.assets.thumbnail || ''}
 											autoPlay={false}

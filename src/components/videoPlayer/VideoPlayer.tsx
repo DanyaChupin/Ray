@@ -16,9 +16,11 @@ interface IVideoPlayer {
 	src: string
 	poster: string
 	onLoadLocal?: Dispatch<SetStateAction<boolean>>
+	videoId: string
 }
 
 export function VideoPlayer({
+	videoId,
 	isPrevies,
 	removeVideo,
 	onTouchStart,
@@ -28,11 +30,11 @@ export function VideoPlayer({
 	poster,
 	onLoadLocal,
 }: IVideoPlayer) {
-	const { actions, video, videoRef, divRef } = useVideo(autoPlay)
+	const { actions, video, videoRef, divRef } = useVideo(autoPlay, videoId)
 	return (
 		<div
-			onMouseMove={actions.handleMove}
-			onTouchMove={actions.handleMove}
+			onMouseMove={() => actions.handleMove(videoId)}
+			onTouchMove={() => actions.handleMove(videoId)}
 			ref={divRef}
 			className={styles['videoPlayer']}
 		>
@@ -81,13 +83,7 @@ export function VideoPlayer({
 							viewBox="0 0 32 32"
 							fill="#fff"
 						>
-							<g id="SVGRepo_bgCarrier" stroke-width="0" />
-
-							<g
-								id="SVGRepo_tracerCarrier"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
+							<g id="SVGRepo_tracerCarrier" />
 
 							<g id="SVGRepo_iconCarrier">
 								<g>
@@ -141,21 +137,7 @@ export function VideoPlayer({
 							width="25px"
 							height="25px"
 						>
-							<g
-								fill="#ffffff"
-								fill-rule="nonzero"
-								stroke="none"
-								stroke-width="1"
-								stroke-linecap="butt"
-								stroke-linejoin="miter"
-								stroke-miterlimit="10"
-								stroke-dasharray=""
-								stroke-dashoffset="0"
-								font-family="none"
-								font-weight="none"
-								font-size="none"
-								text-anchor="none"
-							>
+							<g fill="#ffffff" stroke="none">
 								<g transform="scale(5.12,5.12)">
 									<path d="M7.71875,6.28125l-1.4375,1.4375l17.28125,17.28125l-17.28125,17.28125l1.4375,1.4375l17.28125,-17.28125l17.28125,17.28125l1.4375,-1.4375l-17.28125,-17.28125l17.28125,-17.28125l-1.4375,-1.4375l-17.28125,17.28125z"></path>
 								</g>

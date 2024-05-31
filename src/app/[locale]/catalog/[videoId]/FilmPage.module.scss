@@ -3,8 +3,19 @@
 .film__wrapper {
 	width: 100%;
 	min-height: 100vh;
+	height: 100%;
+	position: sticky;
+	transform: translateY(-50%, -50%);
 	display: flex;
+	user-select: none;
 	flex-direction: column;
+	padding: 0px 13px;
+	@include respond-to(md) {
+		padding: 0px 30px;
+	}
+	@include respond-to(xl) {
+		padding: 0px 20px;
+	}
 }
 .film__top {
 	display: flex;

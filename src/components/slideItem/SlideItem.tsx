@@ -3,7 +3,6 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useScreenSize } from '../../hooks/useScreenSize'
 import { IVideoPrevies } from '../../shared/types/video.type'
-import cn from 'classnames'
 import styles from './SlideItem.module.scss'
 
 interface ISlideItem {
@@ -20,7 +19,6 @@ export function SlideItem({
 	setActiveVideo,
 }: ISlideItem) {
 	const [isActive, setIsActive] = useState(false)
-	const [isDragging, setIsDragging] = useState(false)
 	const { isScreenLg } = useScreenSize()
 	const MAXVIDEO = isScreenLg ? 4 : 2
 
@@ -31,7 +29,6 @@ export function SlideItem({
 
 	const openVideoPreviesDrag = () => {
 		if (isActive) return
-		setIsDragging(true)
 		setDragVideo({ ...video, zIndex: 10 })
 	}
 
@@ -73,9 +70,7 @@ export function SlideItem({
 					onDragStart={openVideoPreviesDrag}
 					onTouchEnd={clearDragVideo}
 					onDragEnd={clearDragVideo}
-					className={cn(styles['slideItem'], {
-						[styles['grabbing']]: isDragging,
-					})}
+					className={styles['slideItem']}
 					width={70}
 					height={55}
 					src={video.poster}

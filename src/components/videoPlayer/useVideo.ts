@@ -63,6 +63,7 @@ export const useVideo = (autoPlay: boolean, videoId: string) => {
 			video.pause()
 			handleMove(videoId)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const fastForward = useCallback(() => {

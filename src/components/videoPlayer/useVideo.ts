@@ -9,9 +9,13 @@ import {
 import { IVideoElement } from '@/shared/types/videoPlayer.types'
 import screenfull from 'screenfull'
 
-let timeoutId: NodeJS.Timeout
+interface VideoTimeouts {
+	[key: string]: NodeJS.Timeout
+}
 
-export const useVideo = (autoPlay: boolean) => {
+const videoTimeouts: VideoTimeouts = {}
+
+export const useVideo = (autoPlay: boolean, videoId: string) => {
 	const videoRef = useRef<IVideoElement>(null)
 	const divRef = useRef<HTMLDivElement>(null)
 	const [isPlaying, setIsPlaying] = useState(autoPlay)
@@ -57,8 +61,9 @@ export const useVideo = (autoPlay: boolean) => {
 			video.play()
 		} else {
 			video.pause()
-			handleMove()
+			handleMove(videoId)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const fastForward = useCallback(() => {
@@ -126,13 +131,16 @@ export const useVideo = (autoPlay: boolean) => {
 		video.webkitEnterFullscreen()
 		// fullScreen on Ios
 	}
-	const handleMove = () => {
-		setShowControls(true)
-		clearTimeout(timeoutId)
-		timeoutId = setTimeout(() => setShowControls(false), 1000)
-		return () => {
-			clearInterval(timeoutId)
+	const handleMove = (videoId: string) => {
+		if (videoTimeouts[videoId]) {
+			clearTimeout(videoTimeouts[videoId])
 		}
+
+		setShowControls(true)
+		videoTimeouts[videoId] = setTimeout(() => {
+			// Действия по истечении времени для конкретного видео
+			setShowControls(false)
+		}, 1000)
 	}
 
 	useEffect(() => {

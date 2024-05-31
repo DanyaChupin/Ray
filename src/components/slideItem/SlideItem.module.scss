@@ -3,11 +3,9 @@
 .slideItem {
 	margin: 0 10px 0 0;
 	width: 70px;
-	height: 54px;
 	cursor: grab;
 	opacity: 0;
 	animation: opacity var(--transition) forwards;
-
 	@include respond-to(md) {
 		width: 120px;
 		height: 90px;
@@ -19,10 +17,6 @@
 	@media screen and (min-height: 992px) {
 		width: 160px;
 	}
-}
-
-.dragging {
-	cursor: grabbing;
 }
 
 @keyframes opacity {

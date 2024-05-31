@@ -17,11 +17,12 @@
 	cursor: pointer;
 	display: flex;
 	align-items: center;
-	text-align: center;
+	text-align: left;
 	gap: 18px;
 }
 
 .select-item__text {
+	width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

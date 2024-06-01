@@ -20,7 +20,7 @@ type Props = {
 		local: Locale
 	}
 }
-export default async function RootLayout({ children, params }: Props) {
+export default async function Layout({ children, params }: Props) {
 	const messages = await getMessages()
 	return (
 		<html lang={params.local}>
@@ -45,7 +45,10 @@ export async function generateMetadata({
 	const t = await getTranslations({ locale, namespace: 'root' })
 
 	return {
-		title: t('metadata.title'),
+		title: {
+			default: t('metadata.title'),
+			template: `${t('metadata.title')} - %s`,
+		},
 		description: t('metadata.description'),
 		icons: {
 			icon: ['/favicon.ico?v=4'],

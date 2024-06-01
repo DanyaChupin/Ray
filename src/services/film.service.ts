@@ -10,7 +10,7 @@ import {
 export const FilmService = {
 	async getById(videoId: string) {
 		const response = await axiosClassic.get<IVideo>(getFilmById(videoId))
-		return response.data
+		return response
 	},
 	async getAll(page: string) {
 		const response = await axiosClassic.get<IVideoRespose>(getFilms(page))

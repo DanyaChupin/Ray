@@ -49,23 +49,22 @@ export const useVideo = (isPrevies: boolean, autoPlay: boolean) => {
 
 		const handleVideoTime = () => {
 			setVideoTime(video.duration)
+			!isPrevies && setShowControls(true)
+			setIsLoading(false)
+			autoPlay && video.play()
 		}
 		video.addEventListener('loadedmetadata', handleVideoTime)
 		return () => {
 			video.removeEventListener('loadedmetadata', handleVideoTime)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [videoTime])
 
 	useEffect(() => {
 		const video = videoRef.current
 		if (!video) return
 
-		const handleonLoadVideo = () => {
-			!isPrevies && setShowControls(true)
-			setIsLoading(false)
-			autoPlay && video.play()
-		}
+		const handleonLoadVideo = () => {}
 		video.addEventListener('canplay', handleonLoadVideo)
 		return () => {
 			video.removeEventListener('canplay', handleonLoadVideo)

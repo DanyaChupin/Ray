@@ -30,11 +30,11 @@ export function VideoPlayer({
 	poster,
 	onLoadLocal,
 }: IVideoPlayer) {
-	const { actions, video, videoRef, divRef } = useVideo(autoPlay, videoId)
+	const { actions, video, videoRef, divRef } = useVideo(isPrevies, autoPlay)
 	return (
 		<div
-			onMouseMove={() => actions.handleMove(videoId)}
-			onTouchMove={() => actions.handleMove(videoId)}
+			onMouseMove={() => !video.isLoading && actions.handleMove(videoId)}
+			onTouchMove={() => !video.isLoading && actions.handleMove(videoId)}
 			ref={divRef}
 			className={styles['videoPlayer']}
 		>
@@ -45,7 +45,6 @@ export function VideoPlayer({
 				}}
 				preload="auto"
 				src={src}
-				autoPlay={autoPlay}
 				x-webkit-airplay="allow"
 				x5-video-player-type="h5"
 				x5-video-player-fullscreen="true"
@@ -58,7 +57,7 @@ export function VideoPlayer({
 				playsInline
 				controls={false}
 			/>
-			{video.isWaiting ? (
+			{video.isWaiting || video.isLoading ? (
 				<Spinner />
 			) : (
 				<button

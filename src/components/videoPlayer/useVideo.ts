@@ -1,5 +1,7 @@
 import {
 	ChangeEvent,
+	Dispatch,
+	SetStateAction,
 	useCallback,
 	useEffect,
 	useMemo,
@@ -15,7 +17,10 @@ interface VideoTimeouts {
 
 const videoTimeouts: VideoTimeouts = {}
 
-export const useVideo = (autoPlay: boolean) => {
+export const useVideo = (
+	isAutoPlay: boolean,
+	onLoadLocal?: Dispatch<SetStateAction<boolean>>
+) => {
 	const videoRef = useRef<IVideoElement>(null)
 	const divRef = useRef<HTMLDivElement>(null)
 	const [isPlaying, setIsPlaying] = useState(false)
@@ -26,6 +31,7 @@ export const useVideo = (autoPlay: boolean) => {
 	const [volume, setVolume] = useState(1)
 	const [prevVolume, setPrevVolume] = useState(0)
 	const [showControls, setShowControls] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
 	useEffect(() => {
 		const video = videoRef.current
 		if (!video) return
@@ -39,7 +45,7 @@ export const useVideo = (autoPlay: boolean) => {
 			video.removeEventListener('play', handlePlayPause)
 			video.removeEventListener('pause', handlePlayPause)
 		}
-	}, [])
+	}, [isPlaying])
 
 	useEffect(() => {
 		const video = videoRef.current
@@ -47,7 +53,7 @@ export const useVideo = (autoPlay: boolean) => {
 
 		const handleVideoTime = () => {
 			setVideoTime(video.duration)
-			!autoPlay && setShowControls(true)
+			!isAutoPlay && setShowControls(true)
 		}
 		video.addEventListener('loadedmetadata', handleVideoTime)
 		return () => {
@@ -55,6 +61,23 @@ export const useVideo = (autoPlay: boolean) => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+	useEffect(() => {
+		const video = videoRef.current
+		if (!video) return
+
+		const handleLoading = () => {
+			setIsLoading(!isLoading)
+			if (onLoadLocal) {
+				onLoadLocal(false)
+			}
+		}
+		video.addEventListener('loadedmetadata', handleLoading)
+		video.addEventListener('loadstart', handleLoading)
+		return () => {
+			video.removeEventListener('loadedmetadata', handleLoading)
+			video.removeEventListener('loadstart', handleLoading)
+		}
+	}, [isLoading, onLoadLocal])
 
 	const toggleVideo = useCallback(() => {
 		const video = videoRef.current
@@ -64,7 +87,6 @@ export const useVideo = (autoPlay: boolean) => {
 		} else {
 			video.pause()
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const fastForward = useCallback(() => {
@@ -216,6 +238,7 @@ export const useVideo = (autoPlay: boolean) => {
 				toggleVolume,
 				handleMove,
 				setShowControls,
+				setIsLoading,
 			},
 			video: {
 				isWaiting,
@@ -224,12 +247,14 @@ export const useVideo = (autoPlay: boolean) => {
 				progress,
 				videoTime,
 				volume,
+				isLoading,
 				showControls,
 			},
 		}),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[
 			currentTime,
+			// isLoading,
 			showControls,
 			isWaiting,
 			progress,

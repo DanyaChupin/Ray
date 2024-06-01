@@ -16,6 +16,7 @@ interface IVideoPlayer {
 	poster: string
 	onLoadLocal?: Dispatch<SetStateAction<boolean>>
 	videoId: string
+	isAutoPlay: boolean
 }
 
 export function VideoPlayer({
@@ -24,11 +25,12 @@ export function VideoPlayer({
 	removeVideo,
 	onTouchStart,
 	onMouseDown,
+	isAutoPlay,
 	src,
 	poster,
 	onLoadLocal,
 }: IVideoPlayer) {
-	const { actions, video, videoRef, divRef } = useVideo(isPrevies)
+	const { actions, video, videoRef, divRef } = useVideo(isAutoPlay, onLoadLocal)
 	return (
 		<div
 			onMouseMove={() => actions.handleMove(videoId)}
@@ -38,10 +40,8 @@ export function VideoPlayer({
 		>
 			<video
 				poster={poster}
-				onLoadedData={() => {
-					onLoadLocal && onLoadLocal(false)
-				}}
-				preload="auto"
+				preload="metadata"
+				autoPlay={isAutoPlay}
 				src={src}
 				x-webkit-airplay="allow"
 				x5-video-player-type="h5"
@@ -55,7 +55,7 @@ export function VideoPlayer({
 				playsInline
 				controls={false}
 			/>
-			{video.isWaiting ? (
+			{video.isWaiting || video.isLoading ? (
 				<Spinner />
 			) : (
 				<button

@@ -70,6 +70,7 @@ export function Catalog() {
 					<button
 						onClick={() => fetchNextPage()}
 						className={styles['catalog__fetchButton']}
+						disabled={isFetchingNextPage}
 					>
 						{isFetchingNextPage
 							? t('loading').toUpperCase()

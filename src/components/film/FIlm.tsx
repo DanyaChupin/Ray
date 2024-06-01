@@ -36,7 +36,6 @@ export default function Film({
 											videoId={videoId}
 											src={data.data.assets.mp4 || ''}
 											poster={data.data?.assets.thumbnail || ''}
-											autoPlay={false}
 											isPrevies={false}
 										/>
 									</div>

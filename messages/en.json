@@ -13,5 +13,10 @@
 		"familiarization": "— this is an attempt to consolidate and create independent films free from strict boundaries.",
 		"howLuch": "What is a LUCH?",
 		"catalog": "Film catalog"
+	},
+	"catalog": {
+		"notfound": "Movie not found",
+		"loadmore": "Load more",
+		"loading": "Loading..."
 	}
 }

@@ -12,7 +12,6 @@ interface IVideoPlayer {
 	removeVideo?: () => void
 	onTouchStart?: (e: TouchEvent) => void
 	onMouseDown?: (e: MouseEvent) => void
-	autoPlay: boolean
 	src: string
 	poster: string
 	onLoadLocal?: Dispatch<SetStateAction<boolean>>
@@ -25,16 +24,15 @@ export function VideoPlayer({
 	removeVideo,
 	onTouchStart,
 	onMouseDown,
-	autoPlay,
 	src,
 	poster,
 	onLoadLocal,
 }: IVideoPlayer) {
-	const { actions, video, videoRef, divRef } = useVideo(isPrevies, autoPlay)
+	const { actions, video, videoRef, divRef } = useVideo(isPrevies)
 	return (
 		<div
-			onMouseMove={() => !video.isLoading && actions.handleMove(videoId)}
-			onTouchMove={() => !video.isLoading && actions.handleMove(videoId)}
+			onMouseMove={() => actions.handleMove(videoId)}
+			onTouchMove={() => actions.handleMove(videoId)}
 			ref={divRef}
 			className={styles['videoPlayer']}
 		>
@@ -57,7 +55,7 @@ export function VideoPlayer({
 				playsInline
 				controls={false}
 			/>
-			{video.isWaiting || video.isLoading ? (
+			{video.isWaiting ? (
 				<Spinner />
 			) : (
 				<button

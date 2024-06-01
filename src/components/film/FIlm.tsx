@@ -34,6 +34,7 @@ export default function Film({
 									<div className={styles['film__border']}>
 										<VideoPlayer
 											videoId={videoId}
+											isAutoPlay={false}
 											src={data.data.assets.mp4 || ''}
 											poster={data.data?.assets.thumbnail || ''}
 											isPrevies={false}

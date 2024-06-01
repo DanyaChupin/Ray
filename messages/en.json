@@ -1,8 +1,9 @@
 {
 	"root": {
 		"metadata": {
-			"title": "Luch",
-			"description": "Cinema site with original films"
+			"title": "LUCH",
+			"description": "LUCH — this is an attempt to consolidate and create independent films free from strict boundaries.",
+			"catalog": "Catalog"
 		},
 		"errortitle": "Something went wrong",
 		"error": "Error",

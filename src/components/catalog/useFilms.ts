@@ -18,6 +18,7 @@ export const useFilms = (search: string) => {
 			return result
 		},
 		enabled: !search,
+		refetchInterval: 600000,
 		initialPageParam: 1,
 		getNextPageParam: (_lastPage, _allPage, lastPageParam) => {
 			return lastPageParam + 1

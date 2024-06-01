@@ -45,13 +45,15 @@ export const useVideo = (autoPlay: boolean, videoId: string) => {
 		const video = videoRef.current
 		if (!video) return
 
-		const handlePlayPause = () => {
+		const handleVideoTime = () => {
 			setVideoTime(video.duration)
+			!isPlaying && setShowControls(true)
 		}
-		video.addEventListener('loadedmetadata', handlePlayPause)
+		video.addEventListener('loadedmetadata', handleVideoTime)
 		return () => {
-			video.removeEventListener('loadedmetadata', handlePlayPause)
+			video.removeEventListener('loadedmetadata', handleVideoTime)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const toggleVideo = useCallback(() => {

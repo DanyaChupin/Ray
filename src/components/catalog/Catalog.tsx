@@ -8,13 +8,14 @@ import { useFilmSearch } from '../header/useFilmSearch'
 import { ErrorMessage } from '../errorMessage/ErrorMessage'
 import { useEffect } from 'react'
 import { filmQuantityCatalog } from '@/utils/constants'
+import { useTranslations } from 'next-intl'
 
 const elemLoading = Array(filmQuantityCatalog).fill('')
 
 export function Catalog() {
 	const searchParams = useSearchParams()
 	const searchParam = searchParams.get('search')
-
+	const t = useTranslations('catalog')
 	const { data, isLoading, fetchNextPage, isError, isFetchingNextPage, error } =
 		useFilms(searchParam || '')
 
@@ -49,7 +50,7 @@ export function Catalog() {
 						page.map((film) => <CatalogItem film={film} key={film.videoId} />)
 					)}
 				{!searchData?.data.length && searchParam && !searchIsLoading ? (
-					<div>Ничего не найдено</div>
+					<div>{t('notfound')}</div>
 				) : (
 					searchData?.data.map((film) => (
 						<CatalogItem film={film} key={film.videoId} />
@@ -70,7 +71,9 @@ export function Catalog() {
 						onClick={() => fetchNextPage()}
 						className={styles['catalog__fetchButton']}
 					>
-						{isFetchingNextPage ? 'ЗАГРУЗКА...' : 'ЗАГРУЗИТЬ ЕЩЕ'}
+						{isFetchingNextPage
+							? t('loading').toUpperCase()
+							: t('loadmore').toUpperCase()}
 					</button>
 				)}
 		</>

@@ -8,10 +8,5 @@ export default createMiddleware({
 })
 
 export const config = {
-	matcher: [
-		'/',
-		'/catalog/:path*',
-		'/[^/]+(?:/.*)?$', // измененный шаблон
-		'/([w-]+)?/catalog/(.+)',
-	],
+	matcher: ['/', '/catalog/:path*', '/([w-]+)?/catalog/(.+)'],
 }

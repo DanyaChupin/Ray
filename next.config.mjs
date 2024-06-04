@@ -5,7 +5,11 @@ const withNextIntl = createNextIntlPlugin()
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ['139815.edgelive.co', 'demopage.edgevideo.ru'],
+		domains: [
+			's-dt2.cloud.edgecore.ru',
+			'139815.edgelive.co',
+			'demopage.edgevideo.ru',
+		],
 	},
 	env: {
 		NEXT_PUBLIC_API_KEY: process.env.NEXT_PUBLIC_API_KEY,

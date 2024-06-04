@@ -5,6 +5,11 @@ export default createMiddleware({
 	locales,
 	defaultLocale: 'ru' satisfies Locale,
 	localePrefix: 'never',
+	pathnames: {
+		'/': '/',
+		'/catalog': '/catalog',
+		'/catalog/[videoId]': '/catalog/[videoId]',
+	},
 })
 
 export const config = {

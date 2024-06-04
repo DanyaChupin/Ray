@@ -8,10 +8,5 @@ export default createMiddleware({
 })
 
 export const config = {
-	matcher: [
-		'/',
-		'/catalog/:videoId*',
-		'/((?!api|_next|_vercel|.*\\..*).*)',
-		'/([\\w-]+)?/catalog/(.+)',
-	],
+	matcher: ['/', '/catalog/:path*', '/([w-]+)?/catalog/(.+)'],
 }

@@ -21,7 +21,6 @@ export function SlideItem({
 	const [isActive, setIsActive] = useState(false)
 	const { isScreenLg } = useScreenSize()
 	const MAXVIDEO = isScreenLg ? 4 : 2
-
 	useEffect(() => {
 		const isActiveVideo = activeVideo.find((aVideo) => aVideo.id === video.id)
 		setIsActive(!!isActiveVideo)

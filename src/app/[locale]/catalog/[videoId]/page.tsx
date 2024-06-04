@@ -24,12 +24,12 @@ export async function generateMetadata({
 	try {
 		const response = await axiosClassic.get<IVideo>(getFilmById(videoId))
 		return {
-			title: response.data.title,
+			title: response.data.name,
 			description: response.data.description,
 			openGraph: {
 				images: [
 					{
-						url: response.data.assets.thumbnail,
+						url: response.data.screenshots[0],
 					},
 				],
 			},

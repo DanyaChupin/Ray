@@ -1,11 +1,10 @@
-import { IVideoRespose } from '@/shared/types/video.type'
+import { IVideo } from '@/shared/types/video.type'
 
-export function selectTransformation(searchData: IVideoRespose | undefined) {
+export function selectTransformation(searchData: IVideo[] | undefined) {
 	if (searchData) {
-		return searchData.data.map((film) => ({
-			text: `${film.title}  ${film.description && ' | ' + film.description}`.toLowerCase(),
-
-			to: '/catalog/' + film.videoId,
+		return searchData.map((film) => ({
+			text: `${film.name}  ${(film.description && ' | ' + film.description) || ''}`.toLowerCase(),
+			to: '/catalog/' + film.id,
 		}))
 	}
 	return

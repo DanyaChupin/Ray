@@ -4,37 +4,32 @@ export interface IVideoPrevies {
 	src: string
 	zIndex: number
 }
-export interface IVideoRespose {
-	data: IVideo[]
-	pogination: {
-		itemsTotal: number
+export interface IDirectories {
+	directory: {
+		items: IVideo[]
 	}
 }
 export interface IVideo {
-	videoId: string
-	title: string
+	id: number
+	name: string
 	description: string
-	public: boolean
-	panoramic: boolean
-	mp4Support: boolean
-	publishedAt: Date
-	createdAt: Date
-	updatedAt: Date
-	tags: any[]
-	metadata: any[]
-	source: IVideoSource
-	assets: IVideoAssets
-}
-
-export interface IVideoAssets {
-	iframe: string
-	player: string
-	hls: string
-	thumbnail: string
-	mp4: string
-}
-
-export interface IVideoSource {
-	type: string
-	uri: string
+	client_id: number
+	hls_url: string
+	dash_url: string
+	duration: number
+	slug: string
+	origin_size: number
+	origin_host: string
+	origin_resource: string
+	created_at: Date
+	updated_at: Date
+	origin_height: number
+	screenshots: string[]
+	screenshot_id: number
+	sprite: string
+	ad_id: number
+	projection: string
+	status: string
+	client_user_id: number
+	stream_id: number
 }

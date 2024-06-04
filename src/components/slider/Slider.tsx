@@ -1,9 +1,8 @@
 import { IVideoPrevies } from '@/shared/types/video.type'
 import { Slide } from '../slide/Slide'
 import { Dispatch, SetStateAction, useMemo } from 'react'
-import cn from 'classnames'
-import { useFilmsByTag } from './useFilmsByTag'
 import { videoPreviesTransformation } from '@/utils/videoPreviesTransformation'
+import { useFilmsByDirectories } from './useFilmsByDirectories'
 import styles from './Slider.module.scss'
 
 interface ISlider {
@@ -11,12 +10,12 @@ interface ISlider {
 }
 
 export function Slider({ setDragVideo }: ISlider) {
-	const { data, isLoading, isError } = useFilmsByTag()
+	const { data, isLoading, isError } = useFilmsByDirectories()
 
-	const videoPrevies = videoPreviesTransformation(data)
+	const videoPrevies = videoPreviesTransformation(data || [])
 	return useMemo(
 		() => (
-			<div className={cn(styles['slider'], {})}>
+			<div className={styles['slider']}>
 				<div className={styles['first']}>
 					<Slide
 						isLoading={isLoading || isError}

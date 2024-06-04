@@ -7,15 +7,13 @@ function getRandomObjects(arr: IVideo[]) {
 		.slice(0, filmQuantityPrevies)
 	return shuffled
 }
-export const videoPreviesTransformation = (
-	videoPrevies: IVideo[] | undefined
-) => {
+export const videoPreviesTransformation = (videoPrevies: IVideo[]) => {
 	if (videoPrevies) {
 		const randomVideos = getRandomObjects(videoPrevies)
 		const randomPreviesVideo = randomVideos.map((filmPrevies) => ({
-			id: filmPrevies.videoId,
-			poster: filmPrevies.assets.thumbnail,
-			src: filmPrevies.assets.mp4,
+			id: String(filmPrevies.id),
+			poster: filmPrevies.screenshots[0],
+			src: filmPrevies.hls_url,
 			zIndex: 10,
 		}))
 

@@ -1,3 +1,4 @@
+import Hls from 'hls.js'
 import {
 	ChangeEvent,
 	Dispatch,
@@ -19,6 +20,7 @@ const videoTimeouts: VideoTimeouts = {}
 
 export const useVideo = (
 	isAutoPlay: boolean,
+	src: string,
 	onLoadLocal?: Dispatch<SetStateAction<boolean>>
 ) => {
 	const videoRef = useRef<IVideoElement>(null)
@@ -32,6 +34,17 @@ export const useVideo = (
 	const [prevVolume, setPrevVolume] = useState(0)
 	const [showControls, setShowControls] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
+
+	useEffect(() => {
+		if (Hls.isSupported()) {
+			const video = videoRef.current
+			if (!video) return
+			const hls = new Hls()
+			hls.loadSource(src)
+			hls.attachMedia(video)
+		}
+	}, [src])
+
 	useEffect(() => {
 		const video = videoRef.current
 		if (!video) return

@@ -67,7 +67,7 @@ export function CatalogItem({ film }: { film: IVideo }) {
 			<div className={styles['catalogItem__wrapper']}>
 				<Image
 					className={styles['catalogItem__img']}
-					src={film.screenshot}
+					src={film.screenshots[0]}
 					width={160}
 					height={90}
 					layout="responsive"

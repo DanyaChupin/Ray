@@ -23,7 +23,6 @@ export function Slide({
 	isLoading,
 }: ISlide) {
 	const { activeVideo, setActiveVideo } = useActiveVideoContext()
-	console.log(videoPrevies)
 	return (
 		<div className={styles['slide']}>
 			<div

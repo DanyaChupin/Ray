@@ -59,19 +59,19 @@ function rus_to_latin(str: string): string {
 	return n_str.join('').replace(/\.? /g, '-').toLowerCase()
 }
 export function CatalogItem({ film }: { film: IVideo }) {
-	const title = film.title.toLowerCase()
-	const author = film.description.toLowerCase()
-	const link = 'luch.world/' + rus_to_latin(film.title)
+	const title = film.name.toLowerCase()
+	const author = film.description && film.description.toLowerCase()
+	const link = 'luch.world/' + rus_to_latin(film.name)
 	return (
-		<Link href={`/catalog/${film.videoId}`} className={styles['catalogItem']}>
+		<Link href={`/catalog/${film.id}`} className={styles['catalogItem']}>
 			<div className={styles['catalogItem__wrapper']}>
 				<Image
 					className={styles['catalogItem__img']}
-					src={film.assets.thumbnail}
+					src={film.screenshot}
 					width={160}
 					height={90}
 					layout="responsive"
-					alt={film.title}
+					alt={film.name}
 					priority
 				/>
 			</div>

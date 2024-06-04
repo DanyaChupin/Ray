@@ -29,21 +29,21 @@ export default function Film({
 						</header>
 						<main className={styles['film']}>
 							{isLoading && <SkeletonFilm />}
-							{data?.data && (
+							{data && (
 								<>
 									<div className={styles['film__border']}>
 										<VideoPlayer
 											videoId={videoId}
 											isAutoPlay={false}
-											src={data.data.assets.mp4 || ''}
-											poster={data.data?.assets.thumbnail || ''}
+											src={data?.hls_url || ''}
+											poster={data?.screenshots[0] || ''}
 											isPrevies={false}
 										/>
 									</div>
 									<div className={styles['film__info']}>
-										<p className={styles['film__name']}>{data.data?.title}</p>
+										<p className={styles['film__name']}>{data?.name}</p>
 										<p className={styles['film__author']}>
-											{data.data?.description}
+											{data?.description}
 										</p>
 									</div>
 								</>

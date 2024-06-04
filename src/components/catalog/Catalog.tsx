@@ -18,7 +18,6 @@ export function Catalog() {
 	const t = useTranslations('catalog')
 	const { data, isLoading, fetchNextPage, isError, isFetchingNextPage, error } =
 		useFilms(searchParam || '')
-
 	const {
 		searchData,
 		searchRefetch,
@@ -47,14 +46,12 @@ export function Catalog() {
 				{data?.pages &&
 					!searchParam &&
 					data.pages.map((page) =>
-						page.map((film) => <CatalogItem film={film} key={film.videoId} />)
+						page.map((film) => <CatalogItem film={film} key={film.id} />)
 					)}
-				{!searchData?.data.length && searchParam && !searchIsLoading ? (
+				{!searchData?.length && searchParam && !searchIsLoading ? (
 					<div>{t('notfound')}</div>
 				) : (
-					searchData?.data.map((film) => (
-						<CatalogItem film={film} key={film.videoId} />
-					))
+					searchData?.map((film) => <CatalogItem film={film} key={film.id} />)
 				)}
 				{(isLoading || isFetchingNextPage || searchIsLoading) && (
 					<>

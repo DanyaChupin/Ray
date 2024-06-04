@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { FilmService } from '@/services/film.service'
 
-export const useFilmsByTag = () => {
+export const useFilmsByDirectories = () => {
 	const { data, isLoading, isError } = useQuery({
-		queryKey: ['getByTag'],
-		queryFn: () => FilmService.getByTag(),
+		queryKey: ['getByDirectories'],
+		queryFn: () => FilmService.getByDirectories(),
 	})
 
 	return {

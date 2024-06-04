@@ -30,19 +30,24 @@ export function VideoPlayer({
 	poster,
 	onLoadLocal,
 }: IVideoPlayer) {
-	const { actions, video, videoRef, divRef } = useVideo(isAutoPlay, onLoadLocal)
+	const { actions, video, videoRef, divRef } = useVideo(
+		isAutoPlay,
+		src,
+		onLoadLocal
+	)
 	return (
 		<div
 			onMouseMove={() => actions.handleMove(videoId)}
 			onTouchMove={() => actions.handleMove(videoId)}
 			ref={divRef}
-			className={styles['videoPlayer']}
+			className={cn(styles['videoPlayer'], {
+				[styles['cursorno']]: !video.showControls && screenfull.isFullscreen,
+			})}
 		>
 			<video
 				poster={poster}
 				preload="metadata"
 				autoPlay={isAutoPlay}
-				src={src}
 				x-webkit-airplay="allow"
 				x5-video-player-type="h5"
 				x5-video-player-fullscreen="true"
@@ -152,7 +157,7 @@ export function VideoPlayer({
 			<div
 				className={cn(styles['controls'], {
 					[styles['padding']]: isPrevies,
-					[styles['showControls']]: video.showControls,
+					[styles['showControls']]: video.showControls && !video.isLoading,
 				})}
 			>
 				{!isPrevies && (

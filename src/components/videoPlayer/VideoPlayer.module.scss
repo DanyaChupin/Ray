@@ -144,11 +144,17 @@
 
 .controls__quality {
 	font-size: 13px;
+	user-select: none;
+	width: 59px;
 	@include respond-to(lg) {
+		cursor: pointer;
+		width: 68px;
 		font-size: 15px;
 	}
 }
-
+.activeQuality {
+	font-weight: 700;
+}
 .controls__fullScreen {
 	display: flex;
 	align-items: center;

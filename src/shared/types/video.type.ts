@@ -14,6 +14,7 @@ export interface IVideo {
 	name: string
 	description: string
 	client_id: number
+	screenshot: string
 	hls_url: string
 	dash_url: string
 	duration: number

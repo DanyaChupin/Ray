@@ -12,7 +12,7 @@ export const videoPreviesTransformation = (videoPrevies: IVideo[]) => {
 		const randomVideos = getRandomObjects(videoPrevies)
 		const randomPreviesVideo = randomVideos.map((filmPrevies) => ({
 			id: String(filmPrevies.id),
-			poster: filmPrevies.screenshots[0],
+			poster: filmPrevies.screenshot || filmPrevies.screenshots[0],
 			src: filmPrevies.hls_url,
 			zIndex: 10,
 		}))

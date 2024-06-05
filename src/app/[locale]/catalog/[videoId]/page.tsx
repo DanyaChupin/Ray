@@ -27,16 +27,8 @@ export async function generateMetadata({
 		return {
 			title: response.data.name,
 			description: response.data.description,
-			openGraph: {
-				images: [
-					{
-						url: response.data.screenshots[0],
-					},
-				],
-			},
 		}
 	} catch (error) {
-		// notFound()
-		redirect('/catalog')
+		redirect('/')
 	}
 }

@@ -30,9 +30,10 @@ export function VideoPlayer({
 	poster,
 	onLoadLocal,
 }: IVideoPlayer) {
-	const { actions, video, videoRef, divRef } = useVideo(
+	const { actions, video, videoRef, divRef, buttonRef } = useVideo(
 		isAutoPlay,
 		src,
+		videoId,
 		onLoadLocal
 	)
 	return (
@@ -187,7 +188,27 @@ export function VideoPlayer({
 				)}
 				<div className={styles['option__wrapper']}>
 					{!isPrevies && (
-						<span className={styles['controls__quality']}>HQ/HD</span>
+						<button
+							ref={buttonRef}
+							className={styles['controls__quality']}
+							onClick={actions.changeQuality}
+						>
+							<span
+								className={cn({
+									[styles['activeQuality']]: video.quality !== -1,
+								})}
+							>
+								HQ
+							</span>
+							/
+							<span
+								className={cn({
+									[styles['activeQuality']]: video.quality === -1,
+								})}
+							>
+								AUTO
+							</span>
+						</button>
 					)}
 					<div className={styles['volume__wrapper']}>
 						{!isPrevies && (

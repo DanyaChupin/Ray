@@ -35,13 +35,13 @@ export default function Film({
 										<VideoPlayer
 											videoId={videoId}
 											isAutoPlay={false}
-											src={data?.hls_url || ''}
-											poster={data?.screenshots[0] || ''}
+											src={data.hls_url || ''}
+											poster={data.screenshot || data.screenshots[0]}
 											isPrevies={false}
 										/>
 									</div>
 									<div className={styles['film__info']}>
-										<p className={styles['film__name']}>{data?.name}</p>
+										<p className={styles['film__name']}>{data.name}</p>
 										<p className={styles['film__author']}>
 											{data?.description}
 										</p>

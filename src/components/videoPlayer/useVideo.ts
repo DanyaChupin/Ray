@@ -15,16 +15,20 @@ import screenfull from 'screenfull'
 interface VideoTimeouts {
 	[key: string]: NodeJS.Timeout
 }
-
+interface VideoHls {
+	[key: string]: Hls
+}
 const videoTimeouts: VideoTimeouts = {}
-
+const videosHls: VideoHls = {}
 export const useVideo = (
 	isAutoPlay: boolean,
 	src: string,
+	videoId: string,
 	onLoadLocal?: Dispatch<SetStateAction<boolean>>
 ) => {
 	const videoRef = useRef<IVideoElement>(null)
 	const divRef = useRef<HTMLDivElement>(null)
+	const buttonRef = useRef<HTMLButtonElement>(null)
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [currentTime, setCurrentTime] = useState(0)
 	const [videoTime, setVideoTime] = useState(0)
@@ -34,17 +38,30 @@ export const useVideo = (
 	const [prevVolume, setPrevVolume] = useState(0)
 	const [showControls, setShowControls] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
-
+	const [quality, setQuality] = useState(-1)
+	// -1 = autoQuality; 1 = maxQuality
 	useEffect(() => {
+		const video = videoRef.current
+		if (!video) return
 		if (Hls.isSupported()) {
-			const video = videoRef.current
-			if (!video) return
-			const hls = new Hls()
-			hls.loadSource(src)
-			hls.attachMedia(video)
+			videosHls[videoId] = new Hls()
+			videosHls[videoId].loadSource(src)
+			videosHls[videoId].attachMedia(video)
 		}
-	}, [src])
-
+	}, [src, videoId])
+	console.log(videosHls[videoId] && videosHls[videoId].currentLevel)
+	const changeQuality = () => {
+		if (quality !== 1) {
+			videosHls[videoId].loadLevel = videosHls[videoId].levels.length - 1
+			setQuality(1)
+			return
+		}
+		if (quality === 1) {
+			videosHls[videoId].currentLevel = -1
+			setQuality(-1)
+			return
+		}
+	}
 	useEffect(() => {
 		const video = videoRef.current
 		if (!video) return
@@ -246,6 +263,7 @@ export const useVideo = (
 		() => ({
 			videoRef,
 			divRef,
+			buttonRef,
 			actions: {
 				toggleFullScreen,
 				toggleVideo,
@@ -254,10 +272,12 @@ export const useVideo = (
 				toggleVolume,
 				handleMove,
 				setShowControls,
+				changeQuality,
 			},
 			video: {
 				isWaiting,
 				isPlaying,
+				quality,
 				currentTime,
 				progress,
 				videoTime,
@@ -269,6 +289,7 @@ export const useVideo = (
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[
 			currentTime,
+			quality,
 			isLoading,
 			showControls,
 			isWaiting,

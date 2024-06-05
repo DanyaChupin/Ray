@@ -3,7 +3,7 @@ import Film from '@/components/film/FIlm'
 import { getFilmById } from '@/config/api.config'
 import { IVideo } from '@/shared/types/video.type'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 export default function FilmPage({
 	params: { videoId },
@@ -23,6 +23,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	try {
 		const response = await axiosClassic.get<IVideo>(getFilmById(videoId))
+
 		return {
 			title: response.data.name,
 			description: response.data.description,
@@ -35,6 +36,7 @@ export async function generateMetadata({
 			},
 		}
 	} catch (error) {
-		notFound()
+		// notFound()
+		redirect('/catalog')
 	}
 }

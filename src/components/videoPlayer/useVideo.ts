@@ -49,17 +49,18 @@ export const useVideo = (
 			videosHls[videoId].attachMedia(video)
 		}
 	}, [src, videoId])
-	console.log(videosHls[videoId] && videosHls[videoId].currentLevel)
 	const changeQuality = () => {
-		if (quality !== 1) {
-			videosHls[videoId].loadLevel = videosHls[videoId].levels.length - 1
-			setQuality(1)
-			return
-		}
-		if (quality === 1) {
-			videosHls[videoId].currentLevel = -1
-			setQuality(-1)
-			return
+		if (videosHls[videoId]) {
+			if (quality !== 1) {
+				videosHls[videoId].loadLevel = videosHls[videoId].levels.length - 1
+				setQuality(1)
+				return
+			}
+			if (quality === 1) {
+				videosHls[videoId].currentLevel = -1
+				setQuality(-1)
+				return
+			}
 		}
 	}
 	useEffect(() => {

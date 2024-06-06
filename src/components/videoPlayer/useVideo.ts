@@ -44,15 +44,15 @@ export const useVideo = (
 	useEffect(() => {
 		const video = videoRef.current
 		if (!video) return
-		if (Hls.isSupported()) {
-			if (!videosHls[videoId]) {
+		if (!videosHls[videoId]) {
+			if (Hls.isSupported()) {
 				videosHls[videoId] = new Hls()
 			}
-
-			videosHls[videoId].loadSource(src)
-			videosHls[videoId].attachMedia(video)
 		}
-	}, [src, videoId])
+		videosHls[videoId].loadSource(src)
+		videosHls[videoId].attachMedia(video)
+		isAutoPlay && video.play()
+	}, [isAutoPlay, src, videoId])
 
 	const changeQuality = () => {
 		if (videosHls[videoId]) {

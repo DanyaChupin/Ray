@@ -48,6 +48,7 @@ export function VideoPlayer({
 			<video
 				poster={poster}
 				preload="metadata"
+				autoPlay={isAutoPlay}
 				x-webkit-airplay="allow"
 				x5-video-player-type="h5"
 				x5-video-player-fullscreen="true"

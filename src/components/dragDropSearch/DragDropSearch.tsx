@@ -141,9 +141,7 @@ export function DragDropSearch({
 				) : (
 					<>
 						{checkDescription && (
-							<BackLink
-								onClick={() => setCheckDescription(!checkDescription)}
-							/>
+							<BackLink onClick={() => setCheckDescription(false)} />
 						)}
 						<ButtonLang />
 					</>

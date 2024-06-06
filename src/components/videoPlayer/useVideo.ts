@@ -40,18 +40,17 @@ export const useVideo = (
 	const [isLoading, setIsLoading] = useState(false)
 	const [quality, setQuality] = useState(-1)
 	// -1 = autoQuality; 1 = maxQuality
-	console.log(videosHls)
 	useEffect(() => {
 		const video = videoRef.current
 		if (!video) return
+		console.log(videosHls[videoId])
 		if (!videosHls[videoId]) {
 			if (Hls.isSupported()) {
 				videosHls[videoId] = new Hls()
-				videosHls[videoId].loadSource(src)
 			}
 		}
+		videosHls[videoId].loadSource(src)
 		videosHls[videoId].attachMedia(video)
-		isAutoPlay && video.play()
 	}, [isAutoPlay, src, videoId])
 
 	const changeQuality = () => {
@@ -103,6 +102,7 @@ export const useVideo = (
 		const handleOffLoading = () => {
 			setIsLoading(false)
 			!isAutoPlay && setShowControls(true)
+			isAutoPlay && video.play()
 			if (onLoadLocal) {
 				onLoadLocal(false)
 			}

@@ -47,9 +47,9 @@ export const useVideo = (
 		if (!videosHls[videoId]) {
 			if (Hls.isSupported()) {
 				videosHls[videoId] = new Hls()
+				videosHls[videoId].loadSource(src)
 			}
 		}
-		videosHls[videoId].loadSource(src)
 		videosHls[videoId].attachMedia(video)
 		isAutoPlay && video.play()
 	}, [isAutoPlay, src, videoId])

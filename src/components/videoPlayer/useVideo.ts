@@ -40,19 +40,18 @@ export const useVideo = (
 	const [isLoading, setIsLoading] = useState(false)
 	const [quality, setQuality] = useState(-1)
 	// -1 = autoQuality; 1 = maxQuality
+	console.log(videosHls)
 	useEffect(() => {
 		const video = videoRef.current
 		if (!video) return
 		if (Hls.isSupported()) {
-      if(!videosHls[videoId]) {
-			videosHls[videoId] = new Hls()
+			if (!videosHls[videoId]) {
+				videosHls[videoId] = new Hls()
+			}
+
 			videosHls[videoId].loadSource(src)
 			videosHls[videoId].attachMedia(video)
-      }
 		}
-   return () => {
-      delete videosHls[videoId]
-    } 
 	}, [src, videoId])
 
 	const changeQuality = () => {

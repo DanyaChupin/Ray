@@ -55,7 +55,7 @@ export default function Film({
 
 			<div className={styles['film__bottom']}>
 				<Footer>
-					<BackLink returnBackUrl="/catalog" />
+					<BackLink />
 				</Footer>
 			</div>
 		</div>

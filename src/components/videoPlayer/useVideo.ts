@@ -44,11 +44,17 @@ export const useVideo = (
 		const video = videoRef.current
 		if (!video) return
 		if (Hls.isSupported()) {
+      if(!videosHls[videoId]) {
 			videosHls[videoId] = new Hls()
 			videosHls[videoId].loadSource(src)
 			videosHls[videoId].attachMedia(video)
+      }
 		}
+   return () => {
+      delete videosHls[videoId]
+    } 
 	}, [src, videoId])
+
 	const changeQuality = () => {
 		if (videosHls[videoId]) {
 			if (quality !== 1) {

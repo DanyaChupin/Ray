@@ -137,12 +137,11 @@ export function DragDropSearch({
 			</main>
 			<Footer>
 				{activeVideo.length ? (
-					<BackLink returnBackUrl="" onClick={() => setActiveVideo([])} />
+					<BackLink onClick={() => setActiveVideo([])} />
 				) : (
 					<>
 						{checkDescription && (
 							<BackLink
-								returnBackUrl=""
 								onClick={() => setCheckDescription(!checkDescription)}
 							/>
 						)}

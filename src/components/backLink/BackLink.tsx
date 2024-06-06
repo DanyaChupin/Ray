@@ -1,18 +1,15 @@
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import styles from './BackLink.module.scss'
 
-export function BackLink({
-	returnBackUrl,
-	onClick,
-}: {
-	returnBackUrl: string
-	onClick?: () => void
-}) {
+export function BackLink({ onClick }: { onClick?: () => void }) {
+	const router = useRouter()
+	const comeBack = () => {
+		router.back()
+	}
 	return (
-		<Link
+		<button
 			className={styles['backLink']}
-			onClick={onClick && onClick}
-			href={returnBackUrl}
+			onClick={onClick ? onClick : comeBack}
 		>
 			<svg
 				width="32"
@@ -26,6 +23,6 @@ export function BackLink({
 					fill="white"
 				/>
 			</svg>
-		</Link>
+		</button>
 	)
 }

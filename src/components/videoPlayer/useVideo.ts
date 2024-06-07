@@ -51,6 +51,10 @@ export const useVideo = (
 		}
 		videosHls[videoId].loadSource(src)
 		videosHls[videoId].attachMedia(video)
+		return () => {
+			videosHls[videoId].destroy()
+			delete videosHls[videoId]
+		}
 	}, [isAutoPlay, src, videoId])
 
 	const changeQuality = () => {

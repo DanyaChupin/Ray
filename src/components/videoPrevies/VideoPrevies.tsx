@@ -1,12 +1,12 @@
-import { MouseEvent, TouchEvent, useState } from 'react'
-import { IVideoPrevies } from '../../shared/types/video.type'
+import { MouseEvent, TouchEvent, useContext, useState } from 'react'
 import { VideoPlayer } from '../videoPlayer/VideoPlayer'
-import { useActiveVideoContext } from '../../context/ActiveVideoContext'
+import { IVideoPrevies } from '../../shared/types/video.type'
+import { SkeletonPrevies } from './SkeletonPrevies'
 import { usePosition } from './usePosition'
 import { useResize } from './useResize'
-import { SkeletonPrevies } from './SkeletonPrevies'
 import cn from 'classnames'
 import styles from './VideoPrevies.module.scss'
+import { ActiveVideoContext } from '@/context/ActiveVideoContext'
 
 interface IVideoPreviesProps {
 	video: IVideoPrevies
@@ -19,7 +19,7 @@ export function VideoPrevies({ video, changeZIndex }: IVideoPreviesProps) {
 	const { position, generateRandomSize, handleMouseDown, handleTouchStart } =
 		usePosition(setIsDragging)
 
-	const { activeVideo, setActiveVideo } = useActiveVideoContext()
+	const { activeVideo, setActiveVideo } = useContext(ActiveVideoContext)
 
 	const [size, setSize] = useState(generateRandomSize())
 

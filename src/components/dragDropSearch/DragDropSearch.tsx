@@ -6,21 +6,21 @@ import {
 	SetStateAction,
 	useState,
 } from 'react'
-import { Logo } from '../Logo/Logo'
-import { FlexBox } from '../ui/flexBox/FlexBox'
 import { useRouter } from 'next/navigation'
-import { VideoPrevies } from '../videoPrevies/VideoPrevies'
+import { useTranslations } from 'next-intl'
 import { SearchForm } from '../searchForm/SearchForm'
+import { VideoPrevies } from '../videoPrevies/VideoPrevies'
 import { IVideoPrevies } from '../../shared/types/video.type'
-import { Footer } from '../footer/Footer'
 import { BackLink } from '../backLink/BackLink'
-import cn from 'classnames'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useFilmSearch } from '../header/useFilmSearch'
 import { selectTransformation } from '@/utils/selectTransformation'
-import styles from './DragDropSearch.module.scss'
-import { useTranslations } from 'next-intl'
 import { ButtonLang } from '../buttonLang/ButtonLang'
+import { FlexBox } from '../ui/flexBox/FlexBox'
+import { Footer } from '../footer/Footer'
+import { Logo } from '../Logo/Logo'
+import cn from 'classnames'
+import styles from './DragDropSearch.module.scss'
 
 interface IDragDropSearch {
 	dragVideo: IVideoPrevies

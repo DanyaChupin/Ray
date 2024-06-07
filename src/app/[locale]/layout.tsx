@@ -6,6 +6,7 @@ import { ReactQueryClientProvider } from '@/context/ReactQueryClientProvider'
 import { getMessages, getTranslations } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import '../../assets/styles/globals.scss'
+import { ActiveVideoContextProvider } from '@/context/ActiveVideoContext'
 
 export const viewport: Viewport = {
 	themeColor: 'black',
@@ -28,7 +29,9 @@ export default async function Layout({ children, params }: Props) {
 				<ProgressBar>
 					<ReactQueryClientProvider>
 						<NextIntlClientProvider messages={messages}>
-							{children}
+							<ActiveVideoContextProvider>
+								{children}
+							</ActiveVideoContextProvider>
 						</NextIntlClientProvider>
 					</ReactQueryClientProvider>
 				</ProgressBar>

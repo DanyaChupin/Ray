@@ -2,13 +2,13 @@
 
 .wrapper {
 	max-width: var(--max-width);
+	background-color: var(--bg-color);
 	overflow: hidden;
-	touch-action: none;
-	-ms-touch-action: none;
+	touch-action: manipulation;
+	-ms-touch-action: manipulation;
 	width: 100%;
 	height: 100%;
-	position: fixed;
-	transform: translateY(-50%, -50%);
+	position: absolute;
 	user-select: none;
 }
 .home {

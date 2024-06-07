@@ -5,8 +5,8 @@ import { Slider } from '../../components/slider/Slider'
 import { IVideoPrevies } from '../../shared/types/video.type'
 import cn from 'classnames'
 import { useScreenSize } from '@/hooks/useScreenSize'
-import styles from './Home.module.scss'
 import { ActiveVideoContext } from '@/context/ActiveVideoContext'
+import styles from './Home.module.scss'
 
 export default function HomePage() {
 	const [dragVideo, setDragVideo] = useState<IVideoPrevies>({

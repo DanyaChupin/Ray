@@ -1,11 +1,11 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useContext } from 'react'
 import { SlideItem } from '../slideItem/SlideItem'
 import { IVideoPrevies } from '@/shared/types/video.type'
 import cn from 'classnames'
-import { useActiveVideoContext } from '@/context/ActiveVideoContext'
 import { SkeletonSlideItem } from '../slideItem/SkeletonSlideItem'
 import styles from './Slide.module.scss'
 import { filmQuantityPrevies } from '@/utils/constants'
+import { ActiveVideoContext } from '@/context/ActiveVideoContext'
 
 interface ISlide {
 	sideLeft: boolean
@@ -22,7 +22,7 @@ export function Slide({
 	setDragVideo,
 	isLoading,
 }: ISlide) {
-	const { activeVideo, setActiveVideo } = useActiveVideoContext()
+	const { activeVideo, setActiveVideo } = useContext(ActiveVideoContext)
 	return (
 		<div className={styles['slide']}>
 			<div

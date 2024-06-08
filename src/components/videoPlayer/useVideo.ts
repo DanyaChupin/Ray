@@ -11,6 +11,7 @@ import {
 } from 'react'
 import { IVideoElement } from '@/shared/types/videoPlayer.types'
 import screenfull from 'screenfull'
+import { useScreenSize } from '@/hooks/useScreenSize'
 
 interface VideoTimeouts {
 	[key: string]: NodeJS.Timeout
@@ -39,16 +40,16 @@ export const useVideo = (
 	const [showControls, setShowControls] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const [quality, setQuality] = useState(-1)
+
+	const { isScreenXl } = useScreenSize()
 	// -1 = autoQuality; 1 = maxQuality
 	useEffect(() => {
 		const video = videoRef.current
 		if (!video) return
-		console.log(videosHls[videoId])
-		if (!videosHls[videoId]) {
-			if (Hls.isSupported()) {
-				videosHls[videoId] = new Hls()
-			}
+		if (Hls.isSupported()) {
+			videosHls[videoId] = new Hls()
 		}
+
 		videosHls[videoId].loadSource(src)
 		videosHls[videoId].attachMedia(video)
 		return () => {
@@ -193,9 +194,11 @@ export const useVideo = (
 		if (screenfull.isEnabled) {
 			screenfull.toggle(videoWrapper)
 		}
-		//@ts-ignore
-		video.webkitEnterFullscreen()
-		// fullScreen on Ios
+		if (!isScreenXl) {
+			//@ts-ignore
+			video.webkitEnterFullscreen()
+			// fullScreen on Ios
+		}
 	}
 	const handleMove = (videoId: string) => {
 		if (videoTimeouts[videoId]) {

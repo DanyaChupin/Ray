@@ -11,6 +11,7 @@ const nextConfig = {
 			'demopage.edgevideo.ru',
 		],
 	},
+
 	env: {
 		NEXT_PUBLIC_API_KEY: process.env.NEXT_PUBLIC_API_KEY,
 		NEXT_PUBLIC_SERVER: process.env.NEXT_PUBLIC_SERVER,

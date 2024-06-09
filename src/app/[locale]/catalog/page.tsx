@@ -23,7 +23,6 @@ export async function generateMetadata({
 	const t = await getTranslations({ locale, namespace: 'root' })
 
 	return {
-		title: t('metadata.catalog'),
 		description: t('metadata.description'),
 	}
 }

@@ -41,7 +41,7 @@ export const useVideo = (
 	const [isLoading, setIsLoading] = useState(false)
 	const [quality, setQuality] = useState(-1)
 
-	const { isScreenXl } = useScreenSize()
+	const { isScreenLg } = useScreenSize()
 	// -1 = autoQuality; 1 = maxQuality
 	useEffect(() => {
 		const video = videoRef.current
@@ -194,7 +194,7 @@ export const useVideo = (
 		if (screenfull.isEnabled) {
 			screenfull.toggle(videoWrapper)
 		}
-		if (!isScreenXl) {
+		if (!isScreenLg) {
 			//@ts-ignore
 			video.webkitEnterFullscreen()
 			// fullScreen on Ios

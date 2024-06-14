@@ -270,6 +270,7 @@ export const useVideo = (
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fastForward, revert, toggleVideo])
 
 	return useMemo(

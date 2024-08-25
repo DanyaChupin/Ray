@@ -6,6 +6,7 @@ const withNextIntl = createNextIntlPlugin()
 const nextConfig = {
 	images: {
 		domains: [
+			'luch.world',
 			's-dt2.cloud.edgecore.ru',
 			'139815.edgelive.co',
 			'demopage.edgevideo.ru',

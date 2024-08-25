@@ -23,22 +23,26 @@ export default function HomePage() {
 	return (
 		<>
 			<Head>
-				<title>Luch world</title>
+				<title>Luch world - независимое кино</title>
 				<meta
 					name="description"
-					content="ЛУЧ — это попытка консолидации и создания независимых фильмов,свободных от строгих рамок."
+					content="ЛУЧ — это попытка консолидации и создания независимых фильмов,свободных от строгих рамок.Здесь вы сможете смотреть фильмы от независимых авторов онлайн."
 				/>
 				<meta name="document-state" content="Static" />
 				<meta
 					property="og:title"
-					content="— это попытка консолидации и создания независимых фильмов,свободных от строгих рамок."
+					content="ЛУЧ — это попытка консолидации и создания независимых фильмов,свободных от строгих рамок.Здесь вы сможете смотреть фильмы от независимых авторов онлайн."
 				/>
 				<meta property="og:type" content="website" />
 				<meta property="og:url" content="https://luch.world/" />
 				<meta
 					property="og:description"
-					content="— это попытка консолидации и создания независимых фильмов,свободных от строгих рамок."
+					content="ЛУЧ — это попытка консолидации и создания независимых фильмов,свободных от строгих рамок.Здесь вы сможете смотреть фильмы от независимых авторов онлайн."
 				/>
+				<meta property="og:image" content="https://luch.world/logo.svg" />
+				<meta property="vk:image" content="https://luch.world/logo.svg" />
+				<meta property="fb:image" content="https://luch.world/logo.svg" />
+				<meta property="twitter:image" content="https://luch.world/logo.svg" />
 				<meta
 					property="og:site_name"
 					content="luch.world фильмы от независимых авторов"

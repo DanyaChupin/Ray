@@ -10,10 +10,10 @@ export default function CatalogPage() {
 	return (
 		<>
 			<Head>
-				<title>Luch</title>
+				<title>Luch world - фильмы</title>
 				<meta
 					name="description"
-					content="Галерея независимых фильмов,свободных от строгих рамок."
+					content="ЛУЧ - фильмы от независмых авторов."
 				/>
 				<meta name="document-state" content="Static" />
 				<meta
@@ -21,7 +21,11 @@ export default function CatalogPage() {
 					content="Галерея независимых фильмов,свободных от строгих рамок."
 				/>
 				<meta property="og:type" content="website" />
+				<meta property="og:image" content="https://luch.world/logo.svg" />
 				<meta property="og:url" content="https://luch.world/catalog" />
+				<meta property="vk:image" content="https://luch.world/logo.svg" />
+				<meta property="fb:image" content="https://luch.world/logo.svg" />
+				<meta property="twitter:image" content="https://luch.world/logo.svg" />
 				<meta
 					property="og:description"
 					content="— это попытка консолидации и создания независимых фильмов,свободных от строгих рамок."

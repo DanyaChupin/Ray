@@ -63,7 +63,7 @@ export function CatalogItem({ film }: { film: IVideo }) {
 	const author = film.description && film.description.toLowerCase()
 	const link = 'luch.world/' + rus_to_latin(film.name)
 	return (
-		<Link href={`/catalog/${film.id}`} className={styles['catalogItem']}>
+		<Link href={`/films/${film.id}`} className={styles['catalogItem']}>
 			<div className={styles['catalogItem__wrapper']}>
 				<Image
 					className={styles['catalogItem__img']}

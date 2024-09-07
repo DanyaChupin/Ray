@@ -7,6 +7,6 @@ export const defaultSelect = [
 	},
 	{
 		text: GALLERY,
-		to: '/catalog',
+		to: '/films',
 	},
 ]

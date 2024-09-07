@@ -39,17 +39,17 @@ export function Header() {
 
 	useEffect(() => {
 		if (!searchTerm) {
-			router.push('/catalog')
+			router.push('/films')
 		}
 	}, [router, searchTerm])
 
 	const onSubmit = (e: FormEvent) => {
 		e.preventDefault()
 		if (searchTerm) {
-			router.push(`/catalog?search=${searchTerm}`)
-			setStoredValue({ text: searchTerm, to: `/catalog?search=${searchTerm}` })
+			router.push(`/films?search=${searchTerm}`)
+			setStoredValue({ text: searchTerm, to: `/films?search=${searchTerm}` })
 		} else {
-			router.push(`/catalog`)
+			router.push(`/films`)
 		}
 	}
 

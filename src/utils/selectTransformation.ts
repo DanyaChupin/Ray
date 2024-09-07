@@ -4,7 +4,7 @@ export function selectTransformation(searchData: IVideo[] | undefined) {
 	if (searchData) {
 		return searchData.map((film) => ({
 			text: `${film.name}  ${(film.description && ' | ' + film.description) || ''}`.toLowerCase(),
-			to: '/catalog/' + film.id,
+			to: '/films/' + film.id,
 		}))
 	}
 	return

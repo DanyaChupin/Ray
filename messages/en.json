@@ -2,7 +2,7 @@
 	"root": {
 		"metadata": {
 			"title": "LUCH",
-			"description": "LUCH — this is an attempt to consolidate and create independent films free from strict boundaries.",
+			"description": "LUCH is a film studio, film club and film community.",
 			"catalog": "Films"
 		},
 		"errortitle": "Something went wrong",
@@ -11,7 +11,7 @@
 	},
 	"home": {
 		"logo": "LUCH",
-		"familiarization": "— this is an attempt to consolidate and create independent films free from strict boundaries.",
+		"familiarization": "LUCH is a film studio, film club and film community.",
 		"howLuch": "What is a LUCH?",
 		"catalog": "Films"
 	},

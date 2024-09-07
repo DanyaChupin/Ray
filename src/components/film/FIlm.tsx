@@ -5,7 +5,7 @@ import { BackLink } from '@/components/backLink/BackLink'
 import { Footer } from '@/components/footer/Footer'
 import { ErrorMessage } from '@/components/errorMessage/ErrorMessage'
 import Link from 'next/link'
-import { useFilm } from '@/app/[locale]/catalog/[videoId]/useFIlm'
+import { useFilm } from '@/app/[locale]/films/[videoId]/useFIlm'
 import styles from './Film.module.scss'
 import { SkeletonFilm } from './SkeletonFilm'
 

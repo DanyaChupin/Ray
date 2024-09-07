@@ -48,7 +48,7 @@ export function DragDropSearch({
 		},
 		{
 			text: t('catalog'),
-			to: '/catalog',
+			to: '/films',
 		},
 	]
 
@@ -61,9 +61,9 @@ export function DragDropSearch({
 	const onSubmit = (e: FormEvent) => {
 		e.preventDefault()
 		if (debouncedSearch) {
-			router.push(`/catalog?search=${inputValue}`)
+			router.push(`/films?search=${inputValue}`)
 		} else {
-			router.push(`/catalog`)
+			router.push(`/films`)
 		}
 	}
 

@@ -42,9 +42,6 @@ export default function Film({
 									</div>
 									<div className={styles['film__info']}>
 										<p className={styles['film__name']}>{data.name}</p>
-										<p className={styles['film__author']}>
-											{data?.description}
-										</p>
 									</div>
 								</>
 							)}

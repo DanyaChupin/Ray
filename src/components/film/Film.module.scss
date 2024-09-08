@@ -77,7 +77,6 @@
 .film__info {
 	width: 100%;
 	display: flex;
-	justify-content: space-between;
 	height: 22px;
 	align-items: center;
 	font-size: 10px;
@@ -87,7 +86,7 @@
 }
 
 .film__name {
-	width: 50%;
+	width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

@@ -2,7 +2,7 @@
 	"root": {
 		"metadata": {
 			"title": "LUCH",
-			"description": "LUCH is a film studio, film club and film community.",
+			"description": "is a film studio, film club and film community",
 			"catalog": "Films"
 		},
 		"errortitle": "Something went wrong",
@@ -11,7 +11,7 @@
 	},
 	"home": {
 		"logo": "LUCH",
-		"familiarization": "LUCH is a film studio, film club and film community.",
+		"familiarization": "is a film studio, film club and film community",
 		"howLuch": "What is a LUCH?",
 		"catalog": "Films"
 	},

@@ -3,65 +3,11 @@ import cn from 'classnames'
 import Link from 'next/link'
 import { IVideo } from '@/shared/types/video.type'
 import styles from './CatalogItem.module.scss'
-/**
- * Transliterates a Russian string to Latin characters.
- * @param {string} str - The input string in Russian.
- * @returns {string} - The transliterated string in Latin characters.
- */
-function rus_to_latin(str: string): string {
-	const ru: { [key: string]: string } = {
-		а: 'a',
-		б: 'b',
-		в: 'v',
-		г: 'g',
-		д: 'd',
-		е: 'e',
-		ё: 'e',
-		ж: 'j',
-		з: 'z',
-		и: 'i',
-		к: 'k',
-		л: 'l',
-		м: 'm',
-		н: 'n',
-		о: 'o',
-		п: 'p',
-		р: 'r',
-		с: 's',
-		т: 't',
-		у: 'u',
-		ф: 'f',
-		х: 'h',
-		ц: 'c',
-		ч: 'ch',
-		ш: 'sh',
-		щ: 'shch',
-		ы: 'y',
-		э: 'e',
-		ю: 'u',
-		я: 'ya',
-		ъ: 'ie',
-		ь: '',
-		й: 'i',
-	}
-	const n_str: string[] = []
 
-	for (let i = 0; i < str.length; ++i) {
-		n_str.push(
-			ru[str[i]] ||
-				(ru[str[i].toLowerCase()] == undefined && str[i]) ||
-				ru[str[i].toLowerCase()].replace(/^(.)/, (match: string) =>
-					match.toUpperCase()
-				)
-		)
-	}
-
-	return n_str.join('').replace(/\.? /g, '-').toLowerCase()
-}
 export function CatalogItem({ film }: { film: IVideo }) {
-	const title = film.name.toLowerCase()
-	const author = film.description && film.description.toLowerCase()
-	const link = 'luch.world/' + rus_to_latin(film.name)
+	const slug = film?.name.split('|')
+	const title = slug[0]
+	const author = slug[1]
 	return (
 		<Link href={`/films/${film.id}`} className={styles['catalogItem']}>
 			<div className={styles['catalogItem__wrapper']}>
@@ -84,25 +30,13 @@ export function CatalogItem({ film }: { film: IVideo }) {
 					>
 						{title}
 					</p>
-					{author && (
-						<>
-							<span className={styles['catalogItem__line']}>|</span>
-							<p
-								className={cn(styles['catalogItem__author'], {
-									[styles['text']]: true,
-								})}
-							>
-								{author}
-							</p>
-						</>
-					)}
 				</div>
 				<p
 					className={cn(styles['catalogItem__link'], {
 						[styles['text']]: true,
 					})}
 				>
-					{link}
+					{author}
 				</p>
 			</div>
 		</Link>
